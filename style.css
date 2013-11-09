@@ -1,28 +1,63 @@
+
 #container{
+  height: 100%;
+  width: 100%;
   position: relative;
+  display: block;
+  border: 1px solid yellow;
 }
 
 .canvas {
-  display: block;
+  display:block;
+  height: 85%;
+  width: 100%;
+  border: 1px solid red;
   position: relative;
-}
-
-#nycatform {
-  display: block;
-}
-#nyancat-img {
-  display: none;
+  left:0;
+  top: 0;
 }
 
 #path-canvas {
-position: absolute; left:0; top: 0; z-index: 0;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  z-index: 0;
+  float: left;
 }
 
 #nyan-cat-canvas {
-
-position: relative; left:0; top: 0; z-index: 1;
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  z-index: 1;
+  float: left;
+  border: 1px solid blue;
 }
 
 .command-log {
   float: right;
+  position: relative;
+  height: 100%;
+  display: block;
+  width: 40%;
 }
+
+.form-holder {
+  position: relative;
+  background-color: yellow;
+  width: 100%;
+  border: 1px solid black;
+}
+
+#nycatform {
+  display: block;
+  position: absolute;
+  float: left;
+  border: 1px solid blue;
+}
+
+#nyancat-img {
+  display: none;
+}
+
+

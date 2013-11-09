@@ -6,18 +6,19 @@
 <body>
   <div id = 'container'>
     <div class="canvas">
-    <canvas id="path-canvas" width="300" height="300" style="border:1px solid blue;"></canvas>
-    <canvas id="nyan-cat-canvas" width="300" height="300" style="border:1px solid blue;"></canvas>
+      <canvas id="path-canvas"></canvas>
+      <canvas id="nyan-cat-canvas"></canvas>
+      <div class="command-log">
+        <ul id='list-of-commands'> </ul>
+      </div>
     </div>
 
-    <form id='nycatform'>
-      <input type='text' id='textbox'>
-      <input type='submit'>
-    </form>
-
-    <img id='nyancat-img' src="nyancat.png">
-
-    <div class="command-log">
+    <div class='form-holder'>
+      <form id='nycatform'>
+        <input type='text' id='textbox'>
+        <input type='submit'>
+      </form>
+      <img id='nyancat-img' src="nyancat.png">
     </div>
   </div>
 </body>

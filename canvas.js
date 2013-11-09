@@ -53,6 +53,7 @@ $(document).ready(function(){
   function parseGivenCode(event) {
     event.preventDefault()
     userCommand = $('#textbox').val()
+    $('.command-log ul').append('<li>' + userCommand + '</li>')
     $('#textbox').val('')
 
     if (userCommand === "forward 5") {
@@ -63,5 +64,4 @@ $(document).ready(function(){
       console.log("Need more")
     }
   }
-  debugger
 })
