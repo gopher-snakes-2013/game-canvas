@@ -1,3 +1,6 @@
+AMOUNTOFPIXELFORWARD = 10
+CLEARSCREENDIMENSION = 1000
+
 var NyanCat = function(){
   this.currentX=0
   this.currentY=0
@@ -36,32 +39,58 @@ $(document).ready(function(){
   }
 
   function moveNyanCat(x,y){
-    nyanCatContext.clearRect(nyanCat.currentX-5,nyanCat.currentY-5,30,30) // remove old nyan cat
+    nyanCatContext.clearRect(0,0,CLEARSCREENDIMENSION,CLEARSCREENDIMENSION) // remove old nyan cat
     nyanCatContext.drawImage(nyanCat.img,x,y,20,20) // move 5 forward
     nyanCatContext.translate(x,y) // move axis to nyan cat
     drawLine(x,y) // draw the line
     // nyanCat.updateCoordinates(x,y)
   }
 
-  function rotate90NyanCat(){
+  function rotateNyanCat(degrees){
     nyanCatContext.translate(20,0)
-    nyanCatContext.rotate(1.57)
-    pathContext.rotate(1.57)
+    nyanCatContext.rotate(degrees*Math.PI/180.0)
+    pathContext.rotate(degrees*Math.PI/180.0)
+    nyanCatContext.clearRect(0,0,CLEARSCREENDIMENSION,CLEARSCREENDIMENSION)
     nyanCatContext.drawImage(nyanCat.img,nyanCat.currentX,nyanCat.currentY,20,20)
   }
 
   function parseGivenCode(event) {
     event.preventDefault()
-    userCommand = $('#textbox').val()
-    $('.command-log ul').append('<li>' + userCommand + '</li>')
-    $('#textbox').val('')
+    userCommand = $('#textbox').val() // consider DOWNCASE...
+    updateCommandLog(userCommand)  
+    var actionMagnitudePair = extractActionAndMagnitude(userCommand) 
+    actionMagnitudePair.forEach(function(objectLiteral){
+      var action = objectLiteral.action
+      var magnitude = Number(objectLiteral.magnitudeOfAction)
+      caseStatement(action,magnitude)
+    })
+  }
 
-    if (userCommand === "forward 5") {
-      moveNyanCat(nyanCat.currentX+50,nyanCat.currentY+0)
-    } else if (userCommand === "rotate 90") {
-      rotate90NyanCat()
+  function caseStatement(action, magnitude) {
+    if (action === "forward") {
+      for (var i=0; i<magnitude; i++) { // CHANGE MAGNITUDE INTO AN INTEGER
+        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELFORWARD,nyanCat.currentY) 
+      } 
+    } else if (action === "rotate") {
+      rotateNyanCat(magnitude)
     } else {
-      console.log("Need more")
+      alert("Try Again")
     }
+  }
+
+  function extractActionAndMagnitude(userCommand) {
+    console.log(userCommand)  // "forward 5, rotate 90"
+    var individualCommands = userCommand.split(', ') // ["forward 5", "rotate 90"]
+    var actionMagnitude = []
+    individualCommands.forEach(function(command) {
+      actionMagnitude.push({action: command.split(' ')[0], // { action: "forward", magnitudeOfAction: "5" }
+      magnitudeOfAction: command.split(' ')[1]})
+    }) 
+    return actionMagnitude
+  }
+
+  function updateCommandLog(lastCommand){
+    $('.command-log ul').append('<li>' + lastCommand + '</li>')
+    $('#textbox').val('')
   }
 })
