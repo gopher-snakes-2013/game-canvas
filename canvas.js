@@ -1,45 +1,54 @@
+var NyanCat = function(){
+  var COMPASS = ['N','E','S','W']
+  this.currentX=0
+  this.currentY=0
+  this.orientation = COMPASS[1]
+}
+
+NyanCat.prototype.updateCoordinates = function(endX, endY) {
+    this.currentX = endX
+    this.currentY = endY
+}
+
 $(document).ready(function(){
+  var canvas = document.getElementById('c')
+  var c_canvas = canvas.getContext("2d")
+  var nyanCat = new NyanCat()
+  initializeBoard()
 
-  var c_canvas = document.getElementById("c");
-  var context = c_canvas.getContext("2d");
-  var my_gradient=context.createLinearGradient(0,0,0,170);
-  var turtleX=50
-  var turtleY=50
+  function initializeBoard(){
+    var img = new Image()
+    img.src = "nyancat.png"
+    c_canvas.drawImage(img,0,0,20,20)
+    c_canvas.translate(10,10)
+    $('form').on('submit', parseGivenCode)
+  }
 
+  function drawLine(x,y){
+    c_canvas.moveTo(nyanCat.currentX, nyanCat.currentY)
+    c_canvas.lineTo(x, y)
+    c_canvas.strokeStyle= "#FF0000"
+    c_canvas.stroke()
+    nyanCat.updateCoordinates(x,y)
+  }
 
-  makeGrid = function(){
-    for (var x = 0.5; x < 1000; x += 50) {
-      context.moveTo(x, 0);
-      context.lineTo(x, 1000);
+  // function moveNyanCat(x,y){
+
+  //   drawLine(x,y)
+  // }
+
+  function parseGivenCode(event) {
+    event.preventDefault()
+    userCommand = $('#textbox').val()
+    $('#textbox').val('')
+
+    if (userCommand === "forward 5") {
+      drawLine(nyanCat.currentX+50,nyanCat.currentY+0)
+
+    } else if (userCommand === "right 5") {
+      drawLine(nyanCat.currentX+0,nyanCat.currentY+50)
+    } else {
+      console.log("Need more")
     }
-    for (var y = 0.5; y < 1000; y += 50) {
-      context.moveTo(0, y);
-      context.lineTo(1000, y);
-    }
-    context.strokeStyle = "#eee";
-    context.stroke();
-  };
-
-  makeTurtle = function(){
-    my_gradient.addColorStop(0,"red");
-    my_gradient.addColorStop(1,"white");
-    context.fillStyle=my_gradient;
-     // upper-left corner (50, 50), width (50), height (50).
-    context.fillRect(turtleX, turtleY, 50, 50);
-  };
-
-  drawLine = function(){
-    context.moveTo
-
-  };
-
-  resetCanvas = function(){
-    c_canvas.width = c_canvas.width;
-  };
-
-  makeGrid();
-  makeTurtle();
-
-  console.log("Hello")
-
-});
+  }
+})
