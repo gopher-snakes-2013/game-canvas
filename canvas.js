@@ -1,16 +1,13 @@
 AMOUNTOFPIXELFORWARD = 10
-CLEARSCREENDIMENSION = 1000
+SPRITEDIMENSION = 20
+COMPENSATE = SPRITEDIMENSION/2
+BEFOREDRAW = COMPENSATE * (-1)
 
 var NyanCat = function(){
   this.currentX=0
   this.currentY=0
   this.img = new Image()
   this.img.src = "nyancat.png"
-}
-
-NyanCat.prototype.updateCoordinates = function(endX, endY) {
-    this.currentX = endX
-    this.currentY = endY
 }
 
 $(document).ready(function(){
@@ -24,34 +21,36 @@ $(document).ready(function(){
   initializeBoard()
 
   function initializeBoard(){
-    nyanCatContext.drawImage(nyanCat.img,0,0,20,20)
-    // nyanCatContext.translate(10,10)
-    pathContext.translate(10,10)
+    nyanCatContext.translate(COMPENSATE,COMPENSATE)
+    pathContext.translate(COMPENSATE,COMPENSATE)
+    nyanCatContext.drawImage(nyanCat.img,BEFOREDRAW,BEFOREDRAW,SPRITEDIMENSION,SPRITEDIMENSION)
     $('form').on('submit', parseGivenCode)
   }
 
   function drawLine(x,y){
-    pathContext.moveTo(nyanCat.currentX, nyanCat.currentY) // tells us where starting the line
-    pathContext.lineTo(x, y) // where line is gonna end up
+    pathContext.moveTo(nyanCat.currentX, nyanCat.currentY)
+    pathContext.lineTo(x, y)
     pathContext.translate(x,y)
     pathContext.strokeStyle= "#FF0000"
     pathContext.stroke()
   }
 
-  function moveNyanCat(x,y){
-    nyanCatContext.clearRect(0,0,CLEARSCREENDIMENSION,CLEARSCREENDIMENSION) // remove old nyan cat
-    nyanCatContext.drawImage(nyanCat.img,x,y,20,20) // move 5 forward
-    nyanCatContext.translate(x,y) // move axis to nyan cat
-    drawLine(x,y) // draw the line
-    // nyanCat.updateCoordinates(x,y)
+  function clearNyanCatScreen(){
+    nyanCatContext.clearRect(-100,-100,1000,1000)
+  }
+
+  function moveNyanCat(x, y){
+    clearNyanCatScreen() 
+    nyanCatContext.translate(x,0)
+    nyanCatContext.drawImage(nyanCat.img,x-10,-10,SPRITEDIMENSION,SPRITEDIMENSION)
+    drawLine(x,y)
   }
 
   function rotateNyanCat(degrees){
-    nyanCatContext.translate(20,0)
+    clearNyanCatScreen()
     nyanCatContext.rotate(degrees*Math.PI/180.0)
     pathContext.rotate(degrees*Math.PI/180.0)
-    nyanCatContext.clearRect(0,0,CLEARSCREENDIMENSION,CLEARSCREENDIMENSION)
-    nyanCatContext.drawImage(nyanCat.img,nyanCat.currentX,nyanCat.currentY,20,20)
+    nyanCatContext.drawImage(nyanCat.img,-10,-10,SPRITEDIMENSION,SPRITEDIMENSION)
   }
 
   function parseGivenCode(event) {
@@ -68,8 +67,8 @@ $(document).ready(function(){
 
   function caseStatement(action, magnitude) {
     if (action === "forward") {
-      for (var i=0; i<magnitude; i++) { // CHANGE MAGNITUDE INTO AN INTEGER
-        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELFORWARD,nyanCat.currentY) 
+      for (var i=0; i<magnitude; i++) { 
+        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELFORWARD, nyanCat.currentY) 
       } 
     } else if (action === "rotate") {
       rotateNyanCat(magnitude)
@@ -79,11 +78,11 @@ $(document).ready(function(){
   }
 
   function extractActionAndMagnitude(userCommand) {
-    console.log(userCommand)  // "forward 5, rotate 90"
-    var individualCommands = userCommand.split(', ') // ["forward 5", "rotate 90"]
+    console.log(userCommand)
+    var individualCommands = userCommand.split(', ') 
     var actionMagnitude = []
     individualCommands.forEach(function(command) {
-      actionMagnitude.push({action: command.split(' ')[0], // { action: "forward", magnitudeOfAction: "5" }
+      actionMagnitude.push({action: command.split(' ')[0],
       magnitudeOfAction: command.split(' ')[1]})
     }) 
     return actionMagnitude
