@@ -1,8 +1,8 @@
 var NyanCat = function(){
-  var COMPASS = ['N','E','S','W']
   this.currentX=0
   this.currentY=0
-  this.orientation = COMPASS[1]
+  this.img = new Image()
+  this.img.src = "nyancat.png"
 }
 
 NyanCat.prototype.updateCoordinates = function(endX, endY) {
@@ -11,31 +11,44 @@ NyanCat.prototype.updateCoordinates = function(endX, endY) {
 }
 
 $(document).ready(function(){
-  var canvas = document.getElementById('c')
-  var c_canvas = canvas.getContext("2d")
+  var pathCanvas = document.getElementById('path-canvas')
+  var pathContext = pathCanvas.getContext("2d")
+
+  var nyanCatCanvas = document.getElementById('nyan-cat-canvas')
+  var nyanCatContext = nyanCatCanvas.getContext("2d")
+
   var nyanCat = new NyanCat()
   initializeBoard()
 
   function initializeBoard(){
-    var img = new Image()
-    img.src = "nyancat.png"
-    c_canvas.drawImage(img,0,0,20,20)
-    c_canvas.translate(10,10)
+    nyanCatContext.drawImage(nyanCat.img,0,0,20,20)
+    // nyanCatContext.translate(10,10)
+    pathContext.translate(10,10)
     $('form').on('submit', parseGivenCode)
   }
 
   function drawLine(x,y){
-    c_canvas.moveTo(nyanCat.currentX, nyanCat.currentY)
-    c_canvas.lineTo(x, y)
-    c_canvas.strokeStyle= "#FF0000"
-    c_canvas.stroke()
-    nyanCat.updateCoordinates(x,y)
+    pathContext.moveTo(nyanCat.currentX, nyanCat.currentY) // tells us where starting the line
+    pathContext.lineTo(x, y) // where line is gonna end up
+    pathContext.translate(x,y)
+    pathContext.strokeStyle= "#FF0000"
+    pathContext.stroke()
   }
 
-  // function moveNyanCat(x,y){
+  function moveNyanCat(x,y){
+    nyanCatContext.clearRect(nyanCat.currentX-5,nyanCat.currentY-5,30,30) // remove old nyan cat
+    nyanCatContext.drawImage(nyanCat.img,x,y,20,20) // move 5 forward
+    nyanCatContext.translate(x,y) // move axis to nyan cat
+    drawLine(x,y) // draw the line
+    // nyanCat.updateCoordinates(x,y)
+  }
 
-  //   drawLine(x,y)
-  // }
+  function rotate90NyanCat(){
+    nyanCatContext.translate(20,0)
+    nyanCatContext.rotate(1.57)
+    pathContext.rotate(1.57)
+    nyanCatContext.drawImage(nyanCat.img,nyanCat.currentX,nyanCat.currentY,20,20)
+  }
 
   function parseGivenCode(event) {
     event.preventDefault()
@@ -43,12 +56,12 @@ $(document).ready(function(){
     $('#textbox').val('')
 
     if (userCommand === "forward 5") {
-      drawLine(nyanCat.currentX+50,nyanCat.currentY+0)
-
-    } else if (userCommand === "right 5") {
-      drawLine(nyanCat.currentX+0,nyanCat.currentY+50)
+      moveNyanCat(nyanCat.currentX+50,nyanCat.currentY+0)
+    } else if (userCommand === "rotate 90") {
+      rotate90NyanCat()
     } else {
       console.log("Need more")
     }
   }
+  debugger
 })

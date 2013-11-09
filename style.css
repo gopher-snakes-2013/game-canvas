@@ -1,3 +1,28 @@
+#container{
+  position: relative;
+}
+
+.canvas {
+  display: block;
+  position: relative;
+}
+
+#nycatform {
+  display: block;
+}
 #nyancat-img {
   display: none;
+}
+
+#path-canvas {
+position: absolute; left:0; top: 0; z-index: 0;
+}
+
+#nyan-cat-canvas {
+
+position: relative; left:0; top: 0; z-index: 1;
+}
+
+.command-log {
+  float: right;
 }

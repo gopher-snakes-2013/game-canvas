@@ -4,12 +4,20 @@
   <script type="text/javascript" src="canvas.js"></script>
 </head>
 <body>
-  <canvas id="c" width="100" height="100" style="border:1px solid blue;"></canvas>
+  <div id = 'container'>
+    <div class="canvas">
+    <canvas id="path-canvas" width="300" height="300" style="border:1px solid blue;"></canvas>
+    <canvas id="nyan-cat-canvas" width="300" height="300" style="border:1px solid blue;"></canvas>
+    </div>
 
-  <form id='nycatform'>
-    <input type='text' id='textbox'>
-    <input type='submit'>
-  </form>
+    <form id='nycatform'>
+      <input type='text' id='textbox'>
+      <input type='submit'>
+    </form>
 
-  <img id='nyancat-img' src="nyancat.png">
+    <img id='nyancat-img' src="nyancat.png">
+
+    <div class="command-log">
+    </div>
+  </div>
 </body>
