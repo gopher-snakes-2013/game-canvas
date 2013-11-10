@@ -21,7 +21,7 @@ $(document).ready(function(){
 
   var nyanCat = new NyanCat()
   initializeBoard()
-
+  initializeFocusOnTextBox()
   var commandLogCounter = 0
   var nthLastCommand = 1
   var pastUserCommands = []
@@ -34,6 +34,10 @@ $(document).ready(function(){
     $('form').on('submit', applicationController)
     $('#clear-button').on('click', clearLogs)
     $('#textbox').on('keydown', enableLookThroughPastCommands)
+  }
+
+  function initializeFocusOnTextBox() {
+    $('#textbox').focus()
   }
 
   function assessTextBoxSize() {
@@ -96,7 +100,7 @@ $(document).ready(function(){
     clearNyanCatScreen() 
     nyanCatContext.translate(x,0)
     drawNyanCat()
-    drawLine(x,y)
+    drawLine(x,y) // Why is this function drawing a line...? A draw line controller should probably run this line..
   }
 
   function rotateNyanCat(degrees){
@@ -151,7 +155,7 @@ $(document).ready(function(){
     intermediaryData = loopCommand.split(' repeat ')
     return  {
       commandChain: intermediaryData[0].slice(1,-1),
-      loopMultiplier: Number(intermediaryData[1].slice(0,1))
+      loopMultiplier: Number(intermediaryData[1])
     }
   }
 
@@ -162,7 +166,7 @@ $(document).ready(function(){
   function caseStatement(action, magnitude) {
     if (action === "forward") {
       for (var i=0; i<magnitude; i++) { 
-        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELSFORWARD, nyanCat.currentY) 
+        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELSFORWARD, nyanCat.currentY)
       } 
     } else if (action === "rotate") {
       rotateNyanCat(magnitude)
