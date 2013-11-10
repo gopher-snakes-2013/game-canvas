@@ -36,7 +36,18 @@ $(document).ready(function(){
     $('#textbox').on('keydown', enableLookThroughPastCommands)
   }
 
+  function assessTextBoxSize() {
+    if ($('#textbox').val().length === 15) {
+      $('#textbox').css('width', '300')
+    } else if ($('#textbox').val().length === 30) {
+      $('#textbox').css('width', '500')
+    } else {
+
+    }
+  }
+
   function enableLookThroughPastCommands(event) {
+    assessTextBoxSize()
     if (event.keyCode == 38) {
       $('#textbox').val('' + pastUserCommands[pastUserCommands.length-nthLastCommand])
       if (nthLastCommand < pastUserCommands.length) {
@@ -48,7 +59,7 @@ $(document).ready(function(){
       }
       $('#textbox').val('' + pastUserCommands[pastUserCommands.length-nthLastCommand])   
     } else {
-      
+
     }
   }
 
