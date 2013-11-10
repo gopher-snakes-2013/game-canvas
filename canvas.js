@@ -1,7 +1,8 @@
-AMOUNTOFPIXELFORWARD = 10
-SPRITEDIMENSION = 20
-COMPENSATE = SPRITEDIMENSION/2
-BEFOREDRAW = COMPENSATE * (-1)
+function initializeConstants(){
+  AMOUNTOFPIXELFORWARD = 10
+  SPRITEDIMENSION = 20
+  COMPENSATE = SPRITEDIMENSION/2
+}
 
 var NyanCat = function(){
   this.currentX=0
@@ -21,10 +22,15 @@ $(document).ready(function(){
   initializeBoard()
 
   function initializeBoard(){
+    initializeConstants()
+    placeCanvasAxesOnImage()
+    drawNyanCat()
+    $('form').on('submit', applicationController)
+  }
+
+  function placeCanvasAxesOnImage() {
     nyanCatContext.translate(COMPENSATE,COMPENSATE)
     pathContext.translate(COMPENSATE,COMPENSATE)
-    nyanCatContext.drawImage(nyanCat.img,BEFOREDRAW,BEFOREDRAW,SPRITEDIMENSION,SPRITEDIMENSION)
-    $('form').on('submit', parseGivenCode)
   }
 
   function drawLine(x,y){
@@ -35,6 +41,10 @@ $(document).ready(function(){
     pathContext.stroke()
   }
 
+  function drawNyanCat(){
+    nyanCatContext.drawImage(nyanCat.img,-COMPENSATE,-COMPENSATE,SPRITEDIMENSION,SPRITEDIMENSION)
+  }
+
   function clearNyanCatScreen(){
     nyanCatContext.clearRect(-100,-100,1000,1000)
   }
@@ -42,7 +52,7 @@ $(document).ready(function(){
   function moveNyanCat(x, y){
     clearNyanCatScreen() 
     nyanCatContext.translate(x,0)
-    nyanCatContext.drawImage(nyanCat.img,x-10,-10,SPRITEDIMENSION,SPRITEDIMENSION)
+    drawNyanCat()
     drawLine(x,y)
   }
 
@@ -50,19 +60,27 @@ $(document).ready(function(){
     clearNyanCatScreen()
     nyanCatContext.rotate(degrees*Math.PI/180.0)
     pathContext.rotate(degrees*Math.PI/180.0)
-    nyanCatContext.drawImage(nyanCat.img,-10,-10,SPRITEDIMENSION,SPRITEDIMENSION)
+    drawNyanCat()
   }
 
-  function parseGivenCode(event) {
+  function applicationController(event) {
     event.preventDefault()
-    userCommand = $('#textbox').val() // consider DOWNCASE...
+    var userCommand = retrieveUserInput()
     updateCommandLog(userCommand)  
+    parseGivenCode(userCommand)
+  }
+
+  function parseGivenCode(userCommand) {
     var actionMagnitudePair = extractActionAndMagnitude(userCommand) 
     actionMagnitudePair.forEach(function(objectLiteral){
       var action = objectLiteral.action
       var magnitude = Number(objectLiteral.magnitudeOfAction)
       caseStatement(action,magnitude)
     })
+  }
+
+  function retrieveUserInput(){
+    return $('#textbox').val()
   }
 
   function caseStatement(action, magnitude) {
