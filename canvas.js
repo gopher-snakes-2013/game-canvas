@@ -111,12 +111,12 @@ $(document).ready(function(){
     var userCommand = retrieveUserInput()
     updateCommandLog(userCommand)  
     parseGivenCode(userCommand)
-    addCommandToCompilation(userCommand) // moved from parseGivenCode to applicationController
+    addCommandToCompilation(userCommand)
   }
 
   function parseGivenCode(userCommand) {
     var currentLoopMultiplier = 1
-    if (checkIfLoopCommandExists(userCommand) === true){  // checking to see if a repeat command was entered
+    if (checkIfLoopCommandExists(userCommand) === true){
       var commandChainMultiplierPair = separateCommandFromMultiplier(userCommand)
       var userCommand = commandChainMultiplierPair.commandChain
       currentLoopMultiplier = commandChainMultiplierPair.loopMultiplier
@@ -127,7 +127,7 @@ $(document).ready(function(){
   }
 
   function performCommandsGiven(userCommand){
-    var actionMagnitudePairs = extractActionAndMagnitude(userCommand) // this depends on userCommand and currentLoopMultiplier
+    var actionMagnitudePairs = extractActionAndMagnitude(userCommand)
     actionMagnitudePairs.forEach(function(actionMagnitudePair){
     var action = actionMagnitudePair.action
     var magnitude = actionMagnitudePair.magnitudeOfAction
