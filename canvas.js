@@ -1,5 +1,5 @@
 function initializeConstants(){
-  AMOUNTOFPIXELFORWARD = 10
+  AMOUNTOFPIXELSFORWARD = 10
   SPRITEDIMENSION = 20
   COMPENSATE = SPRITEDIMENSION/2
   MAXLOGLINES = 20
@@ -21,7 +21,10 @@ $(document).ready(function(){
 
   var nyanCat = new NyanCat()
   initializeBoard()
+
   var commandLogCounter = 0
+  var nthLastCommand = 1
+  var pastUserCommands = []
 
   function initializeBoard(){
     initializeConstants()
@@ -30,6 +33,23 @@ $(document).ready(function(){
     fillDefaultMultiplier()
     $('form').on('submit', applicationController)
     $('#clear-button').on('click', clearLogs)
+    $('#textbox').on('keydown', enableLookThroughPastCommands)
+  }
+
+  function enableLookThroughPastCommands(event) {
+    if (event.keyCode == 38) {
+      $('#textbox').val('' + pastUserCommands[pastUserCommands.length-nthLastCommand])
+      if (nthLastCommand < pastUserCommands.length) {
+        nthLastCommand++
+      }
+    } else if (event.keyCode == 40) {
+      if (nthLastCommand > 1 ) {
+        nthLastCommand--
+      }
+      $('#textbox').val('' + pastUserCommands[pastUserCommands.length-nthLastCommand])   
+    } else {
+      
+    }
   }
 
   function clearLogs(){
@@ -83,6 +103,7 @@ $(document).ready(function(){
   }
 
   function parseGivenCode(userCommand) {
+    addCommandToCompilation(userCommand)
     var currentLoopMultiplier = 1
     if (userCommand.indexOf('repeat') >= 0){
       var commandChainMultiplierPair = cleanseUserInput(userCommand)
@@ -100,6 +121,10 @@ $(document).ready(function(){
     }
   }
 
+  function addCommandToCompilation(userCommand) {
+    pastUserCommands.push(userCommand)
+  }
+
   function cleanseUserInput(loopCommand){
     intermediaryData = loopCommand.split(' repeat ')
     return  {
@@ -115,7 +140,7 @@ $(document).ready(function(){
   function caseStatement(action, magnitude) {
     if (action === "forward") {
       for (var i=0; i<magnitude; i++) { 
-        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELFORWARD, nyanCat.currentY) 
+        moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELSFORWARD, nyanCat.currentY) 
       } 
     } else if (action === "rotate") {
       rotateNyanCat(magnitude)
