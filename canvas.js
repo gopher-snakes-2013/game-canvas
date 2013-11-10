@@ -24,15 +24,16 @@ $(document).ready(function(){
   var commandLogCounter = 0
 
   function initializeBoard(){
+    console.log('board initialize')
     initializeConstants()
     placeCanvasAxesOnImage()
     drawNyanCat()
     fillDefaultMultiplier()
     $('form').on('submit', applicationController)
-    $('#clear-logs').on('click', attachListenerToClearLogs)
+    $('#clear-button').on('click', clearLogs)
   }
 
-  function attachListenerToClearLogs(){
+  function clearLogs(){
     $('ul li').remove()
   }
 
@@ -82,13 +83,30 @@ $(document).ready(function(){
     parseGivenCode(userCommand)
   }
 
-  function parseGivenCode(userCommand) {
-    var actionMagnitudePair = extractActionAndMagnitude(userCommand) 
-    actionMagnitudePair.forEach(function(objectLiteral){
+  function parseGivenCode(userCommand) { // (forward 3, rotate 4) repeat 4.
+    var currentLoopMultiplier = 1        
+    if (userCommand.indexOf('repeat') >=0){
+      var dataCrap = userCommand.split(' repeat ')  // RENAME   ["(forward 3, rotate 4)", "4."]
+      crap = crapCleaner(dataCrap) // RENAME { commandChain: "forward 3, rotate 4", loopMultiplier: "4" }
+      var userCommand = crap.commandChain // 'forward 3', rotate 4'
+      currentLoopMultiplier = crap.loopMultiplier
+    }
+    
+    for (var i=0; i<currentLoopMultiplier; i++){
+      var actionMagnitudePair = extractActionAndMagnitude(userCommand) 
+      actionMagnitudePair.forEach(function(objectLiteral){
       var action = objectLiteral.action
       var magnitude = Number(objectLiteral.magnitudeOfAction)
       caseStatement(action,magnitude)
-    })
+      })
+    }
+  }
+
+  function crapCleaner(data){
+    return  {
+      commandChain: data[0].slice(1,-1),
+      loopMultiplier: Number(data[1].slice(0,1))
+    }
   }
 
   function retrieveUserInput(){
