@@ -1,17 +1,34 @@
 
-#container{
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: block;
-  border: 1px solid yellow;
+h1 {
+  font-family: 'Luckiest Guy', cursive;
+  text-align:center;
 }
 
-.canvas {
-  display:block;
-  height: 85%;
+h3 {
+  font-family: 'Luckiest Guy', cursive;
+
+}
+
+.wrapper {
+   padding: 0;
+   margin-left: 3em;
+   width: 100%;
+   height: 100%;
+   position: absolute;
+}
+
+#container{
+  position: relative;
+  height: 100%;
   width: 100%;
-  border: 1px solid red;
+  display: block;
+  border: 1px gray;
+}
+
+.canvas-container {
+  display:block;
+  height: 600px;
+  /*border: 1px solid red;*/
   position: relative;
   left:0;
   top: 0;
@@ -19,41 +36,50 @@
 
 #path-canvas {
   position: absolute;
-  width: 50%;
-  height: 100%;
+  width: 80%;
+  height: auto;
   z-index: 0;
   float: left;
+  background: #ecf0f1;
 }
 
 #nyan-cat-canvas {
   position: absolute;
-  width: 60%;
-  height: 100%;
+  width: 80%;
+  height: auto;
   z-index: 1;
   float: left;
-  border: 1px solid blue;
+  /*background: #ecf0f1;*/
+  box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
 }
 
 .command-log {
   float: right;
+  margin-right: -10px;
   position: relative;
-  height: 100%;
+  height: auto;
   display: block;
-  width: 40%;
+  width: 20%;
+}
+
+.command-log ul {
+  list-style: none;
 }
 
 .form-holder {
   position: relative;
-  background-color: yellow;
   width: 100%;
-  border: 1px solid black;
 }
 
 #nycatform {
   display: block;
-  position: absolute;
+  position: relative;
   float: left;
-  border: 1px solid blue;
+}
+
+#textbox {
+  width: 400px;
+  height: 30px;
 }
 
 #nyancat-img {

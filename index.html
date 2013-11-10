@@ -1,24 +1,31 @@
 <head>
+  <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="canvas.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
 </head>
 <body>
+<div class="wrapper">
+
   <div id = 'container'>
-    <div class="canvas">
-      <canvas id="path-canvas"></canvas>
-      <canvas id="nyan-cat-canvas"></canvas>
-      <div class="command-log">
-        <ul id='list-of-commands'> </ul>
+  <h1>Turtle Logo II</h1>
+    <div class='canvas-container'>
+      <canvas id="path-canvas" width="500" height="300"></canvas>
+      <canvas id="nyan-cat-canvas" width="500" height="300"></canvas>
+      <div class="command-log"><h3>Command Log</h3>
+        <ul id='list-of-commands'></ul>
       </div>
     </div>
 
     <div class='form-holder'>
       <form id='nycatform'>
-        <input type='text' id='textbox'>
+        <input type='text' id='textbox' size="25">
         <input type='submit'>
       </form>
       <img id='nyancat-img' src="nyancat.png">
     </div>
   </div>
+
+</div>
 </body>
