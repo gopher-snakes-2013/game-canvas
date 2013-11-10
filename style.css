@@ -1,3 +1,11 @@
+body {
+    font-size:125%;
+    line-height:1.125em; /* 16×1.125=18 */
+}.bodytext p {
+    font-size:0.875em;
+}.sidenote {
+    font-size:0.75em;
+}
 
 h1 {
   font-family: 'Luckiest Guy', cursive;
@@ -9,61 +17,89 @@ h3 {
 
 }
 
+
+
+
 .wrapper {
-   padding: 0;
-   margin-left: 3em;
+/*
+height:100% implies the element is going to have the 100% height of its parent container.
+height:auto. The default. This means the element will have flexible height i.e. its height will depend upon the height of children elements of it
+*/
+
    width: 100%;
-   height: 100%;
+   height: auto;
+   margin: auto;
+   padding-left: 2em;
    position: absolute;
+   border: 1px solid red;
 }
 
-#container{
+
+#top-container{
   position: relative;
-  height: 100%;
-  width: 100%;
+  /*height: 100%;*/
+  /*width: 100%;*/
   display: block;
-  border: 1px gray;
+  border: 1px solid green;
 }
 
 .canvas-container {
-  display:block;
-  height: 600px;
-  /*border: 1px solid red;*/
   position: relative;
-  left:0;
-  top: 0;
+  width: 100%;
+  border: 1px solid black;
 }
+
+/*http://www.mademyday.de/css-height-equals-width-with-pure-css.html*/
+.canvas-container:before{
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+
+
 
 #path-canvas {
   position: absolute;
-  width: 80%;
-  height: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   float: left;
   background: #ecf0f1;
+  border-radius:25px;
+  box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+  border: 1px solid black;
 }
 
 #nyan-cat-canvas {
   position: absolute;
-  width: 80%;
-  height: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   float: left;
-  /*background: #ecf0f1;*/
-  box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
 }
 
 .command-log {
   float: right;
-  margin-right: -10px;
   position: relative;
   height: auto;
   display: block;
-  width: 20%;
+  width: 18%;
+  border: 1px solid black;
 }
 
 .command-log ul {
   list-style: none;
+  margin: 0px;
+  padding: 0px;
+
 }
 
 .form-holder {
