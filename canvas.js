@@ -111,24 +111,35 @@ $(document).ready(function(){
     var userCommand = retrieveUserInput()
     updateCommandLog(userCommand)  
     parseGivenCode(userCommand)
+    addCommandToCompilation(userCommand) // moved from parseGivenCode to applicationController
   }
 
   function parseGivenCode(userCommand) {
-    addCommandToCompilation(userCommand)
     var currentLoopMultiplier = 1
-    if (userCommand.indexOf('repeat') >= 0){
-      var commandChainMultiplierPair = cleanseUserInput(userCommand)
+    if (checkIfLoopCommandExists(userCommand) === true){  // checking to see if a repeat command was entered
+      var commandChainMultiplierPair = separateCommandFromMultiplier(userCommand)
       var userCommand = commandChainMultiplierPair.commandChain
       currentLoopMultiplier = commandChainMultiplierPair.loopMultiplier
-    }
-    
+    } 
     for (var i=0; i<currentLoopMultiplier; i++){
-      var actionMagnitudePair = extractActionAndMagnitude(userCommand) 
-      actionMagnitudePair.forEach(function(objectLiteral){
-      var action = objectLiteral.action
-      var magnitude = Number(objectLiteral.magnitudeOfAction)
-      caseStatement(action,magnitude)
-      })
+      performCommandsGiven(userCommand)
+    }
+  }
+
+  function performCommandsGiven(userCommand){
+    var actionMagnitudePairs = extractActionAndMagnitude(userCommand) // this depends on userCommand and currentLoopMultiplier
+    actionMagnitudePairs.forEach(function(actionMagnitudePair){
+    var action = actionMagnitudePair.action
+    var magnitude = actionMagnitudePair.magnitudeOfAction
+    caseStatement(action,magnitude)
+    })
+  }
+
+  function checkIfLoopCommandExists(command){
+    if (command.indexOf("repeat") >= 0){
+      return true
+    } else {
+      return false
     }
   }
 
@@ -136,7 +147,7 @@ $(document).ready(function(){
     pastUserCommands.push(userCommand)
   }
 
-  function cleanseUserInput(loopCommand){
+  function separateCommandFromMultiplier(loopCommand){
     intermediaryData = loopCommand.split(' repeat ')
     return  {
       commandChain: intermediaryData[0].slice(1,-1),
@@ -165,7 +176,7 @@ $(document).ready(function(){
     var actionMagnitude = []
     individualCommands.forEach(function(command) {
       actionMagnitude.push({action: command.split(' ')[0],
-      magnitudeOfAction: command.split(' ')[1]})
+      magnitudeOfAction: Number(command.split(' ')[1])})
     }) 
     return actionMagnitude
   }
