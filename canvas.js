@@ -24,7 +24,6 @@ $(document).ready(function(){
   var commandLogCounter = 0
 
   function initializeBoard(){
-    console.log('board initialize')
     initializeConstants()
     placeCanvasAxesOnImage()
     drawNyanCat()
@@ -83,13 +82,12 @@ $(document).ready(function(){
     parseGivenCode(userCommand)
   }
 
-  function parseGivenCode(userCommand) { // (forward 3, rotate 4) repeat 4.
-    var currentLoopMultiplier = 1        
-    if (userCommand.indexOf('repeat') >=0){
-      var dataCrap = userCommand.split(' repeat ')  // RENAME   ["(forward 3, rotate 4)", "4."]
-      crap = crapCleaner(dataCrap) // RENAME { commandChain: "forward 3, rotate 4", loopMultiplier: "4" }
-      var userCommand = crap.commandChain // 'forward 3', rotate 4'
-      currentLoopMultiplier = crap.loopMultiplier
+  function parseGivenCode(userCommand) {
+    var currentLoopMultiplier = 1
+    if (userCommand.indexOf('repeat') >= 0){
+      var commandChainMultiplierPair = cleanseUserInput(userCommand)
+      var userCommand = commandChainMultiplierPair.commandChain
+      currentLoopMultiplier = commandChainMultiplierPair.loopMultiplier
     }
     
     for (var i=0; i<currentLoopMultiplier; i++){
@@ -102,10 +100,11 @@ $(document).ready(function(){
     }
   }
 
-  function crapCleaner(data){
+  function cleanseUserInput(loopCommand){
+    intermediaryData = loopCommand.split(' repeat ')
     return  {
-      commandChain: data[0].slice(1,-1),
-      loopMultiplier: Number(data[1].slice(0,1))
+      commandChain: intermediaryData[0].slice(1,-1),
+      loopMultiplier: Number(intermediaryData[1].slice(0,1))
     }
   }
 
@@ -126,7 +125,6 @@ $(document).ready(function(){
   }
 
   function extractActionAndMagnitude(userCommand) {
-    console.log(userCommand)
     var individualCommands = userCommand.split(', ') 
     var actionMagnitude = []
     individualCommands.forEach(function(command) {
