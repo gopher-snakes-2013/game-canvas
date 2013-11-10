@@ -60,4 +60,7 @@
   display: none;
 }
 
-
+#log-features {
+  position: relative;
+  float: right;
+}

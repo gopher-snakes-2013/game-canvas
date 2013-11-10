@@ -2,6 +2,7 @@ function initializeConstants(){
   AMOUNTOFPIXELFORWARD = 10
   SPRITEDIMENSION = 20
   COMPENSATE = SPRITEDIMENSION/2
+  MAXLOGLINES = 20
 }
 
 var NyanCat = function(){
@@ -20,12 +21,23 @@ $(document).ready(function(){
 
   var nyanCat = new NyanCat()
   initializeBoard()
+  var commandLogCounter = 0
 
   function initializeBoard(){
     initializeConstants()
     placeCanvasAxesOnImage()
     drawNyanCat()
+    fillDefaultMultiplier()
     $('form').on('submit', applicationController)
+    $('#clear-logs').on('click', attachListenerToClearLogs)
+  }
+
+  function attachListenerToClearLogs(){
+    $('ul li').remove()
+  }
+
+  function fillDefaultMultiplier() {
+    $('#multiplier').val('1')
   }
 
   function placeCanvasAxesOnImage() {
@@ -107,7 +119,10 @@ $(document).ready(function(){
   }
 
   function updateCommandLog(lastCommand){
+    if (++commandLogCounter > MAXLOGLINES){
+      $('ul li').eq(0).remove()
+    }
     $('.command-log ul').append('<li>' + lastCommand + '</li>')
-    $('#textbox').val('')
+    $('#textbox').val('')  
   }
 })
