@@ -2,7 +2,7 @@
 height:100% Implies the element is going to have the 100% height of its parent container.
 height:auto The default. This means the element will have flexible height i.e. its height will depend upon the height of children elements of it
 */
-/* palette:  http://www.colourlovers.com/palette/101556/Flat */
+/* color palette:  http://www.colourlovers.com/palette/101556/Flat */
 
 /* base CSS */
 
@@ -64,7 +64,7 @@ hidden {
   display: none;
 }
 
-/* the top left */
+/* top left */
 .canvas-container {
   position: relative;
   width: 73%;
@@ -108,7 +108,7 @@ hidden {
   float: left;
 }
 
-/* the right sidebar */
+/* right sidebar */
 
 .right-sidebar{
   float: right;
@@ -142,7 +142,8 @@ hidden {
   padding: 0px;
 }
 
-/* bottom section */
+/* bottom container */
+
 .bottom-container {
   position: relative;
   width: 100%;
@@ -166,7 +167,7 @@ hidden {
   display: none;
 }
 
-/* go button */
+/* go button courtesy of CSSButtonGenerator.com */
 .go-button {
   margin-left: .3em;
   margin-bottom: .1em;
@@ -213,4 +214,3 @@ hidden {
   position:relative;
   top:1px;
 }
-/* CSSButtonGenerator.com */
