@@ -4,31 +4,47 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="canvas.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="wrapper">
+<div class ="wrapper">
+  <header>
+    <h1>Turtle Logo II</h1>
+  </header>
 
-  <h1>Turtle Logo II</h1>
-
-  <div id = 'top-container'>
+  <div class='top-container'>
     <div class='canvas-container'>
-      <canvas id="path-canvas"></canvas>
-      <canvas id="nyan-cat-canvas"></canvas>
+      <canvas class="path-canvas"></canvas>
+      <canvas class="sprite-canvas"></canvas>
     </div>
+    <div class ='right-sidebar'>
+      <div class='commandlog-container'>
+        <h3>Command Log</h3>
+        <ul class='list-of-commands'></ul>
+      </div>
 
-    <div class="command-log"><h3>Command Log</h3>
-      <ul id='list-of-commands'>forward 5</ul>
-      <ul id='list-of-commands'></ul>
+      <div class='recipe-container'>
+        <h3>Recipes</h3>
+        <ul class='recipes-list'>
+          <li>square = (forward 5, rotate 90) repeat 4</li>
+          <li>triangle = (forward 5, rotate 120) repeat 3</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div class='form-holder'>
-    <form id='nycatform'>
-      <input type='text' id='textbox' size="25">
-      <input type='submit'>
+  <div class='bottom-container'>
+    <form class='nycatform'>
+      <input type='text' class='textbox' size="25">
+      <input class='hidden' type='submit' value = "Go!">
     </form>
-    <img id='nyancat-img' src="nyancat.png">
+
+<a href="#" class="go-button">GO!</a>
+
+    <img class='sprite-img' src="nyancat.png">
   </div>
+
+
 
 </div>
 </body>
