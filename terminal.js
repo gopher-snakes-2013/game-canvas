@@ -9,9 +9,12 @@ Terminal.prototype.initializeFocusOnTextBox = function() {
   $('#textbox').focus()
 }
 
-Terminal.prototype.enableListeners = function(){
-  $('#textbox').on('keydown', this.traversePriorCommands)
-  $('#textbox').on('change', this.adustTextBoxSize)
+Terminal.prototype.initializeListeners = function(){
+  self = this
+  $('#textbox').on('keydown', function(event){
+    self.traversePriorCommands(event) // NEED TO MAKE THIS WORK...
+  })
+  $('#textbox').on('change', this.adjustTextBoxSize)
 }
 
 Terminal.prototype.adjustTextBoxSize = function() {
@@ -26,16 +29,16 @@ Terminal.prototype.adjustTextBoxSize = function() {
 
 Terminal.prototype.traversePriorCommands = function(event) {
   if (event.keyCode == 38) {
-    $('#textbox').val('' + priorCommands[priorCommands.length-commandListIndex]) //array[0]
-    if (commandListIndex < priorCommands.length) {
-      commandListIndex++
+    $('#textbox').val('' + this.priorCommands[this.priorCommands.length-this.commandListIndex]) //array[0]
+    if (this.commandListIndex < this.priorCommands.length) {
+      this.commandListIndex++
     }
   }
   if (event.keyCode == 40) {
-    if (commandListIndex > 1 ) {
-      commandListIndex--
+    if (this.commandListIndex > 1 ) {
+      this.commandListIndex--
     }
-    $('#textbox').val('' + priorCommands[priorCommands.length-commandListIndex])   
+    $('#textbox').val('' + this.priorCommands[this.priorCommands.length-this.commandListIndex])   
   }
 }
 

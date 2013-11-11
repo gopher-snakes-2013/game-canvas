@@ -1,5 +1,3 @@
-
-
 var ApplicationController = function() {
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(SPRITEIMAGE)
@@ -12,7 +10,7 @@ var ApplicationController = function() {
 ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
-
+  // this.terminal.initializeListeners()
   canvasArray = [this.sprite, this.path]
   contextArray = this.createCanvases(canvasArray)
   this.placeCanvasAxesOnImage(contextArray)
