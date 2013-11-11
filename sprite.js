@@ -4,7 +4,7 @@ var Sprite = function(avatar){
   this.img = new Image()
   this.img.src = avatar
   this.context = this.prepareContext()
-  this.dimension = 15
+  this.dimension = 20
   this.offset = this.dimension/2
 }
 
@@ -22,7 +22,7 @@ Sprite.prototype.clearScreen = function(){
 }
 
 Sprite.prototype.move = function(x, y){
-  this.clearScreen() 
+  this.clearScreen()
   this.context.translate(x,0)
   this.draw()
 }
