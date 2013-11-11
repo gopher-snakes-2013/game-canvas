@@ -19,7 +19,7 @@ ApplicationController.prototype.initializeGame = function(){
 
 ApplicationController.prototype.initializeConstants = function() {
   PATHCOLOR = "#FF0000"
-  SPRITEIMAGE = "lib/greenturtle.jpeg"
+  SPRITEIMAGE = "lib/nyancat.png"
 }
 
 ApplicationController.prototype.initializeListeners = function() {
