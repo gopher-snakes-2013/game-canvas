@@ -35,13 +35,26 @@ function placeCanvasAxesOnImage(contextArray) {
 
 function retrieveCommand(event) {
   event.preventDefault()
+  resetCommandListIndexValue()
   var userCommand = retrieveUserInput()
   commandLog.update(userCommand)  
   parseGivenCode(userCommand)
   terminal.addCommandToCompilation(userCommand)
 }
 
-function performCommandsGiven(userCommand){
+// parse.ParseGivenCode <- will return a object literal with command and loopmultiplier
+
+function resetCommandListIndexValue() {
+  terminal.commandListIndex = 1
+}
+
+function performLoopCommandsGiven() {
+  for (var i=0; i<this.currentLoopMultiplier; i++){
+    performCommandsGiven(userCommand)
+  }
+}
+
+function performSimpleCommandsGiven(userCommand){
   var actionMagnitudePairs = extractActionAndMagnitude(userCommand)
   actionMagnitudePairs.forEach(function(actionMagnitudePair){
   var action = actionMagnitudePair.action
@@ -64,18 +77,4 @@ function caseStatement(action, magnitude) {
   } else {
     alert("Try Again")
   }
-}
-
-function extractActionAndMagnitude(userCommand) {
-  var individualCommands = userCommand.split(', ') 
-  var actionMagnitude = []
-  individualCommands.forEach(function(command) {
-    actionMagnitude.push({action: command.split(' ')[0],
-    magnitudeOfAction: Number(command.split(' ')[1])})
-  }) 
-  return actionMagnitude
-}
-
-function terminal.addCommandToCompilation(userCommand) {
-  pastUserCommands.push(userCommand)
 }
