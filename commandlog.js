@@ -1,5 +1,5 @@
 var CommandLog = function() {
-  this.list = $('.command-log ul')
+  this.list = $('.list-of-commands')
 }
 
 CommandLog.prototype.update = function(lastCommand){

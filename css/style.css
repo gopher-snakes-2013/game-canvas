@@ -60,7 +60,7 @@ header {
   display: none;
 }
 
-hidden {
+.hidden {
   display: none;
 }
 
@@ -81,7 +81,7 @@ hidden {
 }
 
 
-.path-canvas {
+#path-canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@ hidden {
   box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
 }
 
-.sprite-canvas {
+#sprite-canvas {
   position: absolute;
   top: 0;
   left: 0;
