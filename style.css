@@ -25,7 +25,7 @@
   float: left;
 }
 
-#nyan-cat-canvas {
+#sprite-canvas {
   position: absolute;
   width: 60%;
   height: 100%;
@@ -49,14 +49,14 @@
   border: 1px solid black;
 }
 
-#nycatform {
+#command-form {
   display: block;
   position: absolute;
   float: left;
   border: 1px solid blue;
 }
 
-#nyancat-img {
+#sprite-img {
   display: none;
 }
 

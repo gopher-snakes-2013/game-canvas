@@ -41,5 +41,5 @@ Terminal.prototype.traversePriorCommands = function(event) {
 }
 
 Terminal.prototype.addCommandToCompilation = function(userCommand) {
-  priorCommands.push(userCommand)
+  this.priorCommands.push(userCommand)
 }

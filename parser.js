@@ -10,7 +10,6 @@ Parser.prototype.parseGivenCode = function(userCommand) {
   }   
   return {command: userCommand, multiplier: this.currentLoopMultiplier}
 }
-  
 
 Parser.prototype.checkIfLoopCommandExists = function(command){
   if (command.indexOf("repeat") >= 0){

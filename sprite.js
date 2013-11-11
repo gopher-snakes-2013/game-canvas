@@ -1,32 +1,34 @@
-var NyanCat = function(avatar){
+var Sprite = function(avatar){
   this.currentX=0
   this.currentY=0
   this.img = new Image()
   this.img.src = avatar
   this.context = this.prepareContext()
+  this.dimension = 20
+  this.offset = this.dimension/2
 }
 
-NyanCat.prototype.prepareContext = function() {
-  var nyanCatCanvas = document.getElementById('nyan-cat-canvas')
-  return nyanCatCanvas.getContext("2d")
+Sprite.prototype.prepareContext = function() {
+  var SpriteCanvas = document.getElementById('sprite-canvas')
+  return SpriteCanvas.getContext("2d")
 }
 
-NyanCat.prototype.draw = function(){
-  this.context.drawImage(this.img,-COMPENSATE,-COMPENSATE,SPRITEDIMENSION,SPRITEDIMENSION)
+Sprite.prototype.draw = function(){
+  this.context.drawImage(this.img,-this.offset,-this.offset,this.dimension,this.dimension)
 }
 
-NyanCat.prototype.clearScreen = function(){
+Sprite.prototype.clearScreen = function(){
   this.context.clearRect(-100,-100,1000,1000)
 }
 
-NyanCat.prototype.move = function(x, y){
+Sprite.prototype.move = function(x, y){
   this.clearScreen() 
   this.context.translate(x,0)
   this.draw()
   drawLine(x,y) // Why is this function drawing a line...? A draw line controller should probably run this line..
 }
 
-NyanCat.prototype.rotate = function(degrees, pathContext){
+Sprite.prototype.rotate = function(degrees, pathContext){
   this.clearScreen()
   this.context.rotate(degrees*Math.PI/180.0)
   pathContext.rotate(degrees*Math.PI/180.0)

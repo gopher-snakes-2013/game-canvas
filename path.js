@@ -1,9 +1,11 @@
 var Path = function(color) {
   this.canvas = document.getElementById('path-canvas')
-  this.context = this.canvas.getContext("2d")
   this.lineColor = color
 }
 
+Path.prototype.prepareContext = function(){
+  return this.canvas.getContext("2d")
+}
 
 Path.prototype.drawLine = function(sprite,x,y){
   this.context.moveTo(sprite.currentX, sprite.currentY)

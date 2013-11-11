@@ -1,60 +1,68 @@
 var ApplicationController = function() {
   this.constants = this.initializeConstants()
-  this.game = this.initializeCanvases()
+  this.sprite = new Sprite(SPRITEIMAGE)
+  this.path = new Path(PATHCOLOR)
+  this.commandLog = new CommandLog()
+  this.terminal = new Terminal()
+  this.parser = new Parser()
+}
+
+ApplicationController.prototype.initializeGame = function(){
+  this.initializeConstants()
+  this.initializeListeners()
+
+  canvasArray = [this.sprite, this.path]
+  contextArray = this.createCanvases(canvasArray)
+  this.sprite.draw()
+  this.placeCanvasAxesOnImage(contextArray)
 }
 
 ApplicationController.prototype.initializeConstants = function() {
   AMOUNTOFPIXELSFORWARD = 10
-  SPRITEDIMENSION = 20
-  COMPENSATE = SPRITEDIMENSION/2
   MAXLOGLINES = 20
+  PATHCOLOR = "#FF0000"
+  SPRITEIMAGE = "nyancat.png"
 }
 
-ApplicationController.prototype.initializeConstants = function() {
-  $('form').on('submit', retrieveCommand)
+ApplicationController.prototype.initializeListeners = function() {
+  var self = this
+  $('form').on('submit', this.respondToSubmit(event, self))
 }
 
-ApplicationController.prototype.initializeGame = function(){
-  initializeCanvases()
+ApplicationController.prototype.createCanvases = function(canvasArray){
+  var contextArray = []
+  canvasArray.forEach(function(canvas) {
+    contextArray.push(canvas.prepareContext())
+  })
+  return contextArray
 }
 
-ApplicationController.prototype.initializeCanvases = function(){
-  var nyanCat = new NyanCat("nyancat.png")
-  var path = new Path("#FF0000")
-  var commandLog = new CommandLog()
-  var terminal = new Terminal()
-  contextArray = [path.context, nyanCat.context]
-  placeCanvasAxesOnImage(contextArray)
-  nyanCat.draw()
-}
-
-function placeCanvasAxesOnImage(contextArray) {
-  contextArray.forEach(function(context) {context.translate(COMPENSATE,COMPENSATE)
+ApplicationController.prototype.placeCanvasAxesOnImage = function(contextArray) {
+  var self = this
+  contextArray.forEach(function(context) {context.translate(self.sprite.offset,self.sprite.offset)
   })
 }
 
-function retrieveCommand(event) {
+ApplicationController.prototype.respondToSubmit = function(event, self) {
   event.preventDefault()
-  resetCommandListIndexValue()
-  var userCommand = retrieveUserInput()
-  commandLog.update(userCommand)  
-  parseGivenCode(userCommand)
-  terminal.addCommandToCompilation(userCommand)
+  self.resetCommandListIndexValue()
+  var userCommand = self.retrieveUserInput()
+  self.commandLog.update(userCommand)  
+  self.parser.parseGivenCode(userCommand)
+  self.terminal.addCommandToCompilation(userCommand)
 }
 
-// parse.ParseGivenCode <- will return a object literal with command and loopmultiplier
-
-function resetCommandListIndexValue() {
-  terminal.commandListIndex = 1
+ApplicationController.prototype.resetCommandListIndexValue = function() {
+  this.terminal.commandListIndex = 1
 }
 
-function performLoopCommandsGiven() {
+ApplicationController.prototype.performLoopCommandsGiven = function() {
   for (var i=0; i<this.currentLoopMultiplier; i++){
     performCommandsGiven(userCommand)
   }
 }
 
-function performSimpleCommandsGiven(userCommand){
+ApplicationController.prototype.performSimpleCommandsGiven = function(userCommand){
   var actionMagnitudePairs = extractActionAndMagnitude(userCommand)
   actionMagnitudePairs.forEach(function(actionMagnitudePair){
   var action = actionMagnitudePair.action
@@ -63,17 +71,17 @@ function performSimpleCommandsGiven(userCommand){
   })
 }
 
-function retrieveUserInput(){
+ApplicationController.prototype.retrieveUserInput = function(){
   return $('#textbox').val()
 }
 
-function caseStatement(action, magnitude) {
+ApplicationController.prototype.caseStatement = function(action, magnitude) {
   if (action === "forward") {
     for (var i=0; i<magnitude; i++) { 
-      moveNyanCat(nyanCat.currentX+AMOUNTOFPIXELSFORWARD, nyanCat.currentY)
+      moveSprite(this.sprite.currentX+AMOUNTOFPIXELSFORWARD, this.sprite.currentY)
     } 
   } else if (action === "rotate") {
-    rotateNyanCat(magnitude)
+    rotateSprite(magnitude)
   } else {
     alert("Try Again")
   }

@@ -1,32 +1,35 @@
+<html>
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="sprite.js"></script>
   <script type="text/javascript" src="path.js"></script>
+  <script type="text/javascript" src="parser.js"></script>
   <script type="text/javascript" src="commandlog.js"></script>
   <script type="text/javascript" src="terminal.js"></script>
   <script type="text/javascript" src="application-controller.js"></script>
-  <script type="text/javascript" src="canvas.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
   <div id = 'container'>
     <div class="canvas">
       <canvas id="path-canvas"></canvas>
-      <canvas id="nyan-cat-canvas"></canvas>
+      <canvas id="sprite-canvas"></canvas>
       <div class="command-log">
         <ul id='list-of-commands'> </ul>
       </div>
     </div>
 
     <div class='form-holder'>
-      <form id='nycatform'>
+      <form id='command-form'>
         <input type='text' id='textbox'>
         <input type='submit'>
       </form>
-      <img id='nyancat-img' src="nyancat.png">
+      <img id='sprite-img' src="nyancat.png">
     </div>
     <div id='log-features'> 
         <input type="checkbox" name="checkbox" value='Do Not Log'> Do Not Log 
     </div>
   </div>
 </body>
+</html>
