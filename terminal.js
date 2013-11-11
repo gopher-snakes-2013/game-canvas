@@ -12,7 +12,6 @@ Terminal.prototype.initializeFocusOnTextBox = function() {
 Terminal.prototype.enableListeners = function(){
   $('#textbox').on('keydown', this.traversePriorCommands)
   $('#textbox').on('change', this.adustTextBoxSize)
-
 }
 
 Terminal.prototype.adjustTextBoxSize = function() {

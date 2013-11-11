@@ -1,3 +1,5 @@
+
+
 var ApplicationController = function() {
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(SPRITEIMAGE)
@@ -13,8 +15,8 @@ ApplicationController.prototype.initializeGame = function(){
 
   canvasArray = [this.sprite, this.path]
   contextArray = this.createCanvases(canvasArray)
-  this.sprite.draw()
   this.placeCanvasAxesOnImage(contextArray)
+  this.sprite.draw()
 }
 
 ApplicationController.prototype.initializeConstants = function() {
@@ -26,7 +28,9 @@ ApplicationController.prototype.initializeConstants = function() {
 
 ApplicationController.prototype.initializeListeners = function() {
   var self = this
-  $('form').on('submit', this.respondToSubmit(event, self))
+  $('form').on('submit', function(event){
+    self.respondToSubmit(event)
+  })
 }
 
 ApplicationController.prototype.createCanvases = function(canvasArray){
@@ -43,31 +47,37 @@ ApplicationController.prototype.placeCanvasAxesOnImage = function(contextArray) 
   })
 }
 
-ApplicationController.prototype.respondToSubmit = function(event, self) {
+ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
-  self.resetCommandListIndexValue()
-  var userCommand = self.retrieveUserInput()
-  self.commandLog.update(userCommand)  
-  self.parser.parseGivenCode(userCommand)
-  self.terminal.addCommandToCompilation(userCommand)
+  var userCommand = this.retrieveUserInput()
+  this.commandLog.update(userCommand)   // Extract
+  this.terminal.addCommandToCompilation(userCommand)  // Extract
+  this.resetCommandListIndexValue()  // Extract
+  if (this.parser.checkIfLoopCommandExists(userCommand)) {
+    var commandMultiplierPair = this.parser.parseGivenCode(userCommand)
+    this.performLoopCommandsGiven(commandMultiplierPair.command, commandMultiplierPair.multiplier)
+  } else {
+    this.performSimpleCommandsGiven(userCommand)
+  }
 }
 
 ApplicationController.prototype.resetCommandListIndexValue = function() {
   this.terminal.commandListIndex = 1
 }
 
-ApplicationController.prototype.performLoopCommandsGiven = function() {
-  for (var i=0; i<this.currentLoopMultiplier; i++){
-    performCommandsGiven(userCommand)
+ApplicationController.prototype.performLoopCommandsGiven = function(userCommand, currentLoopMultiplier) {
+  for (var i=0; i<currentLoopMultiplier; i++){
+    this.performSimpleCommandsGiven(userCommand)
   }
 }
 
 ApplicationController.prototype.performSimpleCommandsGiven = function(userCommand){
-  var actionMagnitudePairs = extractActionAndMagnitude(userCommand)
+  var actionMagnitudePairs = this.parser.extractActionAndMagnitude(userCommand)
+  self = this
   actionMagnitudePairs.forEach(function(actionMagnitudePair){
   var action = actionMagnitudePair.action
   var magnitude = actionMagnitudePair.magnitudeOfAction
-  caseStatement(action,magnitude)
+  self.caseStatement(action,magnitude)
   })
 }
 
@@ -78,10 +88,12 @@ ApplicationController.prototype.retrieveUserInput = function(){
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
   if (action === "forward") {
     for (var i=0; i<magnitude; i++) { 
-      moveSprite(this.sprite.currentX+AMOUNTOFPIXELSFORWARD, this.sprite.currentY)
+      this.sprite.move(magnitude, 0)
+      this.path.drawLine(magnitude,0)
     } 
   } else if (action === "rotate") {
-    rotateSprite(magnitude)
+    this.sprite.rotate(magnitude)
+    this.path.rotate(magnitude)
   } else {
     alert("Try Again")
   }

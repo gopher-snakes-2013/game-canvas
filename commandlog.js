@@ -1,3 +1,7 @@
+var commandLog = { 
+  letter: 'a'}
+
+
 var CommandLog = function() {
   this.counter = 0
   this.list = $('.command-log ul')

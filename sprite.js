@@ -25,12 +25,10 @@ Sprite.prototype.move = function(x, y){
   this.clearScreen() 
   this.context.translate(x,0)
   this.draw()
-  drawLine(x,y) // Why is this function drawing a line...? A draw line controller should probably run this line..
 }
 
-Sprite.prototype.rotate = function(degrees, pathContext){
+Sprite.prototype.rotate = function(degrees){
   this.clearScreen()
   this.context.rotate(degrees*Math.PI/180.0)
-  pathContext.rotate(degrees*Math.PI/180.0)
   this.draw()
 }
