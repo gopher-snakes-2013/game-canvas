@@ -1,6 +1,9 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="sprite.js"></script>
   <script type="text/javascript" src="path.js"></script>
@@ -11,23 +14,36 @@
   <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-  <div id = 'container'>
-    <div class="canvas">
-      <canvas id="path-canvas"></canvas>
-      <canvas id="sprite-canvas"></canvas>
-      <div class="command-log">
-        <ul id='list-of-commands'> </ul>
+  <div class ="wrapper">
+    <header>
+      <h1>Turtle Logo II</h1>
+    </header>
+    <div class='top-container'>
+      <div class='canvas-container'>
+        <canvas class="path-canvas"></canvas>
+        <canvas class="sprite-canvas"></canvas>
+      </div>
+      <div class ='right-sidebar'>
+        <div class='commandlog-container'>
+          <h3>Command Log</h3>
+          <ul class='list-of-commands'></ul>
+        </div>
+        <div class='recipe-container'>
+          <h3>Recipes</h3>
+          <ul class='recipes-list'>
+            <li>square = (forward 5, rotate 90) repeat 4</li>
+            <li>triangle = (forward 5, rotate 120) repeat 3</li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class='form-holder'>
-      <form id='command-form'>
-        <input type='text' id='textbox'>
-        <input type='submit'>
+    <div class='bottom-container'>
+      <form class='nycatform'>
+        <input type='text' class='textbox' size="25">
+        <input class='hidden' type='submit' value = "Go!">
       </form>
-      <img id='sprite-img' src="nyancat.png">
-    </div>
-    <div id='log-features'> 
+      <a href="#" class="go-button">GO!</a>
+      <img class='sprite-img' src="nyancat.png">
     </div>
   </div>
 </body>
