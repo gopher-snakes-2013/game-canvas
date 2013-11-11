@@ -10,7 +10,7 @@ var ApplicationController = function() {
 ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
-  // this.terminal.initializeListeners()
+  this.terminal.initializeListeners()
   canvasArray = [this.sprite, this.path]
   contextArray = this.createCanvases(canvasArray)
   this.placeCanvasAxesOnImage(contextArray)
@@ -18,8 +18,6 @@ ApplicationController.prototype.initializeGame = function(){
 }
 
 ApplicationController.prototype.initializeConstants = function() {
-  AMOUNTOFPIXELSFORWARD = 10
-  MAXLOGLINES = 20
   PATHCOLOR = "#FF0000"
   SPRITEIMAGE = "nyancat.png"
 }

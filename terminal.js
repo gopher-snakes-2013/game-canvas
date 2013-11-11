@@ -10,11 +10,11 @@ Terminal.prototype.initializeFocusOnTextBox = function() {
 }
 
 Terminal.prototype.initializeListeners = function(){
-  self = this
+  var self = this
   $('#textbox').on('keydown', function(event){
-    self.traversePriorCommands(event) // NEED TO MAKE THIS WORK...
+    self.traversePriorCommands(event)
   })
-  $('#textbox').on('change', this.adjustTextBoxSize)
+  $('#textbox').on('keyup', self.adjustTextBoxSize)
 }
 
 Terminal.prototype.adjustTextBoxSize = function() {
