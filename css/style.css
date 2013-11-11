@@ -1,0 +1,216 @@
+/*
+height:100% Implies the element is going to have the 100% height of its parent container.
+height:auto The default. This means the element will have flexible height i.e. its height will depend upon the height of children elements of it
+*/
+/* color palette:  http://www.colourlovers.com/palette/101556/Flat */
+
+/* base CSS */
+
+body {
+    font-size:125%;
+    line-height:1.125em; /* 16×1.125=18 */
+    color: #34495e;
+}.bodytext p {
+    font-size:0.875em;
+}.sidenote {
+    font-size:0.75em;
+}
+
+h1 {
+  font-family: 'Luckiest Guy', cursive;
+  text-align:center;
+  font-size: 4em;
+  color: #FC6042;
+  text-shadow: 1px 0px 5px rgba(150, 150, 150, 0.78);
+}
+
+h3 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 2em;
+  color: #2c3e50;
+}
+
+header {
+  /*border: 1px solid red;*/
+  margin-top: 3em;
+}
+
+
+
+.wrapper {
+  width: 95%;
+  height: auto;
+  margin: auto;
+  margin-left: 1.5em;
+  margin-right: 1em;
+  position: absolute;
+
+}
+
+.top-container{
+  position: relative;
+  height: 100%;
+  /*width: 100%;*/
+  display: block;
+  overflow: hidden; /*this will recognize the children float in the parent class.*/
+}
+
+
+.sprite-img {
+  display: none;
+}
+
+hidden {
+  display: none;
+}
+
+/* top left */
+.canvas-container {
+  position: relative;
+  width: 73%;
+  max-height: 100%;
+  float: left;
+}
+
+
+.canvas-container:before{
+  content: "";
+  display: block;
+  /* padding-top sets the aspect ratio of 16:9 */
+  padding-top: 56.25%;
+}
+
+
+.path-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  float: left;
+  background: #ecf0f1;
+  border-radius:25px;
+  box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+}
+
+.sprite-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  float: left;
+}
+
+/* right sidebar */
+
+.right-sidebar{
+  float: right;
+  width: 25%;
+}
+
+.commandlog-container {
+  position: relative;
+  display: block;
+}
+
+.commandlog-container ul {
+  overflow: auto;
+  height: 300px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+.recipe-container {
+  position: relative;
+  display: block;
+}
+
+.recipe-container ul {
+  overflow: auto;
+  max-height: 300px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* bottom container */
+
+.bottom-container {
+  position: relative;
+  width: 100%;
+  padding-top: 1em;
+  overflow: hidden;
+}
+
+.nycatform {
+  padding-left: .3em;
+  display: block;
+  position: relative;
+  float: left;
+}
+
+.textbox {
+  width: 800px;
+  height: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* go button (CSSButtonGenerator.com) */
+.go-button {
+  margin-left: .3em;
+  margin-bottom: .1em;
+  -moz-box-shadow: 2px -1px 6px -2px #2e966d;
+  -webkit-box-shadow: 2px -1px 6px -2px #2e966d;
+  box-shadow: 2px -1px 6px -2px #2e966d;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2cc98f), color-stop(1, #29c28a) );
+  background:-moz-linear-gradient( center top, #2cc98f 5%, #29c28a 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2cc98f', endColorstr='#29c28a');
+  background-color:#2cc98f;
+  -webkit-border-top-left-radius:0px;
+  -moz-border-radius-topleft:0px;
+  border-top-left-radius:0px;
+  -webkit-border-top-right-radius:42px;
+  -moz-border-radius-topright:42px;
+  border-top-right-radius:42px;
+  -webkit-border-bottom-right-radius:42px;
+  -moz-border-radius-bottomright:42px;
+  border-bottom-right-radius:42px;
+  -webkit-border-bottom-left-radius:42px;
+  -moz-border-radius-bottomleft:42px;
+  border-bottom-left-radius:42px;
+  text-indent:0;
+  border:1px solid #2cbf89;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Verdana;
+  font-size:23px;
+  font-weight:bold;
+  font-style:normal;
+  height:75px;
+  line-height:75px;
+  width:75px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px -1px 6px #1e805c;
+}
+.go-button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #29c28a), color-stop(1, #2cc98f) );
+  background:-moz-linear-gradient( center top, #29c28a 5%, #2cc98f 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#29c28a', endColorstr='#2cc98f');
+  background-color:#29c28a;
+}.go-button:active {
+  position:relative;
+  top:1px;
+}

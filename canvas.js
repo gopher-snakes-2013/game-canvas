@@ -14,7 +14,7 @@ $(document).ready(function(){
   var pathCanvas = document.getElementById('path-canvas')
   var pathContext = pathCanvas.getContext("2d")
 
-  var nyanCatCanvas = document.getElementById('nyan-cat-canvas')
+  var nyanCatCanvas = document.getElementById('sprite-canvas')
   var nyanCatContext = nyanCatCanvas.getContext("2d")
 
   var nyanCat = new NyanCat()
@@ -53,7 +53,7 @@ $(document).ready(function(){
   function parseGivenCode(event) {
     event.preventDefault()
     userCommand = $('#textbox').val()
-    $('.command-log ul').append('<li>' + userCommand + '</li>')
+    $('#command-log ul').append('<li>' + userCommand + '</li>')
     $('#textbox').val('')
 
     if (userCommand === "forward 5") {
