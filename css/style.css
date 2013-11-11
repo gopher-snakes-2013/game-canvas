@@ -7,8 +7,8 @@ height:auto The default. This means the element will have flexible height i.e. i
 /* base CSS */
 
 body {
-    font-size:125%;
-    line-height:1.125em; /* 16×1.125=18 */
+    font-size: 125%;
+    line-height: 150%
     color: #34495e;
 }.bodytext p {
     font-size:0.875em;
@@ -87,8 +87,8 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+/*  width: 100%;
+  height: 100%;*/
   z-index: 0;
   float: left;
   background: #ecf0f1;
@@ -102,8 +102,8 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+/*  width: 100%;
+  height: 100%;*/
   z-index: 1;
   float: left;
 }
