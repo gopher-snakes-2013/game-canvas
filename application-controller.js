@@ -8,6 +8,7 @@ var ApplicationController = function() {
 }
 
 ApplicationController.prototype.initializeGame = function(){
+  this.dynamicizeCanvases()
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
@@ -17,8 +18,21 @@ ApplicationController.prototype.initializeGame = function(){
   this.sprite.draw()
 }
 
+ApplicationController.prototype.dynamicizeCanvases = function(){
+    $(window).resize(function(){
+    var PathCanvas = document.getElementById('path-canvas')
+    var SpriteCanvas = document.getElementById('sprite-canvas')
+    container = $('.canvas-container')
+
+    PathCanvas.height = container.height()
+    PathCanvas.width = container.width()
+    SpriteCanvas.height = container.height()
+    SpriteCanvas.width = container.width()
+  })
+}
+
 ApplicationController.prototype.initializeConstants = function() {
-  PATHCOLOR = "#FF0000"
+  PATHCOLOR = "#2980b9"
   SPRITEIMAGE = "lib/nyancat.png"
 }
 
@@ -83,10 +97,10 @@ ApplicationController.prototype.retrieveUserInput = function(){
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
   if (action === "forward") {
-    for (var i=0; i<magnitude; i++) { 
+    for (var i=0; i<magnitude; i++) {
       this.sprite.move(magnitude, 0)
       this.path.drawLine(magnitude,0)
-    } 
+    }
   } else if (action === "rotate") {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
