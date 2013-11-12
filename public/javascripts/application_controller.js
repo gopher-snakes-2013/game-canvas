@@ -2,6 +2,7 @@ var ApplicationController = function() {
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(SPRITEIMAGE)
   this.path = new Path(PATHCOLOR)
+  this.grid = new Grid(GRIDCOLOR)
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
@@ -36,10 +37,11 @@ updateStoredCanvasContainerDimensions = function() {
 }
 
 ApplicationController.prototype.initializeConstants = function() {
+  GRIDCOLOR = "#ddd"
   PATHCOLOR = "#2980b9"
   SPRITEIMAGE = "lib/nyancat.png"
   CONTAINEROFCANVASES = $('.canvas-container')
-  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas']
+  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas', 'grid-canvas']
 }
 
 ApplicationController.prototype.initializeListeners = function() {
