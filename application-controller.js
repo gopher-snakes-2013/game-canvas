@@ -94,7 +94,7 @@ ApplicationController.prototype.performLoopCommandsGiven = function(userCommand,
 
 ApplicationController.prototype.performSimpleCommandsGiven = function(userCommand){
   var actionMagnitudePairs = this.parser.extractActionAndMagnitude(userCommand)
-  self = this
+  var self = this
   actionMagnitudePairs.forEach(function(actionMagnitudePair){
   var action = actionMagnitudePair.action
   var magnitude = actionMagnitudePair.magnitudeOfAction
@@ -107,15 +107,44 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
-  if (action === "forward") {
+  if (action === "forward" || action === "fd") {
+
     for (var i=0; i<magnitude; i++) {
       this.sprite.move(magnitude, 0)
       this.path.drawLine(magnitude,0)
     }
+
+  } else if (action === "backward" || action === "bk") {  
+    for (var i=0; i<magnitude; i++) {
+      this.sprite.move(-magnitude, 0)
+      this.path.drawLine(-magnitude,0)
+    }
+
+  } else if (action === "right" || action === "rt") {
+    this.sprite.rotate(90)
+    this.path.rotate(90)
+
+  } else if (action === "left" || action === "lt") {
+    this.sprite.rotate(-90)
+    this.path.rotate(-90)
+
+  } else if (action === "spin") {
+    var randomAngle = Math.floor((Math.random()*360)+1)
+    this.sprite.rotate(randomAngle)
+    this.path.rotate(randomAngle)
+
   } else if (action === "rotate") {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
+
+  } else if (action === "move" || action === "mv") {  
+    for (var i=0; i<magnitude; i++) {
+      this.sprite.move(magnitude, 0)
+      this.path.context.translate(magnitude,0)
+    }
+
   } else {
     alert("Try Again")
   }
 }
+
