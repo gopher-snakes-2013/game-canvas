@@ -6,7 +6,7 @@ var ApplicationController = function() {
   this.terminal = new Terminal()
   this.parser = new Parser()
   this.resizeController = new ResizeController(CANVASHTMLIDS)
-  this.canvases = [] // HAS A WIDTH(), HEIGHT()
+  this.canvases = []
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
@@ -16,7 +16,6 @@ ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
-  // this.resizeController.enableDynamicCanvas()
   canvasArray = [this.sprite, this.path]
   contextArray = this.createCanvases(canvasArray)
   this.canvases = contextArray
