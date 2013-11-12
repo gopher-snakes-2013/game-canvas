@@ -25,9 +25,22 @@ ApplicationController.prototype.initializeConstants = function() {
 
 ApplicationController.prototype.initializeListeners = function() {
   var self = this
-  $('form').on('submit', function(event){
+  $('body').on('submit', 'form', function(event){
     self.respondToSubmit(event)
   })
+  $('body').on('keypress', '#textbox', function(){console.log(event);self.projectPathOnCanvas()})
+}
+
+ApplicationController.prototype.projectPathOnCanvas = function(){
+  var userCommand = $('#textbox').val()
+  if (userCommand.match(/f/)){
+    this.dottedLine.drawLine()
+    console.log(userCommand)
+  }
+  if (userCommand.match(/ /)){
+    this.dottedLine.removeDottedLine()
+    console.log(userCommand)
+  }
 }
 
 ApplicationController.prototype.createCanvases = function(canvasArray){
@@ -83,15 +96,19 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
-  this.dottedLine.drawLine(magnitude+100,0)
   if (action === "forward") {
+      this.dottedLine.removeDottedLine()
     for (var i=0; i<magnitude; i++) {
       this.sprite.move(magnitude, 0)
       this.path.drawLine(magnitude,0)
+      this.dottedLine.translateAxis(magnitude,0)
     }
   } else if (action === "rotate") {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
+          this.dottedLine.removeDottedLine()
+
+    this.dottedLine.rotateAxis(magnitude)
   } else {
     alert("Try Again")
   }
