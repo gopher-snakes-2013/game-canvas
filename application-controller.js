@@ -5,41 +5,52 @@ var ApplicationController = function() {
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
+  this.resizeController = new ResizeController(CANVASHTMLIDS)
+  this.canvases = [] // HAS A WIDTH(), HEIGHT()
+  this.containerWidth = CONTAINEROFCANVASES.width()
+  this.containerHeight = CONTAINEROFCANVASES.height()
 }
 
+
 ApplicationController.prototype.initializeGame = function(){
-  this.dynamicizeCanvases()
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
+  // this.resizeController.enableDynamicCanvas()
   canvasArray = [this.sprite, this.path]
   contextArray = this.createCanvases(canvasArray)
-  this.placeCanvasAxesOnImage(contextArray)
+  this.canvases = contextArray
+  this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
 }
 
-ApplicationController.prototype.dynamicizeCanvases = function(){
-    $(window).resize(function(){
-    var PathCanvas = document.getElementById('path-canvas')
-    var SpriteCanvas = document.getElementById('sprite-canvas')
-    container = $('.canvas-container')
+ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
+  this.resizeController.updateDimensions(CONTAINEROFCANVASES)
+  updateStoredCanvasContainerDimensions()
+  this.placeCanvasAxesInTheMiddle(this.canvases)
+  this.sprite.draw()
+}
 
-    PathCanvas.height = container.height()
-    PathCanvas.width = container.width()
-    SpriteCanvas.height = container.height()
-    SpriteCanvas.width = container.width()
-  })
+updateStoredCanvasContainerDimensions = function() {
+  this.containerWidth = CONTAINEROFCANVASES.width()
+  this.containerHeight = CONTAINEROFCANVASES.height()
 }
 
 ApplicationController.prototype.initializeConstants = function() {
   PATHCOLOR = "#2980b9"
   SPRITEIMAGE = "lib/nyancat.png"
+  CONTAINEROFCANVASES = $('.canvas-container')
+  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas']
 }
 
 ApplicationController.prototype.initializeListeners = function() {
   var self = this
   $('form').on('submit', function(event){
     self.respondToSubmit(event)
+  })
+
+  $(window).on('resize', function() {
+    self.updateDimensionsOnResizeAndPrepareCanvas()
   })
 }
 
@@ -51,9 +62,10 @@ ApplicationController.prototype.createCanvases = function(canvasArray){
   return contextArray
 }
 
-ApplicationController.prototype.placeCanvasAxesOnImage = function(contextArray) {
+ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArray) {
   var self = this
-  contextArray.forEach(function(context) {context.translate(self.sprite.offset,self.sprite.offset)
+  contextArray.forEach(function(context) {
+    context.translate(self.sprite.offset + self.containerWidth / 2, self.sprite.offset + self.containerHeight / 2)
   })
 }
 
