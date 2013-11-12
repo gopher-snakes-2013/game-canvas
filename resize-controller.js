@@ -1,11 +1,6 @@
 var ResizeController = function(arrayCanvasDomIds){
   this.HTMLCanvases = this.grabCanvasFromDom(arrayCanvasDomIds)
-  // this.canvasContainer = $('.canvas-container')
 }
-
-// ResizeController.prototype.enableDynamicCanvas = function(){
-//   this.initializeWindowListener()
-// }
 
 ResizeController.prototype.grabCanvasFromDom = function(arrayCanvasDomIds){
   arrayOfHTMLCanvases = []
@@ -14,14 +9,6 @@ ResizeController.prototype.grabCanvasFromDom = function(arrayCanvasDomIds){
   })
   return arrayOfHTMLCanvases
 }
-
-// ResizeController.prototype.initializeWindowListener = function(){
-//   self = this
-//   $(window).on('resize', function(){
-//     self.updateDimensions(self.canvasContainer)
-//   })
-//   // $(window).on('resize', self.updateDimensions)
-// }
 
 ResizeController.prototype.updateDimensions = function(canvasContainer){
   self = this
