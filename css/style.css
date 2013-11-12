@@ -7,13 +7,16 @@ height:auto The default. This means the element will have flexible height i.e. i
 /* base CSS */
 
 body {
-    font-size: 125%;
-    line-height: 150%
-    color: #34495e;
+  line-height: 150%;
+  font-size:125%;
+  color: #34495e;
 }.bodytext p {
-    font-size:0.875em;
-}.sidenote {
-    font-size:0.75em;
+  font-size:0.875em;
+  color: #34495e;
+}
+
+p {
+  color: #34495e;
 }
 
 h1 {
@@ -28,10 +31,11 @@ h3 {
   font-family: 'Luckiest Guy', cursive;
   font-size: 2em;
   color: #2c3e50;
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
 
 header {
-  /*border: 1px solid red;*/
   margin-top: 3em;
 }
 
@@ -50,7 +54,8 @@ header {
   height: 100%;
   /*width: 100%;*/
   display: block;
-  overflow: hidden; /*this will recognize the children float in the parent class.*/
+  /*this will recognize the children float in the parent class.*/
+  overflow: hidden;
 }
 
 .sprite-img {
@@ -95,8 +100,6 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
-/*  width: 100%;
-  height: 100%;*/
   z-index: 1;
   float: left;
 }
@@ -121,6 +124,12 @@ header {
   padding: 0px;
 }
 
+.commandlog-container ul li {
+  padding: .2em 0em .2em 1em;
+  margin-top: .25em;
+  background: #FFE767;
+  border-radius: 15px;
+}
 
 .recipe-container {
   position: relative;
