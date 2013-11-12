@@ -80,8 +80,8 @@ header {
   padding-top: 56.25%;
 }
 
-
-#path-canvas {
+#dotted-line-canvas {
+  border: 2px solid yellow;
   position: absolute;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@ header {
   box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
 }
 
-#sprite-canvas {
+#path-canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -105,6 +105,21 @@ header {
   width: 100%;
   height: 100%;
   z-index: 1;
+  float: left;
+  /*background: #ecf0f1;*/
+  border-radius:25px;
+  box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+}
+
+#sprite-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   float: left;
 }
 

@@ -2,6 +2,7 @@ var ApplicationController = function() {
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(SPRITEIMAGE)
   this.path = new Path(PATHCOLOR)
+  this.dottedLine = new DottedLine()
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
@@ -11,7 +12,7 @@ ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
-  canvasArray = [this.sprite, this.path]
+  canvasArray = [this.sprite, this.path, this.dottedLine]
   contextArray = this.createCanvases(canvasArray)
   this.placeCanvasAxesOnImage(contextArray)
   this.sprite.draw()
@@ -69,7 +70,7 @@ ApplicationController.prototype.performLoopCommandsGiven = function(userCommand,
 
 ApplicationController.prototype.performSimpleCommandsGiven = function(userCommand){
   var actionMagnitudePairs = this.parser.extractActionAndMagnitude(userCommand)
-  self = this
+  var self = this
   actionMagnitudePairs.forEach(function(actionMagnitudePair){
   var action = actionMagnitudePair.action
   var magnitude = actionMagnitudePair.magnitudeOfAction
@@ -82,11 +83,12 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
+  this.dottedLine.drawLine(magnitude+100,0)
   if (action === "forward") {
-    for (var i=0; i<magnitude; i++) { 
+    for (var i=0; i<magnitude; i++) {
       this.sprite.move(magnitude, 0)
       this.path.drawLine(magnitude,0)
-    } 
+    }
   } else if (action === "rotate") {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
