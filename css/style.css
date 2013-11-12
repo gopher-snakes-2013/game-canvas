@@ -82,6 +82,8 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
+/*  width: 100%;
+  height: 100%;*/
   z-index: 0;
   float: left;
   background: #ecf0f1;
@@ -120,7 +122,6 @@ header {
   margin: 0px;
   padding: 0px;
 }
-
 
 .recipe-container {
   position: relative;
