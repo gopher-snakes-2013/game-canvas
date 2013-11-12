@@ -2,7 +2,7 @@ var Terminal = function(){
   this.focus = this.initializeFocusOnTextBox()
   this.textbox = $('#textbox')
   this.commandListIndex = 1
-  this.priorCommands = ['']  
+  this.priorCommands = ['']
 }
 
 Terminal.prototype.initializeFocusOnTextBox = function() {
@@ -20,11 +20,11 @@ Terminal.prototype.initializeListeners = function(){
 Terminal.prototype.adjustTextBoxSize = function() {
   var currentInputLength = $('#textbox').val().length
   if (currentInputLength === 15) {
-    $('#textbox').css('width', '300')
+    $('#textbox').css('width', '500px')
   }
   if (currentInputLength === 30) {
-    $('#textbox').css('width', '500')
-  } 
+    $('#textbox').css('width', '800px')
+  }
 }
 
 Terminal.prototype.traversePriorCommands = function(event) {
@@ -38,7 +38,7 @@ Terminal.prototype.traversePriorCommands = function(event) {
     if (this.commandListIndex > 1 ) {
       this.commandListIndex--
     }
-    $('#textbox').val('' + this.priorCommands[this.priorCommands.length-this.commandListIndex])   
+    $('#textbox').val('' + this.priorCommands[this.priorCommands.length-this.commandListIndex])
   }
 }
 

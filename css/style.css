@@ -35,8 +35,6 @@ header {
   margin-top: 3em;
 }
 
-
-
 .wrapper {
   width: 95%;
   height: auto;
@@ -55,7 +53,6 @@ header {
   overflow: hidden; /*this will recognize the children float in the parent class.*/
 }
 
-
 .sprite-img {
   display: none;
 }
@@ -72,8 +69,7 @@ header {
   float: left;
 }
 
-
-.canvas-container:before{
+.canvas-container:before {
   content: "";
   display: block;
   /* padding-top sets the aspect ratio of 16:9 */
@@ -156,9 +152,9 @@ header {
   float: left;
 }
 
-.textbox {
-  width: 800px;
-  height: 50px;
+#textbox {
+  width: 300px;
+  height: 35px;
 }
 
 .hidden {
