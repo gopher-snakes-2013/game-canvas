@@ -29,7 +29,7 @@ Terminal.prototype.adjustTextBoxSize = function() {
 
 Terminal.prototype.traversePriorCommands = function(event) {
   if (event.keyCode == 38) {
-    $('#textbox').val('' + this.priorCommands[this.priorCommands.length-this.commandListIndex]) //array[0]
+    $('#textbox').val('' + this.priorCommands[this.priorCommands.length-this.commandListIndex])
     if (this.commandListIndex < this.priorCommands.length) {
       this.commandListIndex++
     }

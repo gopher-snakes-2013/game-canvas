@@ -80,22 +80,6 @@ header {
   padding-top: 56.25%;
 }
 
-#dotted-line-canvas {
-  border: 2px solid yellow;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  float: left;
-  background: #ecf0f1;
-  border-radius:25px;
-  box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
-}
-
 #path-canvas {
   position: absolute;
   top: 0;
@@ -142,7 +126,6 @@ header {
   margin: 0px;
   padding: 0px;
 }
-
 
 .recipe-container {
   position: relative;
