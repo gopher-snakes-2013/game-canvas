@@ -5,29 +5,45 @@ var ApplicationController = function() {
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
+  this.canvases = []
 }
 
+var halfOfCanvasHeight = 540
+var halfOfCanvasWidth = 304
+
 ApplicationController.prototype.initializeGame = function(){
+  // self = this
   this.dynamicizeCanvases()
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
   canvasArray = [this.sprite, this.path]
+  this.canvases = canvasArray
   contextArray = this.createCanvases(canvasArray)
-  this.placeCanvasAxesOnImage(contextArray)
+  this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
 }
 
 ApplicationController.prototype.dynamicizeCanvases = function(){
-    $(window).resize(function(){
+  self = this
+  $(window).on('resize', function(){
     var PathCanvas = document.getElementById('path-canvas')
     var SpriteCanvas = document.getElementById('sprite-canvas')
     container = $('.canvas-container')
+    var canvasHeight = container.height()
+    halfOfCanvasHeight = canvasHeight/2
+    var canvasWidth = container.width()
+    halfOfCanvasWidth = canvasWidth/2
+    PathCanvas.height = canvasHeight
+    PathCanvas.width = canvasWidth
+    SpriteCanvas.height = canvasHeight
+    SpriteCanvas.width = canvasWidth
 
-    PathCanvas.height = container.height()
-    PathCanvas.width = container.width()
-    SpriteCanvas.height = container.height()
-    SpriteCanvas.width = container.width()
+    canvasArray = [self.sprite, self.path]
+    self.canvases = canvasArray
+    self.createCanvases(canvasArray)
+    self.placeCanvasAxesInTheMiddle(self.canvases) /// NEEDS TO PASSED CONTEXT ARRAY
+    self.sprite.draw()
   })
 }
 
@@ -51,9 +67,10 @@ ApplicationController.prototype.createCanvases = function(canvasArray){
   return contextArray
 }
 
-ApplicationController.prototype.placeCanvasAxesOnImage = function(contextArray) {
+ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArray) {
   var self = this
-  contextArray.forEach(function(context) {context.translate(self.sprite.offset,self.sprite.offset)
+  contextArray.forEach(function(context) {
+    context.translate(self.sprite.offset + halfOfCanvasWidth, self.sprite.offset + halfOfCanvasHeight)
   })
 }
 

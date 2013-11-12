@@ -1,6 +1,5 @@
 $(document).ready(function(){
   var applicationController = new ApplicationController()
-  applicationController.initializeGame()
 
   var PathCanvas = document.getElementById('path-canvas')
   var SpriteCanvas = document.getElementById('sprite-canvas')
@@ -10,5 +9,7 @@ $(document).ready(function(){
   PathCanvas.width = container.width()
   SpriteCanvas.height = container.height()
   SpriteCanvas.width = container.width()
+
+  applicationController.initializeGame()
 })
 

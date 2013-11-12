@@ -35,8 +35,6 @@ header {
   margin-top: 3em;
 }
 
-
-
 .wrapper {
   width: 95%;
   height: auto;
@@ -55,7 +53,6 @@ header {
   overflow: hidden; /*this will recognize the children float in the parent class.*/
 }
 
-
 .sprite-img {
   display: none;
 }
@@ -70,16 +67,15 @@ header {
   width: 73%;
   max-height: 100%;
   float: left;
+  border: 5px solid blue;
 }
 
-
-.canvas-container:before{
+.canvas-container:before {
   content: "";
   display: block;
   /* padding-top sets the aspect ratio of 16:9 */
   padding-top: 56.25%;
 }
-
 
 #path-canvas {
   position: absolute;
@@ -87,13 +83,12 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
-/*  width: 100%;
-  height: 100%;*/
   z-index: 0;
   float: left;
   background: #ecf0f1;
   border-radius:25px;
   box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+  border: 5px solid yellow;
 }
 
 #sprite-canvas {
