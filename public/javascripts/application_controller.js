@@ -107,20 +107,7 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
-  if (action === "forward" || action === "fd") {
-
-    for (var i=0; i<magnitude; i++) {
-      this.sprite.move(magnitude, 0)
-      this.path.drawLine(magnitude,0)
-    }
-
-  } else if (action === "backward" || action === "bk") {  
-    for (var i=0; i<magnitude; i++) {
-      this.sprite.move(-magnitude, 0)
-      this.path.drawLine(-magnitude,0)
-    }
-
-  } else if (action === "right" || action === "rt") {
+  if (action === "right" || action === "rt") {
     this.sprite.rotate(90)
     this.path.rotate(90)
 
@@ -137,14 +124,33 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
-  } else if (action === "move" || action === "mv") {  
-    for (var i=0; i<magnitude; i++) {
-      this.sprite.move(magnitude, 0)
-      this.path.context.translate(magnitude,0)
-    }
-
   } else {
-    alert("Try Again")
+
+    magnitude = Math.sqrt(magnitude) * 5
+
+    if (action === "forward" || action === "fd") {
+
+      for (var i=0; i<magnitude; i++) {
+        this.sprite.move(magnitude, 0)
+        this.path.drawLine(magnitude,0)
+      }
+
+    } else if (action === "backward" || action === "bk") {
+      for (var i=0; i<magnitude; i++) {
+        this.sprite.move(-magnitude, 0)
+        this.path.drawLine(-magnitude,0)
+      }
+
+    } else if (action === "move" || action === "mv") {
+
+      for (var i=0; i<magnitude; i++) {
+        this.sprite.move(magnitude, 0)
+        this.path.context.translate(magnitude,0)
+      }
+
+    } else {
+      alert("Try Again")
+    }
   }
 }
 
