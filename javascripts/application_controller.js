@@ -124,6 +124,9 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.path.context.restore()
     this.sprite.context.restore()
 
+  } else if (action === 'reset') {
+    this.updateDimensionsOnResizeAndPrepareCanvas()
+
   } else if (action === "left" || action === "lt") {
     this.sprite.rotate(-90)
     this.path.rotate(-90)
@@ -131,32 +134,6 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action === "right" || action === "rt") {
     this.sprite.rotate(90)
     this.path.rotate(90)
-
-  } else if (action === 'green') {
-    this.path.lineColor = "#0AFF58"
-
-  } else if (action ==='purple') {
-    this.path.lineColor = "#6050E8"
-
-  } else if (action === 'pink') {
-    this.path.lineColor = "#FF5DF9"
-
-  } else if (action === 'red') {
-    this.path.lineColor = "#FF211C"
-
-  } else if (action === 'orange') {
-    this.path.lineColor = "#FF820F"
-
-  } else if (action === 'yellow') {
-    this.path.lineColor = "#FFE119"
-
-  } else if (action === 'randomcolor') {
-    this.path.lineColor = getRandomColor()
-
-  } else if (action === 'linewidth') {
-    if (magnitude > 1 && magnitude <= 1000) {
-      this.path.lineWidth = magnitude
-    }
 
   } else if (action === "rotate" || action === "r") {
     this.sprite.rotate(magnitude)
@@ -166,9 +143,6 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     var randomAngle = Math.floor((Math.random()*360)+1)
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
-
-  } else if (action === 'reset') {
-    this.updateDimensionsOnResizeAndPrepareCanvas()
 
   } else if (action === "backward" || action === "bk") {
     this.path.drawLine(-magnitude)
@@ -185,6 +159,32 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action === "move" || action === "mv") {
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
+
+  } else if (action === "green" ) {
+    this.path.lineColor = "#0AFF58"
+
+  } else if (action === "orange" ) {
+    this.path.lineColor = "#FF820F"
+
+  } else if (action === "pink" ) {
+    this.path.lineColor = "#FF5DF9"
+
+  } else if (action === "purple" ) {
+    this.path.lineColor = "#6050E8"
+
+  } else if (action === "red" ) {
+    this.path.lineColor = "#FF211C"
+
+  } else if (action === "yellow" ) {
+    this.path.lineColor = "#FFE119"
+
+  } else if (action === "randomcolor" || action === "rc") {
+    this.path.lineColor = getRandomColor()
+
+  } else if (action === "linewidth" || action === "lw") {
+    if (magnitude > 1 && magnitude <= 1000) {
+      this.path.lineWidth = magnitude
+    }
 
   } else {
     alert("Try Again")
