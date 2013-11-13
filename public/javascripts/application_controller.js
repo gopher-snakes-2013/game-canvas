@@ -7,7 +7,7 @@ var ApplicationController = function() {
   this.terminal = new Terminal()
   this.parser = new Parser()
   this.resizeController = new ResizeController(CANVASHTMLIDS)
-  this.canvases = []
+  this.canvasContexts = []
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
@@ -17,23 +17,23 @@ ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
-  canvasArray = [this.sprite, this.path]
+  canvasArray = [this.sprite, this.path, this.grid]
   contextArray = this.createCanvases(canvasArray)
-  this.canvases = contextArray
+  this.canvasContexts = contextArray
+  this.grid.makeGridLines()
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
-  this.grid.makeGridLines()
-
 }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
   this.resizeController.updateDimensions(CONTAINEROFCANVASES)
-  updateStoredCanvasContainerDimensions()
-  this.placeCanvasAxesInTheMiddle(this.canvases)
+  this.updateStoredCanvasContainerDimensions()
+  this.grid.makeGridLines()
+  this.placeCanvasAxesInTheMiddle(this.canvasContexts)
   this.sprite.draw()
 }
 
-updateStoredCanvasContainerDimensions = function() {
+ApplicationController.prototype.updateStoredCanvasContainerDimensions = function() {
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
@@ -75,9 +75,9 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
   var userCommand = this.retrieveUserInput()
-  this.commandLog.update(userCommand)   // Extract
-  this.terminal.addCommandToCompilation(userCommand)  // Extract
-  this.resetCommandListIndexValue()  // Extract
+  this.commandLog.update(userCommand)
+  this.terminal.addCommandToCompilation(userCommand)
+  this.resetCommandListIndexValue()
   if (this.parser.checkIfLoopCommandExists(userCommand)) {
     var commandMultiplierPair = this.parser.parseGivenCode(userCommand)
     this.performLoopCommandsGiven(commandMultiplierPair.command, commandMultiplierPair.multiplier)
@@ -111,6 +111,13 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
+
+  if (action === "undo"){
+      this.path.context.putImageData(this.path.savedCanvasData, -100, -100)
+      this.sprite.context.putImageData(this.sprite.savedCanvasData, -100, -100)
+      this.grid.context.putImageData(this.grid.savedCanvasData, -100, -100)
+  }
+
   if (action === "right" || action === "rt") {
     this.sprite.rotate(90)
     this.path.rotate(90)
@@ -145,6 +152,13 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     } else {
       alert("Try Again")
     }
+    this.saveCanvasImageData()
   }
+}
+
+ApplicationController.prototype.saveCanvasImageData = function(){
+    this.path.savedCanvasData = this.path.context.getImageData(-100, -100, 1000, 1000)
+    this.sprite.savedCanvasData = this.sprite.context.getImageData(-100, -100, 1000, 1000)
+    this.grid.savedCanvasData = this.grid.context.getImageData(-100, -100, 1000, 1000)
 }
 

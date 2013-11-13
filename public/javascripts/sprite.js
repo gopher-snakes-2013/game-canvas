@@ -7,6 +7,7 @@ var Sprite = function(avatar){
   this.offset = this.dimension/2
   this.width = this.gridWidth()
   this.height = this.gridHeight()
+  this.savedCanvasData = undefined
 }
 
 Sprite.prototype.prepareContext = function() {

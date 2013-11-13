@@ -4,6 +4,7 @@ var Path = function(color) {
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
+  this.savedCanvasData = undefined
 }
 
 Path.prototype.prepareContext = function(){
