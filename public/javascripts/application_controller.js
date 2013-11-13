@@ -138,9 +138,9 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
       this.path.drawLine(-magnitude)
       this.sprite.move(-magnitude, 0)
 
-    } else if (action === "move" || action === "mv") {
-      this.path.context.translate(magnitude,0)
+    } else if (action === "jump" || action === "jp") {
       this.sprite.move(magnitude, 0)
+      this.path.translate(magnitude)
 
     } else {
       alert("Try Again")

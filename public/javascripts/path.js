@@ -32,3 +32,7 @@ Path.prototype.gridWidth = function() {
 Path.prototype.gridHeight = function() {
   return this.canvas.height / 36;
 }
+
+Path.prototype.translate = function(x){
+  this.context.translate(this.width*x, 0)
+}
