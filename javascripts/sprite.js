@@ -1,10 +1,8 @@
-var Sprite = function(avatar, imgDimension, canvas, widthAspectRatio, heightAspectRatio){
+var Sprite = function(img, imgDimension, canvas, widthAspectRatio, heightAspectRatio){
   this.canvas = document.getElementById(canvas)
   this.widthAspectRatio = widthAspectRatio
   this.heightAspectRatio = heightAspectRatio
-  this.img = new Image()
-  this.img.src = avatar
-  this.img.crossOrigin = "Anonymous"
+  this.img = img
   this.context = this.prepareContext()
   this.dimension = imgDimension
   this.offset = this.dimension/2

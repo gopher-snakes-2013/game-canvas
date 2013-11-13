@@ -1,18 +1,22 @@
 $(document).ready(function(){
-  var applicationController = new ApplicationController()
+  var $img = $('.sprite-img')
+  $img.on("load", function(e) {
+    console.log("image loaded");
 
-  var PathCanvas = document.getElementById('path-canvas')
-  var SpriteCanvas = document.getElementById('sprite-canvas')
-  var GridCanvas = document.getElementById('grid-canvas')
-  container = $('.canvas-container')
+    var applicationController = new ApplicationController()
 
-  PathCanvas.height = container.height()
-  PathCanvas.width = container.width()
-  SpriteCanvas.height = container.height()
-  SpriteCanvas.width = container.width()
-  GridCanvas.height = container.height()
-  GridCanvas.width = container.width()
+    var PathCanvas = document.getElementById('path-canvas')
+    var SpriteCanvas = document.getElementById('sprite-canvas')
+    var GridCanvas = document.getElementById('grid-canvas')
+    container = $('.canvas-container')
 
-  applicationController.initializeGame()
+    PathCanvas.height = container.height()
+    PathCanvas.width = container.width()
+    SpriteCanvas.height = container.height()
+    SpriteCanvas.width = container.width()
+    GridCanvas.height = container.height()
+    GridCanvas.width = container.width()
+
+    applicationController.initializeGame()
+  });
 })
-
