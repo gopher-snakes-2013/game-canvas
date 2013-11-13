@@ -21,22 +21,34 @@ p {
 
 h1 {
   font-family: 'Luckiest Guy', cursive;
-  text-align:center;
+  text-align: left;
   font-size: 4em;
   color: #FC6042;
   text-shadow: 1px 0px 5px rgba(150, 150, 150, 0.78);
+  text-rendering: optimizeLegibility;
 }
+
+
+h1:first-child:first-letter{
+    float:left;
+    font-size:150%;
+    margin-top:7px;
+    margin-right:5px;
+    }
 
 h3 {
   font-family: 'Luckiest Guy', cursive;
   font-size: 2em;
   color: #2c3e50;
   margin-top: .5em;
-  margin-bottom: .5em;
+  margin-bottom: .25em;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.05em
 }
 
 header {
   margin-top: 3em;
+  margin-left: .25em;
 }
 
 .wrapper {
@@ -109,16 +121,21 @@ header {
 .right-sidebar{
   float: right;
   width: 25%;
+  padding-right: .05em;
 }
 
 .commandlog-container {
   position: relative;
   display: block;
+  border-style: dashed;
+  border-color: #ecf0f1;
+  border-radius:25px;
+  padding: .5em;
 }
 
 .commandlog-container ul {
   overflow: auto;
-  height: 300px;
+  height: 250px;
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -138,10 +155,17 @@ header {
 
 .recipe-container ul {
   overflow: auto;
-  max-height: 300px;
+  max-height: 250px;
   list-style: none;
   margin: 0px;
   padding: 0px;
+}
+
+.recipe-container ul li {
+  padding: .2em 0em .2em 1em;
+  margin-top: .25em;
+  background: rgba(155, 89, 182, 0.46);
+  border-radius: 15px;
 }
 
 /* bottom container */
@@ -160,13 +184,38 @@ header {
   float: left;
 }
 
+
 #textbox {
-  width: 300px;
-  height: 35px;
+  padding-left: .25em;
+  width: 350px;
+  height: 40px;
+  font-size: 125%;
+  border: 2px solid #dadada;
+  border-radius: 7px;
+  -webkit-animation-name: 'pulse_animation';
+  -webkit-animation-duration: 5000ms;
+  -webkit-transform-origin:70% 70%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
 }
 
 .hidden {
   display: none;
+}
+
+
+@-webkit-keyframes pulse_animation {
+  0% {
+    border: 2px solid #dadada;
+    border-radius: 7px; }
+  50% {
+    box-shadow: inset 0 0 20px 5px rgba(241, 196, 15, .7);
+    -webkit-box-shadow: inset 0 0 20px 5px rgba(241, 196, 15, .7);
+    -moz-box-shadow: inset 0 0 20px 5px rgba(241, 196, 15, .7); }
+  100% {
+    border: 2px solid #dadada;
+    border-radius: 7px; }
+
 }
 
 /* go button (CSSButtonGenerator.com) */

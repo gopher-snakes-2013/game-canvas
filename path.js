@@ -13,6 +13,7 @@ Path.prototype.drawLine = function(x,y){
   this.context.lineTo(x, y)
   this.context.translate(x,y)
   this.context.strokeStyle = this.lineColor
+  this.context.lineWidth=5
   this.context.stroke()
 }
 
