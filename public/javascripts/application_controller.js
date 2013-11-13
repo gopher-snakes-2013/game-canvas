@@ -12,7 +12,6 @@ var ApplicationController = function() {
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
 
-
 ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
@@ -48,8 +47,8 @@ ApplicationController.prototype.initializeConstants = function() {
   PATHCANVAS = 'path-canvas'
   GRIDCANVAS = 'grid-canvas'
   CANVASHTMLIDS = [PATHCANVAS, SPRITECANVAS, GRIDCANVAS]
-  WIDTHASPECTRATIO = 64
-  HEIGHTASPECTRATIO = 36
+  WIDTHASPECTRATIO = 54
+  HEIGHTASPECTRATIO = 30
 }
 
 ApplicationController.prototype.initializeListeners = function() {
