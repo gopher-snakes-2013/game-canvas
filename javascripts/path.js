@@ -45,4 +45,3 @@ Path.prototype.saveStateOfCanvas = function(){
   this.context.save()
   this.savedCanvasData.push(this.context.getImageData(-100, -100, 1000, 1000))
 }
-
