@@ -2,6 +2,7 @@ var ApplicationController = function() {
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(SPRITEIMAGE)
   this.path = new Path(PATHCOLOR)
+  this.grid = new Grid(GRIDCOLOR)
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
@@ -21,6 +22,8 @@ ApplicationController.prototype.initializeGame = function(){
   this.canvases = contextArray
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
+  this.grid.makeGridLines()
+
 }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
@@ -36,10 +39,11 @@ updateStoredCanvasContainerDimensions = function() {
 }
 
 ApplicationController.prototype.initializeConstants = function() {
+  GRIDCOLOR = "#ddd"
   PATHCOLOR = "#2980b9"
   SPRITEIMAGE = "lib/nyancat.png"
   CONTAINEROFCANVASES = $('.canvas-container')
-  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas']
+  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas', 'grid-canvas']
 }
 
 ApplicationController.prototype.initializeListeners = function() {
@@ -126,27 +130,17 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   } else {
 
-    magnitude = Math.sqrt(magnitude) * 5
-
     if (action === "forward" || action === "fd") {
-
-      for (var i=0; i<magnitude; i++) {
-        this.sprite.move(magnitude, 0)
-        this.path.drawLine(magnitude,0)
-      }
+      this.path.drawLine(magnitude)
+      this.sprite.move(magnitude, 0)
 
     } else if (action === "backward" || action === "bk") {
-      for (var i=0; i<magnitude; i++) {
-        this.sprite.move(-magnitude, 0)
-        this.path.drawLine(-magnitude,0)
-      }
+      this.path.drawLine(-magnitude)
+      this.sprite.move(-magnitude, 0)
 
-    } else if (action === "move" || action === "mv") {
-
-      for (var i=0; i<magnitude; i++) {
-        this.sprite.move(magnitude, 0)
-        this.path.context.translate(magnitude,0)
-      }
+    } else if (action === "jump" || action === "jp") {
+      this.sprite.move(magnitude, 0)
+      this.path.translate(magnitude)
 
     } else {
       alert("Try Again")
