@@ -136,6 +136,32 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(90)
     this.path.rotate(90)
 
+  } else if (action === 'green') {
+    this.path.lineColor = "#0AFF58"
+
+  } else if (action ==='purple') {
+    this.path.lineColor = "#6050E8"
+
+  } else if (action === 'pink') {
+    this.path.lineColor = "#FF5DF9"
+
+  } else if (action === 'red') {
+    this.path.lineColor = "#FF211C"
+
+  } else if (action === 'orange') {
+    this.path.lineColor = "#FF820F"
+
+  } else if (action === 'yellow') {
+    this.path.lineColor = "#FFE119"
+
+  } else if (action === 'randomcolor') {
+    this.path.lineColor = getRandomColor()
+
+  } else if (action === 'linewidth') {
+    if (magnitude > 1 && magnitude <= 1000) {
+      this.path.lineWidth = magnitude
+    }
+
   } else if (action === "rotate") {
     this.saveCanvasImageData()
     this.sprite.rotate(magnitude)

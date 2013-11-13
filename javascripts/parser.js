@@ -4,35 +4,28 @@ var Parser = function (){
 
 Parser.prototype.parseGivenCode = function(userCommand) {
   if (this.checkIfLoopCommandExists(userCommand) === true){
-    var commandChainMultiplierPair = this.separateCommandFromMultiplier(userCommand)
-    var userCommand = commandChainMultiplierPair.commandChain
-    this.currentLoopMultiplier = commandChainMultiplierPair.loopMultiplier
+    intermediaryData = userCommand.split(' repeat ')
+    var userCommandChain = intermediaryData[0].slice(1,-1)
+    var loopMultiplier = Number(intermediaryData[1])
+    this.currentLoopMultiplier = loopMultiplier
   }
-  return {command: userCommand, multiplier: this.currentLoopMultiplier}
+  return {command: userCommandChain, multiplier: loopMultiplier}
 }
 
 Parser.prototype.checkIfLoopCommandExists = function(command){
-  if (command.indexOf("repeat") >= 0){ 
+  if (command.indexOf("repeat") >= 0){
     return true
   } else {
     return false
   }
 }
 
-Parser.prototype.separateCommandFromMultiplier = function(loopCommand){
-  intermediaryData = loopCommand.split(' repeat ')
-  return {
-    commandChain: intermediaryData[0].slice(1,-1), 
-    loopMultiplier: Number(intermediaryData[1])
-  }
-}
-
 Parser.prototype.extractActionAndMagnitude = function(userCommand) {
-  var individualCommands = userCommand.split(', ') 
+  var individualCommands = userCommand.split(', ')
   var actionMagnitudeArray = []
   individualCommands.forEach(function(command) {
     actionMagnitudeArray.push({action: command.split(' ')[0],
     magnitudeOfAction: Number(command.split(' ')[1])})
-  }) 
+  })
   return actionMagnitudeArray
 }
