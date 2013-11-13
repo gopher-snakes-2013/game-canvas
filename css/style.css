@@ -53,10 +53,6 @@ header {
   overflow: hidden; /*this will recognize the children float in the parent class.*/
 }
 
-.sprite-img {
-  display: none;
-}
-
 .hidden {
   display: none;
 }
