@@ -53,6 +53,7 @@ header {
 }
 
 
+
 .sprite-img {
   display: none;
 }
@@ -68,7 +69,7 @@ header {
   height: auto;
   margin: auto;
   margin-left: 1.5em;
-  margin-right: 1em;
+  margin-right: .5em;
 }
 
 .left-container{
@@ -139,7 +140,7 @@ header {
 
 .right-sidebar{
   float: right;
-  width: 25%;
+  width: 26%;
   min-height: 100%;
   padding-right: .05em;
 }
@@ -147,11 +148,11 @@ header {
 .commandlog-container {
   position: relative;
   display: block;
+  margin-bottom: 2.5em;
   border-style: dashed;
   border-color: #ecf0f1;
   border-radius:25px;
-  padding: .5em;
-  margin-bottom: 1.5em;
+  padding: .25em;
 }
 
 .commandlog-container ul {
@@ -172,25 +173,72 @@ header {
 
 .recipe-container {
   position: relative;
-  display: block;
+  border-style: dashed;
+  border-color: #ecf0f1;
+  border-radius:25px;
+  padding: .25em;
+
 }
 
-.recipe-container ul {
+.recipe-list {
+  position: relative;
+  display: block;
   overflow: auto;
-  max-height: 300px;
+  height: 350px;
+}
+
+.recipe {
+  background: rgba(155, 89, 182, 0.46);
+  height: auto;
   list-style: none;
   margin: 0px;
-  padding: 0px;
-}
-
-.recipe-container ul li {
-  padding: .2em 0em .2em 1em;
-  margin-top: .25em;
-  background: rgba(155, 89, 182, 0.46);
+  margin-bottom: .5em;
+  padding: .5em;
   border-radius: 15px;
+  overflow: auto
 }
 
-/* bottom container */
+
+.recipe-shape {
+  float: left;
+
+}
+
+
+.recipe-text {
+  float: right;
+  display: inline-block;
+}
+
+
+
+#circle {
+  width: 50px;
+  height: 50px;
+  background: grey;
+  display: inline-block;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+#square {
+  width: 45px;
+  height: 45px;
+  background: grey;
+}
+
+#triangle-up {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 25px 43.3px 25px;
+  border-color: transparent transparent grey transparent;
+}
+
+
+
+/* leftbottom container */
 
 .leftbottom-container {
   position: relative;
@@ -221,9 +269,6 @@ header {
   -webkit-animation-timing-function: linear;
 }
 
-.hidden {
-  display: none;
-}
 
 
 @-webkit-keyframes pulse_animation {
@@ -287,3 +332,4 @@ header {
   position:relative;
   top:1px;
 }
+
