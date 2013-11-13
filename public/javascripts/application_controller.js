@@ -23,7 +23,6 @@ ApplicationController.prototype.initializeGame = function(){
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
   this.grid.makeGridLines()
-
 }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
@@ -33,7 +32,7 @@ ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = funct
   this.sprite.draw()
 }
 
-updateStoredCanvasContainerDimensions = function() {
+ApplicationController.prototype.updateStoredCanvasContainerDimensions = function() {
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
@@ -124,27 +123,50 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
+  } else if (action === 'green') {
+    this.path.lineColor = "#0AFF58"
+
+  } else if (action ==='purple') {
+    this.path.lineColor = "#6050E8"
+
+  } else if (action === 'pink') {
+    this.path.lineColor = "#FF5DF9"
+
+  } else if (action === 'red') {
+    this.path.lineColor = "#FF211C"
+
+  } else if (action === 'orange') {
+    this.path.lineColor = "#FF820F"
+
+  } else if (action === 'yellow') {
+    this.path.lineColor = "#FFE119"
+
+  } else if (action === 'randomcolor') {
+    this.path.lineColor = getRandomColor()
+
+  } else if (action === 'linewidth') {
+    if (magnitude > 1 && magnitude <= 1000) {
+      this.path.lineWidth = magnitude
+    }
+
   } else if (action === "rotate") {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
+  } else if (action === "forward" || action === "fd") {
+    this.path.drawLine(magnitude)
+    this.sprite.move(magnitude, 0)
+
+  } else if (action === "backward" || action === "bk") {
+    this.path.drawLine(-magnitude)
+    this.sprite.move(-magnitude, 0)
+
+  } else if (action === "jump" || action === "jp") {
+    this.sprite.move(magnitude, 0)
+    this.path.translate(magnitude)
+
   } else {
-
-    if (action === "forward" || action === "fd") {
-      this.path.drawLine(magnitude)
-      this.sprite.move(magnitude, 0)
-
-    } else if (action === "backward" || action === "bk") {
-      this.path.drawLine(-magnitude)
-      this.sprite.move(-magnitude, 0)
-
-    } else if (action === "jump" || action === "jp") {
-      this.sprite.move(magnitude, 0)
-      this.path.translate(magnitude)
-
-    } else {
-      alert("Try Again")
-    }
+    alert("Try Again")
   }
 }
 
