@@ -29,6 +29,7 @@ h1 {
 }
 
 
+/*Make dropcap*/
 h1:first-child:first-letter{
     float:left;
     font-size:150%;
@@ -51,24 +52,6 @@ header {
   margin-left: .25em;
 }
 
-.wrapper {
-  width: 95%;
-  height: auto;
-  margin: auto;
-  margin-left: 1.5em;
-  margin-right: 1em;
-  position: absolute;
-
-}
-
-.top-container{
-  position: relative;
-  height: 100%;
-  /*width: 100%;*/
-  display: block;
-  /*this will recognize the children float in the parent class.*/
-  overflow: hidden;
-}
 
 .sprite-img {
   display: none;
@@ -78,10 +61,35 @@ header {
   display: none;
 }
 
+
+.wrapper {
+  position: absolute;
+  width: 95%;
+  height: auto;
+  margin: auto;
+  margin-left: 1.5em;
+  margin-right: 1em;
+}
+
+.left-container{
+  /* position: relative  - places the elemnt in the document flow*/
+  float: left;
+  /* height: 100% - 100% height of its parent container (wrapper).*/
+  height: 100%;
+  width: 72%;
+  /* display: block - By default (without setting a width) they take up as much horizontal space as they can. Not sure if I need this. */
+  /*display: block;*/
+  /* overflow: hidden - recognizes the children float in the parent class. not sure if I need this*/
+  overflow: hidden;
+}
+
+
 /* top left */
 .canvas-container {
   position: relative;
-  width: 73%;
+  /* % width of parent (top-container)*/
+  width: 100%;
+  /*it will never be bigger than parent (top-container) */
   max-height: 100%;
   float: left;
 }
@@ -89,7 +97,7 @@ header {
 .canvas-container:before {
   content: "";
   display: block;
-  /* padding-top sets the aspect ratio of 16:9 */
+  /* this padding-top sets an aspect ratio of 16:9*/
   padding-top: 56.25%;
 }
 
@@ -101,6 +109,7 @@ header {
   right: 0;
   z-index: 1;
   float: left;
+  display: none;
 }
 
 #path-canvas {
@@ -131,6 +140,7 @@ header {
 .right-sidebar{
   float: right;
   width: 25%;
+  min-height: 100%;
   padding-right: .05em;
 }
 
@@ -141,6 +151,7 @@ header {
   border-color: #ecf0f1;
   border-radius:25px;
   padding: .5em;
+  margin-bottom: 1.5em;
 }
 
 .commandlog-container ul {
@@ -156,6 +167,7 @@ header {
   margin-top: .25em;
   background: #FFE767;
   border-radius: 15px;
+
 }
 
 .recipe-container {
@@ -165,7 +177,7 @@ header {
 
 .recipe-container ul {
   overflow: auto;
-  max-height: 250px;
+  max-height: 300px;
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -180,7 +192,7 @@ header {
 
 /* bottom container */
 
-.bottom-container {
+.leftbottom-container {
   position: relative;
   width: 100%;
   padding-top: 1em;
@@ -197,8 +209,8 @@ header {
 
 #textbox {
   padding-left: .25em;
-  width: 350px;
-  height: 40px;
+  width: 650px;
+  height: 50px;
   font-size: 125%;
   border: 2px solid #dadada;
   border-radius: 7px;
