@@ -23,6 +23,10 @@ Path.prototype.drawLine = function(x){
   this.context.translate(this.width*x,0)
 }
 
+Path.prototype.clearScreen = function(){
+  this.context.clearRect(-100,-100,1000,1000)
+}
+
 Path.prototype.rotate = function(degrees) {
   this.context.rotate(degrees*Math.PI/180.0)
 }

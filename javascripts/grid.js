@@ -23,6 +23,10 @@ Grid.prototype.drawLine = function(x,y){
   this.context.stroke()
 }
 
+Grid.prototype.clearScreen = function(){
+  this.context.clearRect(-100,-100,1000,1000)
+}
+
 Grid.prototype.rotate = function(degrees) {
   this.context.rotate(degrees*Math.PI/180.0)
 }

@@ -119,9 +119,12 @@ ApplicationController.prototype.retrieveUserInput = function(){
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   if (action === "undo"){
+      this.updateDimensionsOnResizeAndPrepareCanvas()
       this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
       this.grid.context.putImageData(this.grid.savedCanvasData.pop(), -100, -100)
       this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
+      this.sprite.context.restore()
+      this.path.context.restore()
 
   } else if (action === "left" || action === "lt") {
     this.saveCanvasImageData()
@@ -144,23 +147,34 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
+  } else if (action === 'reset') {
+    this.updateDimensionsOnResizeAndPrepareCanvas()
+
   } else if (action === "backward" || action === "bk") {
     this.saveCanvasImageData()
+    this.path.context.save()
+    this.sprite.context.save()
     this.path.drawLine(-magnitude)
     this.sprite.move(-magnitude)
 
   } else if (action === "forward" || action === "fd") {
       this.saveCanvasImageData()
+      this.path.context.save()
+      this.sprite.context.save()
       this.path.drawLine(magnitude)
       this.sprite.move(magnitude)
 
   } else if (action === "jump" || action === "jp") {
     this.saveCanvasImageData()
+    this.path.context.save()
+    this.sprite.context.save()
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
   } else if (action === "move" || action === "mv") {
     this.saveCanvasImageData()
+    this.path.context.save()
+    this.sprite.context.save()
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
