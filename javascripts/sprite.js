@@ -24,12 +24,14 @@ Sprite.prototype.clearScreen = function(){
 }
 
 Sprite.prototype.move = function(x){
+  this.saveStateOfCanvas()
   this.clearScreen()
   this.context.translate(this.width*x,0)
   this.draw()
 }
 
 Sprite.prototype.rotate = function(degrees){
+  this.saveStateOfCanvas()
   this.clearScreen()
   this.context.rotate(degrees*Math.PI/180.0)
   this.draw()
@@ -41,4 +43,9 @@ Sprite.prototype.gridWidth = function() {
 
 Sprite.prototype.gridHeight = function() {
   return this.canvas.height / this.heightAspectRatio;
+}
+
+Sprite.prototype.saveStateOfCanvas = function(){
+  this.context.save()
+  this.savedCanvasData.push(this.context.getImageData(-100, -100, 1000, 1000))
 }
