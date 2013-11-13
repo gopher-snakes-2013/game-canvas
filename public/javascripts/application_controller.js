@@ -1,39 +1,38 @@
 var ApplicationController = function() {
   this.constants = this.initializeConstants()
-  this.sprite = new Sprite(SPRITEIMAGE)
-  this.path = new Path(PATHCOLOR)
-  this.grid = new Grid(GRIDCOLOR)
+  this.sprite = new Sprite(SPRITEIMAGE, IMAGEDIMENSION, SPRITECANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
+  this.path = new Path(PATHCOLOR, PATHCANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
+  this.grid = new Grid(GRIDCOLOR, GRIDCANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
   this.resizeController = new ResizeController(CANVASHTMLIDS)
-  this.canvases = []
+  this.canvasContexts = []
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
-
 
 ApplicationController.prototype.initializeGame = function(){
   this.initializeConstants()
   this.initializeListeners()
   this.terminal.initializeListeners()
-  canvasArray = [this.sprite, this.path]
+  canvasArray = [this.sprite, this.path, this.grid]
   contextArray = this.createCanvases(canvasArray)
-  this.canvases = contextArray
+  this.canvasContexts = contextArray
+  this.grid.makeGridLines()
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
-  this.grid.makeGridLines()
-
 }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
   this.resizeController.updateDimensions(CONTAINEROFCANVASES)
-  updateStoredCanvasContainerDimensions()
-  this.placeCanvasAxesInTheMiddle(this.canvases)
+  this.updateStoredCanvasContainerDimensions()
+  this.grid.makeGridLines()
+  this.placeCanvasAxesInTheMiddle(this.canvasContexts)
   this.sprite.draw()
 }
 
-updateStoredCanvasContainerDimensions = function() {
+ApplicationController.prototype.updateStoredCanvasContainerDimensions = function() {
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
 }
@@ -42,8 +41,14 @@ ApplicationController.prototype.initializeConstants = function() {
   GRIDCOLOR = "#ddd"
   PATHCOLOR = "#2980b9"
   SPRITEIMAGE = "lib/nyancat.png"
+  IMAGEDIMENSION = 40
   CONTAINEROFCANVASES = $('.canvas-container')
-  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas', 'grid-canvas']
+  SPRITECANVAS = 'sprite-canvas'
+  PATHCANVAS = 'path-canvas'
+  GRIDCANVAS = 'grid-canvas'
+  CANVASHTMLIDS = [PATHCANVAS, SPRITECANVAS, GRIDCANVAS]
+  WIDTHASPECTRATIO = 54
+  HEIGHTASPECTRATIO = 30
 }
 
 ApplicationController.prototype.initializeListeners = function() {
@@ -75,9 +80,9 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
   var userCommand = this.retrieveUserInput()
-  this.commandLog.update(userCommand)   // Extract
-  this.terminal.addCommandToCompilation(userCommand)  // Extract
-  this.resetCommandListIndexValue()  // Extract
+  this.commandLog.update(userCommand)
+  this.terminal.addCommandToCompilation(userCommand)
+  this.resetCommandListIndexValue()
   if (this.parser.checkIfLoopCommandExists(userCommand)) {
     var commandMultiplierPair = this.parser.parseGivenCode(userCommand)
     this.performLoopCommandsGiven(commandMultiplierPair.command, commandMultiplierPair.multiplier)
@@ -111,40 +116,61 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
-  if (action === "right" || action === "rt") {
-    this.sprite.rotate(90)
-    this.path.rotate(90)
+
+  if (action === "undo"){
+      this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
+      this.grid.context.putImageData(this.grid.savedCanvasData.pop(), -100, -100)
+      // this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
 
   } else if (action === "left" || action === "lt") {
+    this.saveCanvasImageData()
     this.sprite.rotate(-90)
     this.path.rotate(-90)
 
-  } else if (action === "spin") {
-    var randomAngle = Math.floor((Math.random()*360)+1)
-    this.sprite.rotate(randomAngle)
-    this.path.rotate(randomAngle)
+  } else if (action === "right" || action === "rt") {
+    this.saveCanvasImageData()
+    this.sprite.rotate(90)
+    this.path.rotate(90)
 
   } else if (action === "rotate") {
+    this.saveCanvasImageData()
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
-  } else {
+  } else if (action === "spin") {
+    var randomAngle = Math.floor((Math.random()*360)+1)
+    this.saveCanvasImageData()
+    this.sprite.rotate(randomAngle)
+    this.path.rotate(randomAngle)
 
-    if (action === "forward" || action === "fd") {
+  } else if (action === "backward" || action === "bk") {
+    this.saveCanvasImageData()
+    this.path.drawLine(-magnitude)
+    this.sprite.move(-magnitude)
+
+  } else if (action === "forward" || action === "fd") {
+      this.saveCanvasImageData()
       this.path.drawLine(magnitude)
-      this.sprite.move(magnitude, 0)
+      this.sprite.move(magnitude)
 
-    } else if (action === "backward" || action === "bk") {
-      this.path.drawLine(-magnitude)
-      this.sprite.move(-magnitude, 0)
+  } else if (action === "jump" || action === "jp") {
+    this.saveCanvasImageData()
+    this.sprite.move(magnitude)
+    this.path.translate(magnitude)
 
-    } else if (action === "jump" || action === "jp") {
-      this.sprite.move(magnitude, 0)
-      this.path.translate(magnitude)
+  } else if (action === "move" || action === "mv") {
+    this.saveCanvasImageData()
+    this.sprite.move(magnitude)
+    this.path.translate(magnitude)
 
-    } else {
-      alert("Try Again")
-    }
+  } else {
+    alert("Try Again")
   }
+}
+
+ApplicationController.prototype.saveCanvasImageData = function(){
+    this.path.savedCanvasData.push(this.path.context.getImageData(-100, -100, 1000, 1000))
+    this.grid.savedCanvasData.push(this.grid.context.getImageData(-100, -100, 1000, 1000))
+    // this.sprite.savedCanvasData.push(this.sprite.context.getImageData(-100, -100, 1000, 1000))
 }
 

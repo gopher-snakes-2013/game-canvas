@@ -1,9 +1,12 @@
-var Grid = function(color){
-  this.canvas = document.getElementById('grid-canvas')
+var Grid = function(color, canvasId, widthAspectRatio, heightAspectRatio){
+  this.canvas = document.getElementById(canvasId)
+  this.widthAspectRatio = widthAspectRatio
+  this.heightAspectRatio = heightAspectRatio
   this.lineColor = color
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
+  this.savedCanvasData = []
 }
 
 Grid.prototype.prepareContext = function(){
@@ -25,11 +28,11 @@ Grid.prototype.rotate = function(degrees) {
 }
 
 Grid.prototype.gridWidth = function() {
-    return this.canvas.width / 64;
+    return this.canvas.width / this.widthAspectRatio;
   }
 
  Grid.prototype.gridHeight = function() {
-    return this.canvas.height / 36;
+    return this.canvas.height / this.heightAspectRatio;
   }
 
 Grid.prototype.makeGridLines = function(){
@@ -42,7 +45,7 @@ Grid.prototype.makeGridLines = function(){
       this.context.moveTo(x, 0);
       this.context.lineTo(x, this.canvas.height);
     }
-    this.context.strokeStyle = "#ddd";
+    this.context.strokeStyle = this.lineColor;
     this.context.closePath();
     this.context.stroke();
 }

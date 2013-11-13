@@ -1,12 +1,16 @@
-var Sprite = function(avatar){
-  this.canvas = document.getElementById('sprite-canvas')
+var Sprite = function(avatar, imgDimension, canvas, widthAspectRatio, heightAspectRatio){
+  this.canvas = document.getElementById(canvas)
+  this.widthAspectRatio = widthAspectRatio
+  this.heightAspectRatio = heightAspectRatio
   this.img = new Image()
   this.img.src = avatar
+  this.img.crossOrigin = "Anonymous"
   this.context = this.prepareContext()
-  this.dimension = 40
+  this.dimension = imgDimension
   this.offset = this.dimension/2
   this.width = this.gridWidth()
   this.height = this.gridHeight()
+  this.savedCanvasData = []
 }
 
 Sprite.prototype.prepareContext = function() {
@@ -21,7 +25,7 @@ Sprite.prototype.clearScreen = function(){
   this.context.clearRect(-100,-100,1000,1000)
 }
 
-Sprite.prototype.move = function(x, y){
+Sprite.prototype.move = function(x){
   this.clearScreen()
   this.context.translate(this.width*x,0)
   this.draw()
@@ -34,9 +38,9 @@ Sprite.prototype.rotate = function(degrees){
 }
 
 Sprite.prototype.gridWidth = function() {
-  return this.canvas.width / 64;
-  }
+  return this.canvas.width / this.widthAspectRatio;
+}
 
 Sprite.prototype.gridHeight = function() {
-  return this.canvas.height / 36;
+  return this.canvas.height / this.heightAspectRatio;
 }
