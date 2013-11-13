@@ -144,8 +144,8 @@ header {
 }
 
 .commandlog-container ul {
-  overflow: auto;
-  height: 250px;
+  overflow-y: auto;
+  height: 50px;
   list-style: none;
   margin: 0px;
   padding: 0px;
