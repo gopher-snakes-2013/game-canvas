@@ -1,16 +1,16 @@
 var Sprite = function(avatar){
-  this.currentX=0
-  this.currentY=0
+  this.canvas = document.getElementById('sprite-canvas')
   this.img = new Image()
   this.img.src = avatar
   this.context = this.prepareContext()
   this.dimension = 40
   this.offset = this.dimension/2
+  this.width = this.gridWidth()
+  this.height = this.gridHeight()
 }
 
 Sprite.prototype.prepareContext = function() {
-  var SpriteCanvas = document.getElementById('sprite-canvas')
-  return SpriteCanvas.getContext("2d")
+  return this.canvas.getContext("2d")
 }
 
 Sprite.prototype.draw = function(){
@@ -23,7 +23,7 @@ Sprite.prototype.clearScreen = function(){
 
 Sprite.prototype.move = function(x, y){
   this.clearScreen()
-  this.context.translate(x,0)
+  this.context.translate(this.width*x,0)
   this.draw()
 }
 
@@ -31,4 +31,12 @@ Sprite.prototype.rotate = function(degrees){
   this.clearScreen()
   this.context.rotate(degrees*Math.PI/180.0)
   this.draw()
+}
+
+Sprite.prototype.gridWidth = function() {
+  return this.canvas.width / 64;
+  }
+
+Sprite.prototype.gridHeight = function() {
+  return this.canvas.height / 36;
 }

@@ -22,6 +22,8 @@ ApplicationController.prototype.initializeGame = function(){
   this.canvases = contextArray
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
+  this.grid.makeGridLines()
+
 }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
@@ -128,27 +130,17 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   } else {
 
-    magnitude = Math.sqrt(magnitude) * 5
-
     if (action === "forward" || action === "fd") {
-
-      for (var i=0; i<magnitude; i++) {
-        this.sprite.move(magnitude, 0)
-        this.path.drawLine(magnitude,0)
-      }
+      this.path.drawLine(magnitude)
+      this.sprite.move(magnitude, 0)
 
     } else if (action === "backward" || action === "bk") {
-      for (var i=0; i<magnitude; i++) {
-        this.sprite.move(-magnitude, 0)
-        this.path.drawLine(-magnitude,0)
-      }
+      this.path.drawLine(-magnitude)
+      this.sprite.move(-magnitude, 0)
 
     } else if (action === "move" || action === "mv") {
-
-      for (var i=0; i<magnitude; i++) {
-        this.sprite.move(magnitude, 0)
-        this.path.context.translate(magnitude,0)
-      }
+      this.path.context.translate(magnitude,0)
+      this.sprite.move(magnitude, 0)
 
     } else {
       alert("Try Again")
