@@ -24,7 +24,7 @@ ApplicationController.prototype.initializeGame = function(){
   this.grid.makeGridLines()
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
-}
+  }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
   this.resizeController.updateDimensions(CONTAINEROFCANVASES)
@@ -119,48 +119,42 @@ ApplicationController.prototype.retrieveUserInput = function(){
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   if (action === "undo"){
-      this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
-      this.grid.context.putImageData(this.grid.savedCanvasData.pop(), -100, -100)
-      this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
+    this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
+    this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
+    this.path.context.restore()
+    this.sprite.context.restore()
+
 
   } else if (action === "left" || action === "lt") {
-    this.saveCanvasImageData()
     this.sprite.rotate(-90)
     this.path.rotate(-90)
 
   } else if (action === "right" || action === "rt") {
-    this.saveCanvasImageData()
     this.sprite.rotate(90)
     this.path.rotate(90)
 
   } else if (action === "rotate") {
-    this.saveCanvasImageData()
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
   } else if (action === "spin") {
     var randomAngle = Math.floor((Math.random()*360)+1)
-    this.saveCanvasImageData()
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
   } else if (action === "backward" || action === "bk") {
-    this.saveCanvasImageData()
     this.path.drawLine(-magnitude)
     this.sprite.move(-magnitude)
 
   } else if (action === "forward" || action === "fd") {
-      this.saveCanvasImageData()
       this.path.drawLine(magnitude)
       this.sprite.move(magnitude)
 
   } else if (action === "jump" || action === "jp") {
-    this.saveCanvasImageData()
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
   } else if (action === "move" || action === "mv") {
-    this.saveCanvasImageData()
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
@@ -168,10 +162,3 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     alert("Try Again")
   }
 }
-
-ApplicationController.prototype.saveCanvasImageData = function(){
-    this.path.savedCanvasData.push(this.path.context.getImageData(-100, -100, 1000, 1000))
-    this.grid.savedCanvasData.push(this.grid.context.getImageData(-100, -100, 1000, 1000))
-    this.sprite.savedCanvasData.push(this.sprite.context.getImageData(-100, -100, 1000, 1000))
-}
-
