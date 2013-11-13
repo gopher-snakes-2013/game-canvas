@@ -113,52 +113,59 @@ ApplicationController.prototype.retrieveUserInput = function(){
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   if (action === "undo"){
-      this.path.context.putImageData(this.path.savedCanvasData, -100, -100)
-      this.sprite.context.putImageData(this.sprite.savedCanvasData, -100, -100)
-      this.grid.context.putImageData(this.grid.savedCanvasData, -100, -100)
-  }
+    console.log ("i'm undoing something!")
+    debugger
+      this.path.context.putImageData(this.path.savedCanvasData[this.path.savedCanvasData.length-1], -100, -100)
+      // this.sprite.context.putImageData(this.sprite.savedCanvasData, -100, -100)
+      // this.grid.context.putImageData(this.grid.savedCanvasData, -100, -100)
 
-  if (action === "right" || action === "rt") {
+  } else if (action === "right" || action === "rt") {
+    this.saveCanvasImageData()
     this.sprite.rotate(90)
     this.path.rotate(90)
 
   } else if (action === "left" || action === "lt") {
+    this.saveCanvasImageData()
     this.sprite.rotate(-90)
     this.path.rotate(-90)
 
   } else if (action === "spin") {
+    this.saveCanvasImageData()
     var randomAngle = Math.floor((Math.random()*360)+1)
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
   } else if (action === "rotate") {
+    this.saveCanvasImageData()
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
-  } else {
-
-    if (action === "forward" || action === "fd") {
+  } else if (action === "forward" || action === "fd") {
+      this.saveCanvasImageData()
       this.path.drawLine(magnitude)
       this.sprite.move(magnitude, 0)
 
     } else if (action === "backward" || action === "bk") {
+      this.saveCanvasImageData()
       this.path.drawLine(-magnitude)
       this.sprite.move(-magnitude, 0)
 
     } else if (action === "jump" || action === "jp") {
+      this.saveCanvasImageData()
       this.sprite.move(magnitude, 0)
       this.path.translate(magnitude)
 
     } else {
       alert("Try Again")
     }
-    this.saveCanvasImageData()
-  }
 }
 
 ApplicationController.prototype.saveCanvasImageData = function(){
-    this.path.savedCanvasData = this.path.context.getImageData(-100, -100, 1000, 1000)
-    this.sprite.savedCanvasData = this.sprite.context.getImageData(-100, -100, 1000, 1000)
-    this.grid.savedCanvasData = this.grid.context.getImageData(-100, -100, 1000, 1000)
+  console.log("i'm saving something")
+    // debugger
+    this.path.savedCanvasData.push(this.path.context.getImageData(-100, -100, 1000, 1000))
+    // this.sprite.savedCanvasData = this.sprite.context.getImageData(-100, -100, 1000, 1000)
+    // this.grid.savedCanvasData = this.grid.context.getImageData(-100, -100, 1000, 1000)
+    console.log("i saved the canvas")
 }
 
