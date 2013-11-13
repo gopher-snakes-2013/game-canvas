@@ -2,6 +2,7 @@ var ApplicationController = function() {
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(SPRITEIMAGE)
   this.path = new Path(PATHCOLOR)
+  this.grid = new Grid(GRIDCOLOR)
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
@@ -21,6 +22,8 @@ ApplicationController.prototype.initializeGame = function(){
   this.canvases = contextArray
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
+  this.grid.makeGridLines()
+
 }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
@@ -36,10 +39,11 @@ updateStoredCanvasContainerDimensions = function() {
 }
 
 ApplicationController.prototype.initializeConstants = function() {
+  GRIDCOLOR = "#ddd"
   PATHCOLOR = "#2980b9"
   SPRITEIMAGE = "lib/nyancat.png"
   CONTAINEROFCANVASES = $('.canvas-container')
-  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas']
+  CANVASHTMLIDS = ['path-canvas', 'sprite-canvas', 'grid-canvas']
 }
 
 ApplicationController.prototype.initializeListeners = function() {
@@ -107,20 +111,7 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
-  if (action === "forward" || action === "fd") {
-
-    for (var i=0; i<magnitude; i++) {
-      this.sprite.move(magnitude, 0)
-      this.path.drawLine(magnitude,0)
-    }
-
-  } else if (action === "backward" || action === "bk") {  
-    for (var i=0; i<magnitude; i++) {
-      this.sprite.move(-magnitude, 0)
-      this.path.drawLine(-magnitude,0)
-    }
-
-  } else if (action === "right" || action === "rt") {
+  if (action === "right" || action === "rt") {
     this.sprite.rotate(90)
     this.path.rotate(90)
 
@@ -137,14 +128,23 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
-  } else if (action === "move" || action === "mv") {  
-    for (var i=0; i<magnitude; i++) {
-      this.sprite.move(magnitude, 0)
-      this.path.context.translate(magnitude,0)
-    }
-
   } else {
-    alert("Try Again")
+
+    if (action === "forward" || action === "fd") {
+      this.path.drawLine(magnitude)
+      this.sprite.move(magnitude, 0)
+
+    } else if (action === "backward" || action === "bk") {
+      this.path.drawLine(-magnitude)
+      this.sprite.move(-magnitude, 0)
+
+    } else if (action === "jump" || action === "jp") {
+      this.sprite.move(magnitude, 0)
+      this.path.translate(magnitude)
+
+    } else {
+      alert("Try Again")
+    }
   }
 }
 
