@@ -24,7 +24,7 @@ ApplicationController.prototype.initializeGame = function(){
   this.grid.makeGridLines()
   this.placeCanvasAxesInTheMiddle(contextArray)
   this.sprite.draw()
-}
+  }
 
 ApplicationController.prototype.updateDimensionsOnResizeAndPrepareCanvas = function(){
   this.resizeController.updateDimensions(CONTAINEROFCANVASES)
@@ -119,99 +119,74 @@ ApplicationController.prototype.retrieveUserInput = function(){
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   if (action === "undo"){
-      this.updateDimensionsOnResizeAndPrepareCanvas()
-      this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
-      this.grid.context.putImageData(this.grid.savedCanvasData.pop(), -100, -100)
-      this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
-      this.sprite.context.restore()
-      this.path.context.restore()
+    this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
+    this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
+    this.path.context.restore()
+    this.sprite.context.restore()
+
+  } else if (action === 'reset') {
+    this.updateDimensionsOnResizeAndPrepareCanvas()
 
   } else if (action === "left" || action === "lt") {
-    this.saveCanvasImageData()
     this.sprite.rotate(-90)
     this.path.rotate(-90)
 
   } else if (action === "right" || action === "rt") {
-    this.saveCanvasImageData()
     this.sprite.rotate(90)
     this.path.rotate(90)
 
-  } else if (action === 'green') {
-    this.path.lineColor = "#0AFF58"
-
-  } else if (action ==='purple') {
-    this.path.lineColor = "#6050E8"
-
-  } else if (action === 'pink') {
-    this.path.lineColor = "#FF5DF9"
-
-  } else if (action === 'red') {
-    this.path.lineColor = "#FF211C"
-
-  } else if (action === 'orange') {
-    this.path.lineColor = "#FF820F"
-
-  } else if (action === 'yellow') {
-    this.path.lineColor = "#FFE119"
-
-  } else if (action === 'randomcolor') {
-    this.path.lineColor = getRandomColor()
-
-  } else if (action === 'linewidth') {
-    if (magnitude > 1 && magnitude <= 1000) {
-      this.path.lineWidth = magnitude
-    }
-
-  } else if (action === "rotate") {
-    this.saveCanvasImageData()
+  } else if (action === "rotate" || action === "r") {
     this.sprite.rotate(magnitude)
     this.path.rotate(magnitude)
 
   } else if (action === "spin") {
     var randomAngle = Math.floor((Math.random()*360)+1)
-    this.saveCanvasImageData()
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
-  } else if (action === 'reset') {
-    this.updateDimensionsOnResizeAndPrepareCanvas()
-
   } else if (action === "backward" || action === "bk") {
-    this.saveCanvasImageData()
-    this.path.context.save()
-    this.sprite.context.save()
     this.path.drawLine(-magnitude)
     this.sprite.move(-magnitude)
 
   } else if (action === "forward" || action === "fd") {
-      this.saveCanvasImageData()
-      this.path.context.save()
-      this.sprite.context.save()
       this.path.drawLine(magnitude)
       this.sprite.move(magnitude)
 
   } else if (action === "jump" || action === "jp") {
-    this.saveCanvasImageData()
-    this.path.context.save()
-    this.sprite.context.save()
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
   } else if (action === "move" || action === "mv") {
-    this.saveCanvasImageData()
-    this.path.context.save()
-    this.sprite.context.save()
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
+
+  } else if (action === "green" ) {
+    this.path.lineColor = "#0AFF58"
+
+  } else if (action === "orange" ) {
+    this.path.lineColor = "#FF820F"
+
+  } else if (action === "pink" ) {
+    this.path.lineColor = "#FF5DF9"
+
+  } else if (action === "purple" ) {
+    this.path.lineColor = "#6050E8"
+
+  } else if (action === "red" ) {
+    this.path.lineColor = "#FF211C"
+
+  } else if (action === "yellow" ) {
+    this.path.lineColor = "#FFE119"
+
+  } else if (action === "randomcolor" || action === "rc") {
+    this.path.lineColor = getRandomColor()
+
+  } else if (action === "linewidth" || action === "lw") {
+    if (magnitude > 1 && magnitude <= 1000) {
+      this.path.lineWidth = magnitude
+    }
 
   } else {
     alert("Try Again")
   }
 }
-
-ApplicationController.prototype.saveCanvasImageData = function(){
-    this.path.savedCanvasData.push(this.path.context.getImageData(-100, -100, 1000, 1000))
-    this.grid.savedCanvasData.push(this.grid.context.getImageData(-100, -100, 1000, 1000))
-    this.sprite.savedCanvasData.push(this.sprite.context.getImageData(-100, -100, 1000, 1000))
-}
-
