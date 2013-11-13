@@ -26,16 +26,24 @@ h1 {
   color: #FC6042;
   text-shadow: 1px 0px 5px rgba(150, 150, 150, 0.78);
   text-rendering: optimizeLegibility;
+  margin-bottom: .5em;
+  margin-top: .5em;
 }
 
 
 /*Make dropcap*/
 h1:first-child:first-letter{
-    float:left;
-    font-size:150%;
-    margin-top:7px;
-    margin-right:5px;
-    }
+  float:left;
+  font-size:150%;
+  margin-top:7px;
+  margin-right:5px;
+}
+
+#capital{
+  font-size:150%;
+  margin-top:7px;
+  margin-right:5px;
+}
 
 h3 {
   font-family: 'Luckiest Guy', cursive;
@@ -175,14 +183,13 @@ header {
   position: relative;
   border-style: dashed;
   border-color: #ecf0f1;
-  border-radius:25px;
+  border-radius: 25px;
   padding: .25em;
 
 }
 
 .recipe-list {
   position: relative;
-  display: block;
   overflow: auto;
   height: 350px;
 }
@@ -190,24 +197,24 @@ header {
 .recipe {
   background: rgba(155, 89, 182, 0.46);
   height: auto;
-  list-style: none;
-  margin: 0px;
   margin-bottom: .5em;
   padding: .5em;
   border-radius: 15px;
-  overflow: auto
+  overflow: auto /*you need this because there are floating children.*/
 }
 
 
-.recipe-shape {
+.recipe-left-column {
   float: left;
-
+  width: 20%;
+  padding-top: .25em;
 }
 
 
-.recipe-text {
+.recipe-right-column {
   float: right;
-  display: inline-block;
+  width: 75%;
+  text-align: left;
 }
 
 
@@ -215,7 +222,7 @@ header {
 #circle {
   width: 50px;
   height: 50px;
-  background: grey;
+  background: gray;
   display: inline-block;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -225,7 +232,7 @@ header {
 #square {
   width: 45px;
   height: 45px;
-  background: grey;
+  background: gray;
 }
 
 #triangle-up {
@@ -233,7 +240,7 @@ header {
   height: 0px;
   border-style: solid;
   border-width: 0 25px 43.3px 25px;
-  border-color: transparent transparent grey transparent;
+  border-color: transparent transparent gray transparent;
 }
 
 
