@@ -1,6 +1,8 @@
 var ApplicationController = function() {
+  var img = $('.sprite-img')[0]
+  img.crossOrigin = "Anonymous"
   this.constants = this.initializeConstants()
-  this.sprite = new Sprite(SPRITEIMAGE, IMAGEDIMENSION, SPRITECANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
+  this.sprite = new Sprite(img, IMAGEDIMENSION, SPRITECANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
   this.path = new Path(PATHCOLOR, PATHCANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
   this.grid = new Grid(GRIDCOLOR, GRIDCANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
   this.commandLog = new CommandLog()
@@ -40,7 +42,6 @@ ApplicationController.prototype.updateStoredCanvasContainerDimensions = function
 ApplicationController.prototype.initializeConstants = function() {
   GRIDCOLOR = "#ddd"
   PATHCOLOR = "#2980b9"
-  SPRITEIMAGE = "images/nyancat.png"
   IMAGEDIMENSION = 40
   CONTAINEROFCANVASES = $('.canvas-container')
   SPRITECANVAS = 'sprite-canvas'
@@ -120,7 +121,7 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   if (action === "undo"){
       this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
       this.grid.context.putImageData(this.grid.savedCanvasData.pop(), -100, -100)
-      // this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
+      this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
 
   } else if (action === "left" || action === "lt") {
     this.saveCanvasImageData()
@@ -171,6 +172,6 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
 ApplicationController.prototype.saveCanvasImageData = function(){
     this.path.savedCanvasData.push(this.path.context.getImageData(-100, -100, 1000, 1000))
     this.grid.savedCanvasData.push(this.grid.context.getImageData(-100, -100, 1000, 1000))
-    // this.sprite.savedCanvasData.push(this.sprite.context.getImageData(-100, -100, 1000, 1000))
+    this.sprite.savedCanvasData.push(this.sprite.context.getImageData(-100, -100, 1000, 1000))
 }
 
