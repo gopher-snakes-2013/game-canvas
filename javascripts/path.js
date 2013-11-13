@@ -3,6 +3,7 @@ var Path = function(color, canvasId, widthAspectRatio, heightAspectRatio) {
   this.widthAspectRatio = widthAspectRatio
   this.heightAspectRatio = heightAspectRatio
   this.lineColor = color
+  this.lineWidth = 5
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
@@ -18,10 +19,15 @@ Path.prototype.drawLine = function(x){
   this.context.beginPath()
   this.context.moveTo(0, 0)
   this.context.lineTo(this.width*x, 0)
+  this.context.lineWidth = this.lineWidth
   this.context.strokeStyle = this.lineColor
   this.context.closePath()
   this.context.stroke()
   this.translate(x)
+}
+
+Path.prototype.clearScreen = function(){
+  this.context.clearRect(-100,-100,1000,1000)
 }
 
 Path.prototype.rotate = function(degrees) {
