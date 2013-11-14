@@ -7,6 +7,7 @@ var Path = function(color, canvasId, widthAspectRatio, heightAspectRatio) {
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
+  this.cheatCode = false
 }
 
 Path.prototype.prepareContext = function(){
@@ -14,11 +15,27 @@ Path.prototype.prepareContext = function(){
 }
 
 Path.prototype.drawLine = function(x){
+  if (this.cheatCode){
+console.log("i'm in the cheatCode")
+    this.draw(x, -0.3, 0, 4, 'red')
+    this.draw(x, -0.2, 0, 4, 'orange')
+    this.draw(x, -0.1, 0, 4, 'yellow')
+    this.draw(x, 0, 0, 4, 'green')
+    this.draw(x, 0.1, 0, 4, 'blue')
+    this.draw(x, 0.2, 0, 4, 'indigo')
+    this.draw(x, 0.3, 0, 4, 'purple')
+
+  } else {
+    this.draw(x, 0, 0, this.lineWidth, this.lineColor)
+  }
+}
+
+Path.prototype.draw = function(x, startY, endY, lineWidth, lineColor){
   this.context.beginPath()
-  this.context.moveTo(0, 0)
-  this.context.lineTo(this.width*x, 0)
-  this.context.lineWidth = this.lineWidth
-  this.context.strokeStyle = this.lineColor
+  this.context.moveTo(0, startY)
+  this.context.lineTo(this.width*x, endY)
+  this.context.lineWidth = lineWidth
+  this.context.strokeStyle = lineColor
   this.context.closePath()
   this.context.stroke()
   this.translate(x)
@@ -42,4 +59,8 @@ Path.prototype.gridWidth = function() {
 
 Path.prototype.gridHeight = function() {
   return this.canvas.height / this.heightAspectRatio
+}
+
+Path.prototype.nyanCat = function () {
+  this.cheatCode = true
 }

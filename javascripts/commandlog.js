@@ -13,6 +13,7 @@ CommandLog.prototype.retrieveCurrentLogs = function() {
 }
 
 CommandLog.prototype.setCommandLogToBottom = function() {
+  console.log("i'm in the commanglog")
   this.logArea[0].scrollTop = this.list[0].scrollHeight
 }
 

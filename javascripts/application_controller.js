@@ -86,6 +86,7 @@ ApplicationController.prototype.respondToSubmit = function(event) {
   // timer.start()
   var self = this
   var userCommand = this.retrieveUserInput()
+  console.log("i got the command")
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
@@ -96,6 +97,7 @@ ApplicationController.prototype.respondToSubmit = function(event) {
       self.startParse(this.commandArray[i])
     }
   } else {
+
     this.commandArray.push(userCommand)
     this.startParse(userCommand)
   }
@@ -205,5 +207,7 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     if (magnitude > 1 && magnitude <= 1000) {
       this.path.lineWidth = magnitude
     }
+  } else if (action === "nyancat" || action === "nc") {
+    this.path.cheatCode = true
   }
 }
