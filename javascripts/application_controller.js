@@ -172,6 +172,8 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   } else if (action === 'reset') {
     this.updateDimensionsOnResizeAndPrepareCanvas()
+    this.path.lineColor = PATHCOLOR
+    this.path.lineWidth = PATHWIDTH
 
   } else if (action === 'clearlogs') {
     this.commandLog.retrieveCurrentLogs().remove()
