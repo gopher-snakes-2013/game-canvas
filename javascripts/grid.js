@@ -6,7 +6,6 @@ var Grid = function(color, canvasId, widthAspectRatio, heightAspectRatio){
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
-  this.savedCanvasData = []
 }
 
 Grid.prototype.prepareContext = function(){
@@ -32,24 +31,24 @@ Grid.prototype.rotate = function(degrees) {
 }
 
 Grid.prototype.gridWidth = function() {
-    return this.canvas.width / this.widthAspectRatio;
+    return this.canvas.width / this.widthAspectRatio
   }
 
  Grid.prototype.gridHeight = function() {
-    return this.canvas.height / this.heightAspectRatio;
+    return this.canvas.height / this.heightAspectRatio
   }
 
 Grid.prototype.makeGridLines = function(){
-  this.context.beginPath();
+  this.context.beginPath()
     for (var y=this.gridHeight(); y<this.canvas.height; y+=this.gridHeight()) {
-      this.context.moveTo(0, y);
-      this.context.lineTo(this.canvas.width, y);
+      this.context.moveTo(0, y)
+      this.context.lineTo(this.canvas.width, y)
     }
     for (var x=this.gridWidth(); x<this.canvas.width; x+=this.gridWidth()) {
-      this.context.moveTo(x, 0);
-      this.context.lineTo(x, this.canvas.height);
+      this.context.moveTo(x, 0)
+      this.context.lineTo(x, this.canvas.height)
     }
-    this.context.strokeStyle = this.lineColor;
-    this.context.closePath();
-    this.context.stroke();
+    this.context.strokeStyle = this.lineColor
+    this.context.closePath()
+    this.context.stroke()
 }
