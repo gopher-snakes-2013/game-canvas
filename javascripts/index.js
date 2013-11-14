@@ -1,7 +1,13 @@
 $(document).ready(function(){
   var $img = $('.sprite-img')
   $img.on("load", function(e) {
-    console.log("image loaded");
+
+    insertInitialCommand = function(DEFAULTINTEXTBOX) {
+      $('#textbox').val(DEFAULTINTEXTBOX)
+    }
+
+    DEFAULTINTEXTBOX = "forward 5"
+    insertInitialCommand(DEFAULTINTEXTBOX)
 
     var applicationController = new ApplicationController()
 
@@ -18,5 +24,5 @@ $(document).ready(function(){
     GridCanvas.width = container.width()
 
     applicationController.initializeGame()
-  });
+  })
 })

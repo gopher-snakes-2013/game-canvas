@@ -1,13 +1,13 @@
-var Path = function(color, canvasId, widthAspectRatio, heightAspectRatio) {
+var Path = function(color, canvasId, pathWidth, widthAspectRatio, heightAspectRatio) {
   this.canvas = document.getElementById(canvasId)
   this.widthAspectRatio = widthAspectRatio
   this.heightAspectRatio = heightAspectRatio
   this.lineColor = color
-  this.lineWidth = 5
+  this.lineWidth = pathWidth
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
-  this.savedCanvasData = []
+  this.cheatCode = false
 }
 
 Path.prototype.prepareContext = function(){
@@ -15,15 +15,28 @@ Path.prototype.prepareContext = function(){
 }
 
 Path.prototype.drawLine = function(x){
-  this.saveStateOfCanvas()
+  if (this.cheatCode){
+    this.draw(x, -15, 6, 'rgb(248, 0, 0)' )
+    this.draw(x, -9,  6, 'rgb(250, 129, 0)')
+    this.draw(x, -3,  6,  'rgb(255, 255, 0)')
+    this.draw(x, 3,  6, 'rgb(48, 255, 52)')
+    this.draw(x, 9,  6, 'rgb(8, 40, 255)')
+    this.draw(x, 15,  6, 'rgb(110, 0, 255)')
+    this.translate(x)
+  } else {
+    this.draw(x, 0, this.lineWidth, this.lineColor)
+    this.translate(x)
+  }
+}
+
+Path.prototype.draw = function(x, Y, lineWidth, lineColor){
   this.context.beginPath()
-  this.context.moveTo(0, 0)
-  this.context.lineTo(this.width*x, 0)
-  this.context.lineWidth = this.lineWidth
-  this.context.strokeStyle = this.lineColor
+  this.context.moveTo(0, Y)
+  this.context.lineTo(this.width*x, Y)
+  this.context.lineWidth = lineWidth
+  this.context.strokeStyle = lineColor
   this.context.closePath()
   this.context.stroke()
-  this.translate(x)
 }
 
 Path.prototype.clearScreen = function(){
@@ -31,7 +44,6 @@ Path.prototype.clearScreen = function(){
 }
 
 Path.prototype.rotate = function(degrees) {
-  this.saveStateOfCanvas()
   this.context.rotate(degrees*Math.PI/180.0)
 }
 
@@ -40,14 +52,13 @@ Path.prototype.translate = function(x){
 }
 
 Path.prototype.gridWidth = function() {
-  return this.canvas.width / this.widthAspectRatio;
+  return this.canvas.width / this.widthAspectRatio
   }
 
 Path.prototype.gridHeight = function() {
-  return this.canvas.height / this.heightAspectRatio;
+  return this.canvas.height / this.heightAspectRatio
 }
 
-Path.prototype.saveStateOfCanvas = function(){
-  this.context.save()
-  this.savedCanvasData.push(this.context.getImageData(-100, -100, 1000, 1000))
+Path.prototype.nyanCat = function () {
+  this.cheatCode = true
 }

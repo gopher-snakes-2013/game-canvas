@@ -5,11 +5,8 @@
   <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-
-  </script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/timer.js"></script>
   <script type="text/javascript" src="javascripts/sprite.js"></script>
   <script type="text/javascript" src="javascripts/path.js"></script>
   <script type="text/javascript" src="javascripts/grid.js"></script>
@@ -17,7 +14,10 @@
   <script type="text/javascript" src="javascripts/commandlog.js"></script>
   <script type="text/javascript" src="javascripts/terminal.js"></script>
   <script type="text/javascript" src="javascripts/resize_controller.js"></script>
+  <script type="text/javascript" src="javascripts/string.js"></script>
+  <script type="text/javascript" src="javascripts/imageuploader.js"></script>
   <script type="text/javascript" src="javascripts/application_controller.js"></script>
+  <script type="text/javascript" src="javascripts/colors.js"></script>
   <script type="text/javascript" src="javascripts/index.js"></script>
 </head>
 <body>
@@ -44,6 +44,9 @@
         <span class='legend'>
           forward 10 | backward 10 |  jump 5 | spin | rotate 60 | right  | left | reset | randomcolor | linewidth 5
         </span>
+        <div id='image-link-container'>
+
+        </div>
       </div>
 
 
@@ -98,7 +101,6 @@
               (forward 10, rotate 240) repeat 3
             </div>
           </div>
-
           <div class='recipe'>
             <div class='recipe-left-column'><div id='square'></div></div>
             <div class='recipe-right-column'>
@@ -128,13 +130,15 @@
 
 
         </div>
-
-
+          <div id='dashboard'>
+            <h4> DashBoard </h4>
+            <h6 id='current-color'> Current Color: Blue </h6>
+            <h6 id='line-width'> Current Line Width: 5 </h6>
+          </div>
         </div>
       </div>
       <img class='sprite-img' src="images/nyancat2.png">
     </div>
   </div>
-  <script type="text/javascript" src="public/javascripts/colors.js"></script>
 </body>
 </html>
