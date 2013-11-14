@@ -1,11 +1,15 @@
 var CommandLog = function() {
-  this.logArea = $('.list-of-commands')
+  this.logContainer = $('.list-of-commands')
 }
 
 CommandLog.prototype.update = function(lastCommand){
-  this.logArea.append('<li>' + lastCommand + '</li>')
+  this.logContainer.append('<li>' + lastCommand + '</li>')
   this.setCommandLogToBottom()
   this.emptyTextBox()
+}
+
+CommandLog.prototype.retrieveLogContainer = function() {
+  return $('.list-of-commands')
 }
 
 CommandLog.prototype.retrieveCurrentLogs = function() {
@@ -13,8 +17,7 @@ CommandLog.prototype.retrieveCurrentLogs = function() {
 }
 
 CommandLog.prototype.setCommandLogToBottom = function() {
-  console.log("i'm in the commanglog")
-  this.logArea[0].scrollTop = this.list[0].scrollHeight
+  this.logContainer[0].scrollTop = this.logContainer[0].scrollHeight
 }
 
 CommandLog.prototype.emptyTextBox = function() {
