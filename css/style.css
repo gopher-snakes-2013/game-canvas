@@ -7,60 +7,98 @@ height:auto The default. This means the element will have flexible height i.e. i
 /* base CSS */
 
 body {
-    font-size: 125%;
-    line-height: 150%
-    color: #34495e;
+  line-height: 150%;
+  font-size:125%;
+  color: #34495e;
 }.bodytext p {
-    font-size:0.875em;
-}.sidenote {
-    font-size:0.75em;
+  font-size:0.875em;
+  color: #34495e;
+}
+
+p {
+  color: #34495e;
 }
 
 h1 {
   font-family: 'Luckiest Guy', cursive;
-  text-align:center;
+  text-align: left;
   font-size: 4em;
   color: #FC6042;
   text-shadow: 1px 0px 5px rgba(150, 150, 150, 0.78);
+  text-rendering: optimizeLegibility;
+  margin-bottom: .5em;
+  margin-top: .5em;
+}
+
+
+/*Make dropcap*/
+h1:first-child:first-letter{
+  float:left;
+  font-size:150%;
+  margin-top:7px;
+  margin-right:5px;
+}
+
+#capital{
+  font-size:150%;
+  margin-top:7px;
+  margin-right:5px;
 }
 
 h3 {
   font-family: 'Luckiest Guy', cursive;
   font-size: 2em;
   color: #2c3e50;
+  margin-top: .5em;
+  margin-bottom: .25em;
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.05em
 }
 
 header {
-  /*border: 1px solid red;*/
   margin-top: 3em;
+  margin-left: .25em;
 }
 
-.wrapper {
-  width: 95%;
-  height: auto;
-  margin: auto;
-  margin-left: 1.5em;
-  margin-right: 1em;
-  position: absolute;
 
-}
 
-.top-container{
-  position: relative;
-  height: 100%;
-  /*width: 100%;*/
-  display: block;
-  overflow: hidden; /*this will recognize the children float in the parent class.*/
+.sprite-img {
+  display: none;
 }
 
 .hidden {
   display: none;
 }
 
+
+.wrapper {
+  position: absolute;
+  width: 95%;
+  height: auto;
+  margin: auto;
+  margin-left: 1.5em;
+  margin-right: .5em;
+}
+
+.left-container{
+  /* position: relative  - places the elemnt in the document flow*/
+  float: left;
+  /* height: 100% - 100% height of its parent container (wrapper).*/
+  height: 100%;
+  width: 72%;
+  /* display: block - By default (without setting a width) they take up as much horizontal space as they can. Not sure if I need this. */
+  /*display: block;*/
+  /* overflow: hidden - recognizes the children float in the parent class. not sure if I need this*/
+  overflow: hidden;
+}
+
+
 /* top left */
 .canvas-container {
   position: relative;
-  width: 73%;
+  /* % width of parent (top-container)*/
+  width: 100%;
+  /*it will never be bigger than parent (top-container) */
   max-height: 100%;
   float: left;
 }
@@ -68,7 +106,7 @@ header {
 .canvas-container:before {
   content: "";
   display: block;
-  /* padding-top sets the aspect ratio of 16:9 */
+  /* this padding-top sets an aspect ratio of 16:9*/
   padding-top: 56.25%;
 }
 
@@ -109,39 +147,106 @@ header {
 
 .right-sidebar{
   float: right;
-  width: 25%;
+  width: 26%;
+  min-height: 100%;
+  padding-right: .05em;
 }
 
 .commandlog-container {
   position: relative;
   display: block;
+  margin-bottom: 2.5em;
+  border-style: dashed;
+  border-color: #ecf0f1;
+  border-radius:25px;
+  padding: .25em;
 }
 
 .commandlog-container ul {
-  overflow: auto;
-  height: 300px;
+  overflow-y: auto;
+  height: 250px;
   list-style: none;
   margin: 0px;
   padding: 0px;
 }
 
+.commandlog-container ul li {
+  padding: .2em 0em .2em 1em;
+  margin-top: .25em;
+  background: #FFE767;
+  border-radius: 15px;
+
+}
 
 .recipe-container {
   position: relative;
-  display: block;
+  border-style: dashed;
+  border-color: #ecf0f1;
+  border-radius: 25px;
+  padding: .25em;
+
 }
 
-.recipe-container ul {
+.recipe-list {
+  position: relative;
   overflow: auto;
-  max-height: 300px;
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
+  height: 350px;
 }
 
-/* bottom container */
+.recipe {
+  background: rgba(155, 89, 182, 0.46);
+  height: auto;
+  margin-bottom: .5em;
+  padding: .5em;
+  border-radius: 15px;
+  overflow: auto /*you need this because there are floating children.*/
+}
 
-.bottom-container {
+
+.recipe-left-column {
+  float: left;
+  width: 20%;
+  padding-top: .25em;
+}
+
+
+.recipe-right-column {
+  float: right;
+  width: 75%;
+  text-align: left;
+}
+
+
+
+#circle {
+  width: 50px;
+  height: 50px;
+  background: gray;
+  display: inline-block;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+#square {
+  width: 45px;
+  height: 45px;
+  background: gray;
+}
+
+#triangle-up {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 25px 43.3px 25px;
+  border-color: transparent transparent gray transparent;
+}
+
+
+
+/* leftbottom container */
+
+.leftbottom-container {
   position: relative;
   width: 100%;
   padding-top: 1em;
@@ -155,13 +260,35 @@ header {
   float: left;
 }
 
+
 #textbox {
-  width: 300px;
-  height: 35px;
+  padding-left: .25em;
+  width: 650px;
+  height: 50px;
+  font-size: 125%;
+  border: 2px solid #dadada;
+  border-radius: 7px;
+  -webkit-animation-name: 'pulse_animation';
+  -webkit-animation-duration: 5000ms;
+  -webkit-transform-origin:70% 70%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
 }
 
-.hidden {
-  display: none;
+
+
+@-webkit-keyframes pulse_animation {
+  0% {
+    border: 2px solid #dadada;
+    border-radius: 7px; }
+  50% {
+    box-shadow: inset 0 0 20px 5px rgba(241, 196, 15, .7);
+    -webkit-box-shadow: inset 0 0 20px 5px rgba(241, 196, 15, .7);
+    -moz-box-shadow: inset 0 0 20px 5px rgba(241, 196, 15, .7); }
+  100% {
+    border: 2px solid #dadada;
+    border-radius: 7px; }
+
 }
 
 /* go button (CSSButtonGenerator.com) */
@@ -211,3 +338,4 @@ header {
   position:relative;
   top:1px;
 }
+
