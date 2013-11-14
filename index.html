@@ -18,35 +18,63 @@
 <body>
   <div class ="wrapper">
     <header>
-      <h1>Nyan Snakes!</h1>
+      <h1>Code with <span id='capital'>N</span>yan</h1>
     </header>
-    <div class='top-container'>
+
+
+    <div class='left-container'>
+
       <div class='canvas-container'>
         <canvas width="1080" height="608" id="path-canvas"></canvas>
         <canvas width="1080" height="608" id="grid-canvas"></canvas>
         <canvas width="1080" height="608" id="sprite-canvas"></canvas>
       </div>
-      <div class ='right-sidebar'>
-        <div class='commandlog-container'>
-          <h3>Command Log</h3>
-          <ul class='list-of-commands'></ul>
-        </div>
-        <div class='recipe-container'>
-          <h3>Recipes</h3>
-          <ul class='recipes-list'>
-            <li> <span id='square'>square</span> = (forward 5, rotate 90) repeat 4</li>
-            <li>triangle = (forward 5, rotate 120) repeat 3</li>
-          </ul>
+      <div class='leftbottom-container'>
+        <form class='nycatform'>
+          <input type='text' id='textbox'>
+          <input class='hidden' type='submit' value = "Go!">
+        </form>
+        <a href="#" class="go-button">GO!</a>
+      </div>
+
+    </div>
+    <div class ='right-sidebar'>
+
+      <div class='commandlog-container'>
+        <h3>Command Log</h3>
+        <ul class='list-of-commands'>
+        </ul>
+      </div>
+      <div class='recipe-container'>
+      <h3>Recipes</h3>
+        <div class='recipe-list'>
+
+          <div class='recipe'>
+            <div class='recipe-left-column'><div id='circle'></div></div>
+            <div class='recipe-right-column'>
+              (forward 2, rotate 10) repeat 36
+            </div>
+          </div>
+
+          <div class='recipe'>
+            <div class='recipe-left-column'><div id='square'></div></div>
+            <div class='recipe-right-column'>
+              (forward 5, rotate 90) repeat 4
+            </div>
+          </div>
+
+          <div class='recipe'>
+            <div class='recipe-left-column'><div id='triangle-up'></div></div>
+            <div class='recipe-right-column'>
+              (forward 10, rotate 240) repeat 3
+            </div>
+          </div>
+
+
+
         </div>
       </div>
-    </div>
-    <div class='bottom-container'>
-      <form class='nycatform'>
-        <input type='text' id='textbox'>
-        <input type='submit' class='hidden' value = "Go!">
-      </form>
-      <a href="#" class="go-button">GO!</a>
-      <img class='sprite-img hidden' src="images/nyancat.png">
+      <img class='sprite-img' src="images/nyancat.png">
     </div>
   </div>
   <script type="text/javascript" src="public/javascripts/colors.js"></script>

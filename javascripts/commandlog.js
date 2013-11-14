@@ -4,6 +4,7 @@ var CommandLog = function() {
 
 CommandLog.prototype.update = function(lastCommand){
   this.list.append('<li>' + lastCommand + '</li>')
-  $('#textbox').val('')  
+  this.list[0].scrollTop = this.list[0].scrollHeight
+  $('#textbox').val('')
 }
 
