@@ -143,6 +143,11 @@ ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidt
   $('#line-width').text('Current Line Width: ' + lineWidth)
 }
 
+
+ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidth){
+  $('#line-width').text('Current Line Width: ' + lineWidth)
+}
+
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   if (action === 'reset') {
