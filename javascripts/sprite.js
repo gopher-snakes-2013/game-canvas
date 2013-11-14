@@ -8,7 +8,6 @@ var Sprite = function(img, imgDimension, canvas, widthAspectRatio, heightAspectR
   this.offset = this.dimension/2
   this.width = this.gridWidth()
   this.height = this.gridHeight()
-  this.savedCanvasData = []
 }
 
 Sprite.prototype.prepareContext = function() {
@@ -24,28 +23,21 @@ Sprite.prototype.clearScreen = function(){
 }
 
 Sprite.prototype.move = function(x){
-  this.saveStateOfCanvas()
   this.clearScreen()
   this.context.translate(this.width*x,0)
   this.draw()
 }
 
 Sprite.prototype.rotate = function(degrees){
-  this.saveStateOfCanvas()
   this.clearScreen()
   this.context.rotate(degrees*Math.PI/180.0)
   this.draw()
 }
 
 Sprite.prototype.gridWidth = function() {
-  return this.canvas.width / this.widthAspectRatio;
+  return this.canvas.width / this.widthAspectRatio
 }
 
 Sprite.prototype.gridHeight = function() {
-  return this.canvas.height / this.heightAspectRatio;
-}
-
-Sprite.prototype.saveStateOfCanvas = function(){
-  this.context.save()
-  this.savedCanvasData.push(this.context.getImageData(-100, -100, 1000, 1000))
+  return this.canvas.height / this.heightAspectRatio
 }

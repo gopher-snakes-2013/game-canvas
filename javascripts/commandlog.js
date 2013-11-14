@@ -8,7 +8,7 @@ CommandLog.prototype.update = function(lastCommand){
   this.emptyTextBox()
 }
 
-CommandLog.prototype.retrieveLogContainer = function(){
+CommandLog.prototype.retrieveLogContainer = function() {
   return $('.list-of-commands')
 }
 

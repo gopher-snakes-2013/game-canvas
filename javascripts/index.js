@@ -24,5 +24,5 @@ $(document).ready(function(){
     GridCanvas.width = container.width()
 
     applicationController.initializeGame()
-  });
+  })
 })

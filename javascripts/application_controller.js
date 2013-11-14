@@ -13,6 +13,7 @@ var ApplicationController = function() {
   this.canvasContexts = []
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
+  this.commandArray = [""]
 }
 
 ApplicationController.prototype.initializeGame = function(){
@@ -84,10 +85,24 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
+  var self = this
   var userCommand = this.retrieveUserInput()
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
+  if (userCommand === "undo" || userCommand === "u"){
+    self.updateDimensionsOnResizeAndPrepareCanvas()
+    this.commandArray.pop()
+    for(var i=0; i < this.commandArray.length; i++){
+      self.startParse(this.commandArray[i])
+    }
+  } else {
+    this.commandArray.push(userCommand)
+    this.startParse(userCommand)
+  }
+}
+
+ApplicationController.prototype.startParse = function(userCommand){
   if (this.parser.checkIfLoopCommandExists(userCommand)) {
     var commandMultiplierPair = this.parser.parseGivenCode(userCommand)
     this.performLoopCommandsGiven(commandMultiplierPair.command, commandMultiplierPair.multiplier)
@@ -130,13 +145,7 @@ ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidt
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
-  if (action === "undo"){
-    this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
-    this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
-    this.path.context.restore()
-    this.sprite.context.restore()
-
-  } else if (action === 'reset') {
+  if (action === 'reset') {
     this.updateDimensionsOnResizeAndPrepareCanvas()
 
   } else if (action === "left" || action === "lt") {
@@ -167,8 +176,8 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.move(-magnitude)
 
   } else if (action === "forward" || action === "fd") {
-      this.path.drawLine(magnitude)
-      this.sprite.move(magnitude)
+    this.path.drawLine(magnitude)
+    this.sprite.move(magnitude)
 
   } else if (action === "jump" || action === "jp") {
     this.sprite.move(magnitude)
@@ -224,5 +233,6 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   } else {
     alert("Try Again")
+
   }
 }
