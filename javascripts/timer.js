@@ -25,3 +25,11 @@ Timer.prototype = {
     this.startTime = 0;
   }
 }
+
+// To time how long a process takes, place this code at the start of the process
+// var timer = new Timer();
+// timer.start()
+
+// place this code at the end of the process.
+// timer.logElapsed()
+// timer.stop()

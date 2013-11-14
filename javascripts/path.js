@@ -16,29 +16,28 @@ Path.prototype.prepareContext = function(){
 
 Path.prototype.drawLine = function(x){
   if (this.cheatCode){
-console.log("i'm in the cheatCode")
-    this.draw(x, -0.3, 0, 4, 'red')
-    this.draw(x, -0.2, 0, 4, 'orange')
-    this.draw(x, -0.1, 0, 4, 'yellow')
-    this.draw(x, 0, 0, 4, 'green')
-    this.draw(x, 0.1, 0, 4, 'blue')
-    this.draw(x, 0.2, 0, 4, 'indigo')
-    this.draw(x, 0.3, 0, 4, 'purple')
-
+    this.draw(x, -15, 0, 5, 'red')
+    this.draw(x, -10,  5, 'orange')
+    this.draw(x, -5,  5, 'yellow')
+    this.draw(x, 0,  5, 'green')
+    this.draw(x, 5,  5, 'blue')
+    this.draw(x, 10,  5, 'indigo')
+    this.draw(x, 15,  5, 'purple')
+    this.translate(x)
   } else {
-    this.draw(x, 0, 0, this.lineWidth, this.lineColor)
+    this.draw(x, 0, this.lineWidth, this.lineColor)
+    this.translate(x)
   }
 }
 
-Path.prototype.draw = function(x, startY, endY, lineWidth, lineColor){
+Path.prototype.draw = function(x, Y, lineWidth, lineColor){
   this.context.beginPath()
-  this.context.moveTo(0, startY)
-  this.context.lineTo(this.width*x, endY)
+  this.context.moveTo(0, Y)
+  this.context.lineTo(this.width*x, Y)
   this.context.lineWidth = lineWidth
   this.context.strokeStyle = lineColor
   this.context.closePath()
   this.context.stroke()
-  this.translate(x)
 }
 
 Path.prototype.clearScreen = function(){
