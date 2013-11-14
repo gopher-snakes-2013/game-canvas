@@ -1,3 +1,4 @@
+
 var ApplicationController = function() {
   var img = $('.sprite-img')[0]
   img.crossOrigin = "Anonymous"
@@ -80,6 +81,9 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
+  var timer = new Timer();
+  timer.start()
+
   var userCommand = this.retrieveUserInput()
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
@@ -90,6 +94,9 @@ ApplicationController.prototype.respondToSubmit = function(event) {
   } else {
     this.performSimpleCommandsGiven(userCommand)
   }
+
+  timer.logElapsed()
+  timer.stop()
 }
 
 ApplicationController.prototype.resetCommandListIndexValue = function() {
@@ -117,7 +124,6 @@ ApplicationController.prototype.retrieveUserInput = function(){
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
-
   if (action === "undo"){
     this.path.context.putImageData(this.path.savedCanvasData.pop(), -100, -100)
     this.sprite.context.putImageData(this.sprite.savedCanvasData.pop(), -100, -100)
