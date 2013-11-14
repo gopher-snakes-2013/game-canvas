@@ -1,7 +1,6 @@
 $(document).ready(function(){
   var $img = $('.sprite-img')
   $img.on("load", function(e) {
-    console.log("image loaded");
 
     var applicationController = new ApplicationController()
 
@@ -18,5 +17,5 @@ $(document).ready(function(){
     GridCanvas.width = container.width()
 
     applicationController.initializeGame()
-  });
+  })
 })
