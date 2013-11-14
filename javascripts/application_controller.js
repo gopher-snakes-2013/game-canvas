@@ -144,6 +144,12 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
+  } else if (action === 'reset') {
+    this.updateDimensionsOnResizeAndPrepareCanvas()
+
+  } else if (action === 'clearlogs') {
+    this.commandLog.retrieveCurrentLogs().remove()
+
   } else if (action === "backward" || action === "bk") {
     this.path.drawLine(-magnitude)
     this.sprite.move(-magnitude)
