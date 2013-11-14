@@ -90,6 +90,7 @@ ApplicationController.prototype.respondToSubmit = function(event) {
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
+  console.log(this.commandArray)
   if (userCommand === "undo" || userCommand === "u"){
     self.updateDimensionsOnResizeAndPrepareCanvas()
     this.commandArray.pop()
@@ -229,15 +230,15 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
       this.updateCurrentLineWidthInDash(magnitude)
     }
 
+  } else if (action === "nyancat" || action === "nc") {
+    this.path.cheatCode = true
+
   } else if (action === "default") {
     this.path.lineColor = PATHCOLOR
     this.path.lineWidth = PATHWIDTH
 
   } else if (action === "save") {
     this.imageUploader.uploadToImgurAndAppendLinksToScreen()
-
-  } else {
-    alert("Try Again")
 
   }
 }
