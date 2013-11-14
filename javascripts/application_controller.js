@@ -82,14 +82,12 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
-  // var timer = new Timer();
-  // timer.start()
   var self = this
   var userCommand = this.retrieveUserInput()
-  console.log("i got the command")
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
+  console.log(this.commandArray)
   if (userCommand === "undo" || userCommand === "u"){
     self.updateDimensionsOnResizeAndPrepareCanvas()
     this.commandArray.pop()
@@ -97,12 +95,9 @@ ApplicationController.prototype.respondToSubmit = function(event) {
       self.startParse(this.commandArray[i])
     }
   } else {
-
     this.commandArray.push(userCommand)
     this.startParse(userCommand)
   }
-  // timer.logElapsed()
-  // timer.stop()
 }
 
 ApplicationController.prototype.startParse = function(userCommand){
