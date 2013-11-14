@@ -176,6 +176,9 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action === 'reset') {
     this.updateDimensionsOnResizeAndPrepareCanvas()
 
+  } else if (action === 'clearlogs') {
+    this.commandLog.retrieveCurrentLogs().remove()
+
   } else if (action === "backward" || action === "bk") {
     this.saveCanvasImageData()
     this.path.context.save()
