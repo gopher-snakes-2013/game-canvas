@@ -61,6 +61,10 @@ header {
 }
 
 
+.line-seperator {
+  height: 1px;
+  border-bottom: 1px solid gray;
+}
 
 .sprite-img {
   display: none;
@@ -77,7 +81,7 @@ header {
   height: auto;
   margin: auto;
   margin-left: 1.5em;
-  margin-right: .5em;
+  padding-right: 1.5em;
 }
 
 .left-container{
@@ -118,6 +122,7 @@ header {
   right: 0;
   z-index: 1;
   float: left;
+  display: none;
 }
 
 #path-canvas {
@@ -126,7 +131,8 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
-  background: #ecf0f1;
+  background: rgba(72, 180, 215, .25);
+/*  background: #ecf0f1;*/
   z-index: 0;
   float: left;
   border-radius:25px;
@@ -147,7 +153,7 @@ header {
 
 .right-sidebar{
   float: right;
-  width: 26%;
+  width: 27%;
   min-height: 100%;
   padding-right: .05em;
 }
@@ -155,11 +161,11 @@ header {
 .commandlog-container {
   position: relative;
   display: block;
-  margin-bottom: 2.5em;
+  margin-bottom: 1.5em;
   border-style: dashed;
   border-color: #ecf0f1;
   border-radius:25px;
-  padding: .25em;
+  padding: 1em;
 }
 
 .commandlog-container ul {
@@ -188,13 +194,15 @@ header {
 }
 
 .recipe-list {
-  position: relative;
-  overflow: auto;
-  height: 350px;
+  overflow-y: auto;
+  height: 250px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 .recipe {
-  background: rgba(155, 89, 182, 0.46);
+  background: rgba(72, 180, 215, .25);
   height: auto;
   margin-bottom: .5em;
   padding: .5em;
@@ -202,11 +210,18 @@ header {
   overflow: auto /*you need this because there are floating children.*/
 }
 
+.glow {
+
+}
+
 
 .recipe-left-column {
   float: left;
   width: 20%;
-  padding-top: .25em;
+  padding-top: .2em;
+  padding-left: .5em;
+  display: inline-block;
+  border-right: solid 1px gray;
 }
 
 
@@ -214,14 +229,33 @@ header {
   float: right;
   width: 75%;
   text-align: left;
+  font-family: 'VT323', cursive;
+  height: auto;
+}
+
+.recipe img {
+  width: 60px;
 }
 
 
+#line {
+  margin-top: .3em;
+  width: 60px;
+  height: 1px;
+  border-top: 4px solid #2980b9;
+}
+
+#dashed-line {
+  margin-top: .3em;
+  width: 60px;
+  height: 1px;
+  border-top: 4px dashed #2980b9;
+}
 
 #circle {
-  width: 50px;
-  height: 50px;
-  background: gray;
+  width: 20px;
+  height: 20px;
+  border: 10px solid #FC6042;
   display: inline-block;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
@@ -229,9 +263,9 @@ header {
 }
 
 #square {
-  width: 45px;
-  height: 45px;
-  background: gray;
+  width: 20px;
+  height: 20px;
+  border: 5px solid #29c28a;
 }
 
 #triangle-up {
@@ -239,7 +273,7 @@ header {
   height: 0px;
   border-style: solid;
   border-width: 0 25px 43.3px 25px;
-  border-color: transparent transparent gray transparent;
+  border-color: transparent transparent #2980b9 transparent;
 }
 
 
@@ -339,3 +373,42 @@ header {
   top:1px;
 }
 
+
+
+.go-button-mini {
+  margin-left: .3em;
+  margin-bottom: .5em;
+  /*-moz-box-shadow: 2px -1px 6px -2px #2e966d;
+  -webkit-box-shadow: 2px -1px 6px -2px #2e966d;
+  box-shadow: 2px -1px 6px -2px #2e966d;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2cc98f), color-stop(1, #29c28a) );
+  background:-moz-linear-gradient( center top, #2cc98f 5%, #29c28a 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2cc98f', endColorstr='#29c28a');*/
+  background-color:#2cc98f;
+  -webkit-border-top-left-radius:0px;
+  -moz-border-radius-topleft:0px;
+  border-top-left-radius:0px;
+  -webkit-border-top-right-radius:42px;
+  -moz-border-radius-topright:42px;
+  border-top-right-radius:42px;
+  -webkit-border-bottom-right-radius:42px;
+  -moz-border-radius-bottomright:42px;
+  border-bottom-right-radius:42px;
+  -webkit-border-bottom-left-radius:42px;
+  -moz-border-radius-bottomleft:42px;
+  border-bottom-left-radius:42px;
+  text-indent:0;
+  border:1px solid #2cbf89;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Verdana;
+  font-size:8px;
+  font-weight:bold;
+  font-style:normal;
+  height:20px;
+  line-height:15px;
+  width:20px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px -1px 6px #1e805c;
+}

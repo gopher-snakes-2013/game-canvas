@@ -124,7 +124,7 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.path.context.restore()
     this.sprite.context.restore()
 
-  } else if (action === 'reset') {
+  } else if (action === 'reset' || action === 'cs') {
     this.updateDimensionsOnResizeAndPrepareCanvas()
 
   } else if (action === "left" || action === "lt") {
@@ -161,10 +161,13 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.path.translate(magnitude)
 
   } else if (action === "green" ) {
-    this.path.lineColor = "#0AFF58"
+    this.path.lineColor = "#29c28a"
+
+ } else if (action === "blue" ) {
+    this.path.lineColor = "#3498db"
 
   } else if (action === "orange" ) {
-    this.path.lineColor = "#FF820F"
+    this.path.lineColor = "#FC6042"
 
   } else if (action === "pink" ) {
     this.path.lineColor = "#FF5DF9"
@@ -178,11 +181,15 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action === "yellow" ) {
     this.path.lineColor = "#FFE119"
 
+  } else if (action === "eraser" ) {
+    this.path.lineColor = "#ecf0f1"
+
+
   } else if (action === "randomcolor" || action === "rc") {
     this.path.lineColor = getRandomColor()
 
   } else if (action === "linewidth" || action === "lw") {
-    if (magnitude > 1 && magnitude <= 1000) {
+    if (magnitude > 1 && magnitude <= 2000) {
       this.path.lineWidth = magnitude
     }
 
