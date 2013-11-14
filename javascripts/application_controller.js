@@ -231,6 +231,12 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
       this.updateCurrentLineWidthInDash(magnitude)
     }
 
+  } else if (action === "gridOFF") {
+    $('#grid-canvas').addClass("hide-grid");
+
+  } else if (action == "gridON") {
+    $('#grid-canvas').removeClass("hide-grid");
+
   } else if (action === "default") {
     this.path.lineColor = PATHCOLOR
     this.path.lineWidth = PATHWIDTH

@@ -339,3 +339,6 @@ header {
   top:1px;
 }
 
+.hide-grid {
+  display:none;
+}
