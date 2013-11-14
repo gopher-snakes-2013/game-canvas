@@ -189,10 +189,6 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
-  } else if (action === "move" || action === "mv") {
-    this.sprite.move(magnitude)
-    this.path.translate(magnitude)
-
   } else if (action === "green") {
     this.path.lineColor = "#0AFF58"
     this.updateCurrentColorInDash(action)
@@ -232,6 +228,7 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
   } else if (action === "nyancat" || action === "nc") {
     this.path.cheatCode = true
+    this.updateCurrentColorInDash('rainbow')
 
   } else if (action === "default") {
     this.path.lineColor = PATHCOLOR
