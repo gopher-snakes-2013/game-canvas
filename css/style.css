@@ -118,7 +118,6 @@ header {
   right: 0;
   z-index: 1;
   float: left;
-  display: none;
 }
 
 #path-canvas {
