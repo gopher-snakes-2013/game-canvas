@@ -1,15 +1,15 @@
-
 var ApplicationController = function() {
   var img = $('.sprite-img')[0]
   img.crossOrigin = "Anonymous"
   this.constants = this.initializeConstants()
   this.sprite = new Sprite(img, IMAGEDIMENSION, SPRITECANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
-  this.path = new Path(PATHCOLOR, PATHCANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
+  this.path = new Path(PATHCOLOR, PATHCANVAS, PATHWIDTH, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
   this.grid = new Grid(GRIDCOLOR, GRIDCANVAS, WIDTHASPECTRATIO, HEIGHTASPECTRATIO)
   this.commandLog = new CommandLog()
   this.terminal = new Terminal()
   this.parser = new Parser()
   this.resizeController = new ResizeController(CANVASHTMLIDS)
+  this.imageUploader = new ImageUploader(CANVASTOUPLOAD, IMAGELINKCONTAINERHTMLID)
   this.canvasContexts = []
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
@@ -49,9 +49,12 @@ ApplicationController.prototype.initializeConstants = function() {
   SPRITECANVAS = 'sprite-canvas'
   PATHCANVAS = 'path-canvas'
   GRIDCANVAS = 'grid-canvas'
+  CANVASTOUPLOAD = 'path-canvas'
   CANVASHTMLIDS = [PATHCANVAS, SPRITECANVAS, GRIDCANVAS]
+  IMAGELINKCONTAINERHTMLID = 'image-link-container'
   WIDTHASPECTRATIO = 54
   HEIGHTASPECTRATIO = 30
+  PATHWIDTH = 5
 }
 
 ApplicationController.prototype.initializeListeners = function() {
@@ -82,8 +85,6 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
-  // var timer = new Timer();
-  // timer.start()
   var self = this
   var userCommand = this.retrieveUserInput()
   this.commandLog.update(userCommand)
@@ -99,8 +100,6 @@ ApplicationController.prototype.respondToSubmit = function(event) {
     this.commandArray.push(userCommand)
     this.startParse(userCommand)
   }
-  // timer.logElapsed()
-  // timer.stop()
 }
 
 ApplicationController.prototype.startParse = function(userCommand){
@@ -134,6 +133,14 @@ ApplicationController.prototype.performSimpleCommandsGiven = function(userComman
 
 ApplicationController.prototype.retrieveUserInput = function(){
   return $('#textbox').val()
+}
+
+ApplicationController.prototype.updateCurrentColorInDash = function(color){
+  $('#current-color').text('Current Color: ' + color.capitalize())
+}
+
+ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidth){
+  $('#line-width').text('Current Line Width: ' + lineWidth)
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
@@ -180,30 +187,52 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
-  } else if (action === "green" ) {
+  } else if (action === "green") {
     this.path.lineColor = "#0AFF58"
+    this.updateCurrentColorInDash(action)
 
-  } else if (action === "orange" ) {
+  } else if (action === "orange") {
     this.path.lineColor = "#FF820F"
+    this.updateCurrentColorInDash(action)
 
-  } else if (action === "pink" ) {
+  } else if (action === "pink") {
     this.path.lineColor = "#FF5DF9"
+    this.updateCurrentColorInDash(action)
 
-  } else if (action === "purple" ) {
+  } else if (action === "purple") {
     this.path.lineColor = "#6050E8"
+    this.updateCurrentColorInDash(action)
 
-  } else if (action === "red" ) {
+  } else if (action === "red") {
     this.path.lineColor = "#FF211C"
+    this.updateCurrentColorInDash(action)
 
-  } else if (action === "yellow" ) {
+  } else if (action === "yellow") {
     this.path.lineColor = "#FFE119"
+    this.updateCurrentColorInDash(action)
+
+  } else if (action === "blue") {
+    this.path.lineColor = "#2980b9"
 
   } else if (action === "randomcolor" || action === "rc") {
     this.path.lineColor = getRandomColor()
+    this.updateCurrentColorInDash('random')
 
   } else if (action === "linewidth" || action === "lw") {
     if (magnitude > 1 && magnitude <= 1000) {
       this.path.lineWidth = magnitude
+      this.updateCurrentLineWidthInDash(magnitude)
     }
+
+  } else if (action === "default") {
+    this.path.lineColor = PATHCOLOR
+    this.path.lineWidth = PATHWIDTH
+
+  } else if (action === "save") {
+    this.imageUploader.uploadToImgurAndAppendLinksToScreen()
+
+  } else {
+    alert("Try Again")
+
   }
 }

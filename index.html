@@ -13,7 +13,10 @@
   <script type="text/javascript" src="javascripts/commandlog.js"></script>
   <script type="text/javascript" src="javascripts/terminal.js"></script>
   <script type="text/javascript" src="javascripts/resize_controller.js"></script>
+  <script type="text/javascript" src="javascripts/string.js"></script>
+  <script type="text/javascript" src="javascripts/imageuploader.js"></script>
   <script type="text/javascript" src="javascripts/application_controller.js"></script>
+  <script type="text/javascript" src="javascripts/colors.js"></script>
   <script type="text/javascript" src="javascripts/index.js"></script>
 </head>
 <body>
@@ -36,6 +39,10 @@
           <input class='hidden' type='submit' value = "Go!">
         </form>
         <a href="#" class="go-button">GO!</a>
+
+        <div id='image-link-container'>
+
+        </div>
       </div>
 
     </div>
@@ -71,13 +78,16 @@
             </div>
           </div>
 
-
+          <div id='dashboard'>
+            <h4> DashBoard </h4>
+            <h6 id='current-color'> Current Color: Blue </h6>
+            <h6 id='line-width'> Current Line Width: 5 </h6>
+          </div>
 
         </div>
       </div>
       <img class='sprite-img' src="images/nyancat.png">
     </div>
   </div>
-  <script type="text/javascript" src="public/javascripts/colors.js"></script>
 </body>
 </html>
