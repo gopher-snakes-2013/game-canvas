@@ -131,8 +131,8 @@ header {
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(72, 180, 215, .25);
-/*  background: #ecf0f1;*/
+/*  background: rgba(72, 180, 215, .25);*/
+  background: #ecf0f1;
   z-index: 0;
   float: left;
   border-radius:25px;
@@ -202,7 +202,7 @@ header {
 }
 
 .recipe {
-  background: rgba(72, 180, 215, .25);
+  background: #ecf0f1;
   height: auto;
   margin-bottom: .5em;
   padding: .5em;
@@ -214,6 +214,17 @@ header {
 
 }
 
+.recipe-full-width {
+  display: block;
+  padding-left: 1.5em;
+}
+
+.console-font {
+  font-color: gray;
+  font-size: larger;
+  font-family: 'VT323', cursive;
+  color: #8e44ad;
+}
 
 .recipe-left-column {
   float: left;
@@ -221,7 +232,6 @@ header {
   padding-top: .2em;
   padding-left: .5em;
   display: inline-block;
-  border-right: solid 1px gray;
 }
 
 
@@ -229,7 +239,9 @@ header {
   float: right;
   width: 75%;
   text-align: left;
+  font-size: larger;
   font-family: 'VT323', cursive;
+  color: #8e44ad;
   height: auto;
 }
 
@@ -262,10 +274,11 @@ header {
   border-radius: 50px;
 }
 
-#square {
+#rectangle {
   width: 20px;
-  height: 20px;
-  border: 5px solid #29c28a;
+  height: 3px;
+  border: 5px solid #2980b9;
+  background-color: #2980b9;
 }
 
 #triangle-up {
@@ -378,12 +391,6 @@ header {
 .go-button-mini {
   margin-left: .3em;
   margin-bottom: .5em;
-  /*-moz-box-shadow: 2px -1px 6px -2px #2e966d;
-  -webkit-box-shadow: 2px -1px 6px -2px #2e966d;
-  box-shadow: 2px -1px 6px -2px #2e966d;
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #2cc98f), color-stop(1, #29c28a) );
-  background:-moz-linear-gradient( center top, #2cc98f 5%, #29c28a 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2cc98f', endColorstr='#29c28a');*/
   background-color:#2cc98f;
   -webkit-border-top-left-radius:0px;
   -moz-border-radius-topleft:0px;
@@ -406,7 +413,7 @@ header {
   font-weight:bold;
   font-style:normal;
   height:20px;
-  line-height:15px;
+  line-height:20px;
   width:20px;
   text-decoration:none;
   text-align:center;
