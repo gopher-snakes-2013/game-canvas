@@ -1,9 +1,9 @@
-var Path = function(color, canvasId, widthAspectRatio, heightAspectRatio) {
+var Path = function(color, canvasId, pathWidth, widthAspectRatio, heightAspectRatio) {
   this.canvas = document.getElementById(canvasId)
   this.widthAspectRatio = widthAspectRatio
   this.heightAspectRatio = heightAspectRatio
   this.lineColor = color
-  this.lineWidth = 5
+  this.lineWidth = pathWidth
   this.context = this.prepareContext()
   this.width = this.gridWidth()
   this.height = this.gridHeight()
