@@ -47,7 +47,7 @@ h1:first-child:first-letter{
 
 h3 {
   font-family: 'Luckiest Guy', cursive;
-  font-size: 2em;
+  font-size: 1.5em;
   color: #2c3e50;
   margin-top: .5em;
   margin-bottom: .25em;
@@ -161,7 +161,7 @@ header {
 .commandlog-container {
   position: relative;
   display: block;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   border-style: dashed;
   border-color: #ecf0f1;
   border-radius:25px;
@@ -170,7 +170,7 @@ header {
 
 .commandlog-container ul {
   overflow-y: auto;
-  height: 250px;
+  height: 150px;
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -193,9 +193,19 @@ header {
 
 }
 
+
+.dashboard {
+  position: relative;
+  border-style: dashed;
+  border-color: #ecf0f1;
+  border-radius: 25px;
+  padding: .25em;
+
+}
+
 .recipe-list {
   overflow-y: auto;
-  height: 250px;
+  height: 450px;
   list-style: none;
   margin: 0px;
   padding: 0px;
