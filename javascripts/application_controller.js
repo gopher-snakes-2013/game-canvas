@@ -14,6 +14,12 @@ var ApplicationController = function() {
   this.containerWidth = CONTAINEROFCANVASES.width()
   this.containerHeight = CONTAINEROFCANVASES.height()
   this.commandArray = [""]
+  this.arrayOfCommands = ["left","lt","right","rt","rotate","r"
+                          ,"spin","s","backward","bk","forward"
+                          ,"fd","jump","jp","green","blue","orange"
+                          ,"pink","purple","red","yellow","eraser"
+                          ,"randomcolor","rc","lineWidth","lw"
+                          ,"nyancat","nc","default"]
 }
 
 ApplicationController.prototype.initializeGame = function(){
@@ -90,15 +96,18 @@ ApplicationController.prototype.respondToSubmit = function(event) {
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
-  console.log(this.commandArray)
   if (userCommand === "undo" || userCommand === "u"){
     self.updateDimensionsOnResizeAndPrepareCanvas()
+    this.path.cheatCode = false
     this.commandArray.pop()
     for(var i=0; i < this.commandArray.length; i++){
       self.startParse(this.commandArray[i])
     }
   } else {
-    this.commandArray.push(userCommand)
+
+    if ($.inArray(userCommand, this.arrayOfCommands) == -1){
+      this.commandArray.push(userCommand)
+    }
     this.startParse(userCommand)
   }
 }
@@ -144,16 +153,15 @@ ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidt
   $('#line-width').text('Current Line Width: ' + lineWidth)
 }
 
-
-
 ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidth){
   $('#line-width').text('Current Line Width: ' + lineWidth)
 }
 
 ApplicationController.prototype.caseStatement = function(action, magnitude) {
 
-  if (action === 'reset') {
+  if (action === "reset") {
     this.updateDimensionsOnResizeAndPrepareCanvas()
+    this.path.cheatCode = false
 
   } else if (action === "left" || action === "lt") {
     this.sprite.rotate(-90)
@@ -172,10 +180,7 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
-  } else if (action === 'reset') {
-    this.updateDimensionsOnResizeAndPrepareCanvas()
-
-  } else if (action === 'clearlogs') {
+  } else if (action === "clearlogs") {
     this.commandLog.retrieveCurrentLogs().remove()
 
   } else if (action === "backward" || action === "bk") {
@@ -190,50 +195,57 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
+  } else if (action === "blue" ) {
+    this.path.lineColor = "#2980b9"
+    this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
+
+  } else if (action === "eraser" ) {
+    this.path.lineColor = "#ecf0f1"
+    this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
+
   } else if (action === "green") {
     this.path.lineColor = "#29c28a"
     this.updateCurrentColorInDash(action)
-
-  } else if (action === "blue" ) {
-    this.path.lineColor = "#3498db"
-    this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
 
   } else if (action === "orange") {
     this.path.lineColor = "#FC6042"
     this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
 
   } else if (action === "pink") {
     this.path.lineColor = "#FF5DF9"
     this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
 
   } else if (action === "purple") {
     this.path.lineColor = "#6050E8"
     this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
 
   } else if (action === "red") {
     this.path.lineColor = "#FF211C"
     this.updateCurrentColorInDash(action)
+    this.path.cheatCode = false
 
   } else if (action === "yellow") {
     this.path.lineColor = "#FFE119"
     this.updateCurrentColorInDash(action)
-
-  } else if (action === "blue") {
-    this.path.lineColor = "#2980b9"
-
-  } else if (action === "eraser" ) {
-    this.path.lineColor = "#ecf0f1"
-
+    this.path.cheatCode = false
 
   } else if (action === "randomcolor" || action === "rc") {
     this.path.lineColor = getRandomColor()
     this.updateCurrentColorInDash('random')
+    this.path.cheatCode = false
 
   } else if (action === "linewidth" || action === "lw") {
     if (magnitude > 1 && magnitude <= 2000) {
       this.path.lineWidth = magnitude
       this.updateCurrentLineWidthInDash(magnitude)
     }
+    this.path.cheatCode = false
 
   } else if (action === "nyancat" || action === "nc") {
     this.path.cheatCode = true
@@ -242,6 +254,7 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action === "default") {
     this.path.lineColor = PATHCOLOR
     this.path.lineWidth = PATHWIDTH
+    this.path.cheatCode = false
 
   } else if (action === "save") {
     this.imageUploader.uploadToImgurAndAppendLinksToScreen()
