@@ -69,6 +69,11 @@ ApplicationController.prototype.initializeListeners = function() {
     self.respondToSubmit(event)
   })
 
+  $('.go-button').on('click', function(event){
+    event.preventDefault()
+    $('.nycatform').submit()
+  })
+
   $(window).on('resize', function() {
     self.updateDimensionsOnResizeAndPrepareCanvas()
   })

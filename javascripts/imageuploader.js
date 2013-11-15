@@ -55,6 +55,7 @@ ImageUploader.prototype.imgurAjaxRequest = function(base64EncodedImageString, us
 
 ImageUploader.prototype.turnContainerIntoADialog = function() {
   this.locationToAppendLinksTo.dialog({
-    title: "Your Nyanagrams"
+    title: "Your Nyanagrams",
+    width: 400
   })
 }
