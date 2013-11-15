@@ -180,6 +180,11 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.rotate(randomAngle)
     this.path.rotate(randomAngle)
 
+  } else if (action === "reset") {
+    this.updateDimensionsOnResizeAndPrepareCanvas()
+    this.path.lineColor = PATHCOLOR
+    this.path.lineWidth = PATHWIDTH
+
   } else if (action === "clearlogs") {
     this.commandLog.retrieveCurrentLogs().remove()
 
@@ -246,6 +251,12 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
       this.updateCurrentLineWidthInDash(magnitude)
     }
     this.path.cheatCode = false
+
+  } else if (action === "gridOFF") {
+    $('#grid-canvas').addClass("hide-grid");
+
+  } else if (action == "gridON") {
+    $('#grid-canvas').removeClass("hide-grid");
 
   } else if (action === "nyancat" || action === "nc") {
     this.path.cheatCode = true

@@ -396,7 +396,9 @@ header {
   top:1px;
 }
 
-
+.hide-grid {
+  display:none;
+}
 
 .go-button-mini {
   margin-left: .3em;
