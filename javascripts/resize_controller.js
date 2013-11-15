@@ -11,7 +11,6 @@ ResizeController.prototype.grabCanvasFromDom = function(arrayCanvasDomIds){
 }
 
 ResizeController.prototype.updateDimensions = function(canvasContainer){
-  var self = this
   this.HTMLCanvases.forEach(function(HTMLCanvas){
     HTMLCanvas.width = canvasContainer.width()
     HTMLCanvas.height = canvasContainer.height()
