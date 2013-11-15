@@ -96,17 +96,16 @@ ApplicationController.prototype.placeCanvasAxesInTheMiddle = function(contextArr
 
 ApplicationController.prototype.respondToSubmit = function(event) {
   event.preventDefault()
-  var self = this
   var userCommand = this.retrieveUserInput()
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
   if (userCommand === "undo" || userCommand === "u"){
-    self.updateDimensionsOnResizeAndPrepareCanvas()
+    this.updateDimensionsOnResizeAndPrepareCanvas()
     this.path.cheatCode = false
     this.commandArray.pop()
     for(var i=0; i < this.commandArray.length; i++){
-      self.startParse(this.commandArray[i])
+      this.startParse(this.commandArray[i])
     }
   } else {
 
@@ -140,9 +139,9 @@ ApplicationController.prototype.performSimpleCommandsGiven = function(userComman
   var actionMagnitudePairs = this.parser.extractActionAndMagnitude(userCommand)
   var self = this
   actionMagnitudePairs.forEach(function(actionMagnitudePair){
-  var action = actionMagnitudePair.action
-  var magnitude = actionMagnitudePair.magnitudeOfAction
-  self.caseStatement(action,magnitude)
+    var action = actionMagnitudePair.action
+    var magnitude = actionMagnitudePair.magnitudeOfAction
+    self.caseStatement(action,magnitude)
   })
 }
 

@@ -48,8 +48,7 @@ ImageUploader.prototype.imgurAjaxRequest = function(base64EncodedImageString, us
     },
     dataType: 'json'
   }).success(self.imgurParseAndAppend).error(function() {
-    alert('We could not save your image. Sorry :( we are working to fix this problem.');
-    w.close();
+    alert('Sorry, we could not save your image.');
   });
 }
 
