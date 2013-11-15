@@ -181,7 +181,7 @@ header {
 
 .commandlog-container ul {
   overflow-y: auto;
-  height: 150px;
+  height: 200px;
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -211,12 +211,13 @@ header {
   border-color: #ecf0f1;
   border-radius: 25px;
   padding: .25em;
+  display: none;
 
 }
 
 .recipe-list {
   overflow-y: auto;
-  height: 450px;
+  height: 350px;
   list-style: none;
   margin: 0px;
   padding: 0px;
