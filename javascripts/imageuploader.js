@@ -10,7 +10,7 @@ ImageUploader.prototype.retrieveHTMLobject = function() {
 ImageUploader.prototype.uploadToImgurAndAppendLinksToScreen = function() {
   var canvasHTMLObject = this.retrieveHTMLobject()
   var base64EncodedImageString = this.convertToBase64(canvasHTMLObject)
-  var userImageTitle = prompt('What would you like to Title Your Image?? :)')
+  var userImageTitle = prompt('What would you like to name your Nyanagram?')
   this.imgurAjaxRequest(base64EncodedImageString, userImageTitle)
 }
 
@@ -19,10 +19,10 @@ ImageUploader.prototype.convertToBase64 = function(canvasHTMLObject) {
 }
 
 ImageUploader.prototype.appendLinksToScreen = function(imgurPageImage, whiteBackgroundUploadedImage, blackBackgroundUploadedImage, miniIcon) {
-  this.locationToAppendLinksTo.append('<li><a href="'+imgurPageImage+'">Link To Your Drawing</a></li>')
-  this.locationToAppendLinksTo.append('<li><a href="'+whiteBackgroundUploadedImage+'">White Background</a></li>')
-  this.locationToAppendLinksTo.append('<li><a href="'+blackBackgroundUploadedImage+'">Black Background</a></li>')
-  this.locationToAppendLinksTo.append('<li><a href="'+miniIcon+'">Mini Icon</a></li>')
+  this.locationToAppendLinksTo.append('<li><a href="'+imgurPageImage+'" target="_blank">Your Nyanagram on imgur.com</a></li>')
+  this.locationToAppendLinksTo.append('<li><a href="'+whiteBackgroundUploadedImage+'" target="_blank">White background</a></li>')
+  this.locationToAppendLinksTo.append('<li><a href="'+blackBackgroundUploadedImage+'" target="_blank">Black background</a></li>')
+  this.locationToAppendLinksTo.append('<li><a href="'+miniIcon+'" target="_blank">Mini Icon</a></li>')
 }
 
 ImageUploader.prototype.imgurParseAndAppend = function(imgurReturnData) {
@@ -54,5 +54,8 @@ ImageUploader.prototype.imgurAjaxRequest = function(base64EncodedImageString, us
 }
 
 ImageUploader.prototype.turnContainerIntoADialog = function() {
-  this.locationToAppendLinksTo.dialog()
+  this.locationToAppendLinksTo.dialog({
+    title: "Your Nyanagrams",
+    width: 400
+  })
 }

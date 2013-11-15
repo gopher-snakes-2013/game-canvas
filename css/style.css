@@ -6,10 +6,17 @@ height:auto The default. This means the element will have flexible height i.e. i
 
 /* base CSS */
 
+
+#image-link-wrapper {
+  background: #FC6042;
+}
+
 body {
   line-height: 150%;
   font-size:125%;
   color: #34495e;
+  list-style: none;
+
 }.bodytext p {
   font-size:0.875em;
   color: #34495e;
@@ -47,7 +54,7 @@ h1:first-child:first-letter{
 
 h3 {
   font-family: 'Luckiest Guy', cursive;
-  font-size: 2em;
+  font-size: 1.5em;
   color: #2c3e50;
   margin-top: .5em;
   margin-bottom: .25em;
@@ -72,6 +79,10 @@ header {
 
 .hidden {
   display: none;
+}
+
+.hide-grid {
+  display:none;
 }
 
 
@@ -161,7 +172,7 @@ header {
 .commandlog-container {
   position: relative;
   display: block;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   border-style: dashed;
   border-color: #ecf0f1;
   border-radius:25px;
@@ -170,7 +181,7 @@ header {
 
 .commandlog-container ul {
   overflow-y: auto;
-  height: 250px;
+  height: 150px;
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -193,9 +204,19 @@ header {
 
 }
 
+
+#dashboard {
+  position: relative;
+  border-style: dashed;
+  border-color: #ecf0f1;
+  border-radius: 25px;
+  padding: .25em;
+
+}
+
 .recipe-list {
   overflow-y: auto;
-  height: 250px;
+  height: 450px;
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -386,9 +407,7 @@ header {
   top:1px;
 }
 
-.hide-grid {
-  display:none;
-}
+
 
 .go-button-mini {
   margin-left: .3em;
@@ -421,3 +440,6 @@ header {
   text-align:center;
   text-shadow:1px -1px 6px #1e805c;
 }
+
+
+

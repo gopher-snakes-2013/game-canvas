@@ -1,13 +1,14 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
-  <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'/>
-  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'/>
-  <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'/>
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link href="css/flick/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="javascripts/jquery-1.9.1.js"></script>
+  <script src="javascripts/jquery-ui-1.10.3.custom.js"></script>
   <script type="text/javascript" src="javascripts/timer.js"></script>
   <script type="text/javascript" src="javascripts/sprite.js"></script>
   <script type="text/javascript" src="javascripts/path.js"></script>
@@ -28,6 +29,9 @@
       <h1>Code with <span id='capital'>N</span>yan</h1>
     </header>
 
+    <div id='image-link-wrapper'>
+      <div id='image-link-container'></div>
+    </div>
 
     <div class='left-container'>
 
@@ -46,9 +50,6 @@
         <span class='legend'>
           forward 10 | backward 10 |  jump 5 | spin | rotate 60 | right  | left | reset | randomcolor | linewidth 5
         </span>
-        <div id='image-link-container'>
-
-        </div>
       </div>
 
 
@@ -70,7 +71,7 @@
           </div>
 
           <div class ='recipe'>
-            <div class='recipe-full-width'>Type <span class ='console-font'>reset</span> and press <span class="go-button-mini">GO!</span>. Now try <span class ='console-font'>backward 10</span>. What happens now?</div>
+            <div class='recipe-full-width'>Type <span class ='console-font'>reset</span> and press <span class="go-button-mini">GO!</span></div>
           </div>
 
 
@@ -88,6 +89,13 @@
                 green, forward 5, jump 5
             </div>
           </div>
+
+
+          <div class ='recipe'>
+            <div class='recipe-full-width'>Type <span class ='console-font'>save</span> and press <span class="go-button-mini">GO!</span></div>
+          </div>
+
+
 
           <div class ='recipe'>
             <div class='recipe-full-width'>Type <span class ='console-font'>undo</span> to undo your last command.</div>
@@ -132,11 +140,11 @@
 
 
         </div>
-          <div id='dashboard'>
-            <h4> DashBoard </h4>
-            <h6 id='current-color'> Current Color: Blue </h6>
-            <h6 id='line-width'> Current Line Width: 5 </h6>
-          </div>
+        </div>
+        <div id='dashboard'>
+          <h4> DashBoard </h4>
+          <h6 id='current-color'> Current Color: Blue </h6>
+          <h6 id='line-width'> Current Line Width: 5 </h6>
         </div>
       </div>
       <img class='sprite-img' src="images/nyancat2.png">
