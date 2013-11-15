@@ -43,7 +43,7 @@ ImageUploader.prototype.imgurAjaxRequest = function(base64EncodedImageString, us
       type: 'base64',
       key: 'bf880aa11869154f1772cea2d3bdcc31',
       title: userImageTitle,
-      caption: 'https://codewithnyan.com',
+      caption: 'http://codewithnyan.com',
       image: base64EncodedImageString
     },
     dataType: 'json'
