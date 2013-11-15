@@ -6,10 +6,17 @@ height:auto The default. This means the element will have flexible height i.e. i
 
 /* base CSS */
 
+
+#image-link-wrapper {
+  background: #FC6042;
+}
+
 body {
   line-height: 150%;
   font-size:125%;
   color: #34495e;
+  list-style: none;
+
 }.bodytext p {
   font-size:0.875em;
   color: #34495e;
@@ -72,6 +79,10 @@ header {
 
 .hidden {
   display: none;
+}
+
+.hide-grid {
+  display:none;
 }
 
 
@@ -194,7 +205,7 @@ header {
 }
 
 
-.dashboard {
+#dashboard {
   position: relative;
   border-style: dashed;
   border-color: #ecf0f1;
@@ -396,9 +407,7 @@ header {
   top:1px;
 }
 
-.hide-grid {
-  display:none;
-}
+
 
 .go-button-mini {
   margin-left: .3em;
@@ -431,3 +440,6 @@ header {
   text-align:center;
   text-shadow:1px -1px 6px #1e805c;
 }
+
+
+
