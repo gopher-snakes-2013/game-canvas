@@ -31,6 +31,7 @@ ImageUploader.prototype.imgurParseAndAppend = function(imgurReturnData) {
   var whiteBackgroundUploadedImage = imgurReturnData.upload.links.original
   var miniIcon = imgurReturnData.upload.links.small_square
   self.appendLinksToScreen(imgurPageImage, whiteBackgroundUploadedImage, blackBackgroundUploadedImage, miniIcon)
+  self.turnContainerIntoADialog()
 }
 
 ImageUploader.prototype.imgurAjaxRequest = function(base64EncodedImageString, userImageTitle) {
@@ -50,4 +51,8 @@ ImageUploader.prototype.imgurAjaxRequest = function(base64EncodedImageString, us
     alert('We could not save your image. Sorry :( we are working to fix this problem.');
     w.close();
   });
+}
+
+ImageUploader.prototype.turnContainerIntoADialog = function() {
+  this.locationToAppendLinksTo.dialog()
 }
