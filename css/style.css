@@ -211,6 +211,7 @@ header {
   border-color: #ecf0f1;
   border-radius: 25px;
   padding: .25em;
+  display: none;
 
 }
 
