@@ -1,6 +1,15 @@
-1) To change the Sprite Image, we need to change the src in html file
+Code with Nyan
+==============
+* [http://www.codewithnyan.com](http://www.codewithnyan.com)
+* [http://nyansnakes.github.io/codewithnyan.github.io](http://nyansnakes.github.io/codewithnyan.github.io)
 
-An updated intepretation of the classic children's game Turtle, based on the Logo Programming Language. 
+Team Members
+------------
+* Jenny Yee
+* Kenneth Yu
+* Robert Taraya
+
+This is our updated intepretation of the classic children's game, based on the Turtle Logo Programming Language. 
 
 ## Working layout as of Nov 12:
 ![image](http://i.imgur.com/GS1BvPi.png?1)
