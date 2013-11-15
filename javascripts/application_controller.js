@@ -44,7 +44,7 @@ ApplicationController.prototype.updateStoredCanvasContainerDimensions = function
 ApplicationController.prototype.initializeConstants = function() {
   GRIDCOLOR = "#ddd"
   PATHCOLOR = "#2980b9"
-  IMAGEDIMENSION = 40
+  IMAGEDIMENSION = 80
   CONTAINEROFCANVASES = $('.canvas-container')
   SPRITECANVAS = 'sprite-canvas'
   PATHCANVAS = 'path-canvas'
@@ -90,6 +90,7 @@ ApplicationController.prototype.respondToSubmit = function(event) {
   this.commandLog.update(userCommand)
   this.terminal.addCommandToCompilation(userCommand)
   this.resetCommandListIndexValue()
+  console.log(this.commandArray)
   if (userCommand === "undo" || userCommand === "u"){
     self.updateDimensionsOnResizeAndPrepareCanvas()
     this.commandArray.pop()
@@ -144,6 +145,7 @@ ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidt
 }
 
 
+
 ApplicationController.prototype.updateCurrentLineWidthInDash = function(lineWidth){
   $('#line-width').text('Current Line Width: ' + lineWidth)
 }
@@ -190,16 +192,16 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
     this.sprite.move(magnitude)
     this.path.translate(magnitude)
 
-  } else if (action === "move" || action === "mv") {
-    this.sprite.move(magnitude)
-    this.path.translate(magnitude)
-
   } else if (action === "green") {
-    this.path.lineColor = "#0AFF58"
+    this.path.lineColor = "#29c28a"
+    this.updateCurrentColorInDash(action)
+
+  } else if (action === "blue" ) {
+    this.path.lineColor = "#3498db"
     this.updateCurrentColorInDash(action)
 
   } else if (action === "orange") {
-    this.path.lineColor = "#FF820F"
+    this.path.lineColor = "#FC6042"
     this.updateCurrentColorInDash(action)
 
   } else if (action === "pink") {
@@ -221,12 +223,16 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action === "blue") {
     this.path.lineColor = "#2980b9"
 
+  } else if (action === "eraser" ) {
+    this.path.lineColor = "#ecf0f1"
+
+
   } else if (action === "randomcolor" || action === "rc") {
     this.path.lineColor = getRandomColor()
     this.updateCurrentColorInDash('random')
 
   } else if (action === "linewidth" || action === "lw") {
-    if (magnitude > 1 && magnitude <= 1000) {
+    if (magnitude > 1 && magnitude <= 2000) {
       this.path.lineWidth = magnitude
       this.updateCurrentLineWidthInDash(magnitude)
     }
@@ -237,15 +243,16 @@ ApplicationController.prototype.caseStatement = function(action, magnitude) {
   } else if (action == "gridON") {
     $('#grid-canvas').removeClass("hide-grid");
 
+  } else if (action === "nyancat" || action === "nc") {
+    this.path.cheatCode = true
+    this.updateCurrentColorInDash('rainbow')
+
   } else if (action === "default") {
     this.path.lineColor = PATHCOLOR
     this.path.lineWidth = PATHWIDTH
 
   } else if (action === "save") {
     this.imageUploader.uploadToImgurAndAppendLinksToScreen()
-
-  } else {
-    alert("Try Again")
 
   }
 }

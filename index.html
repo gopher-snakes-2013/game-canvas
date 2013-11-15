@@ -4,6 +4,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="javascripts/timer.js"></script>
   <script type="text/javascript" src="javascripts/sprite.js"></script>
@@ -39,11 +40,15 @@
           <input class='hidden' type='submit' value = "Go!">
         </form>
         <a href="#" class="go-button">GO!</a>
-
+        <div class='hints'>Hints?</div>
+        <span class='legend'>
+          forward 10 | backward 10 |  jump 5 | spin | rotate 60 | right  | left | reset | randomcolor | linewidth 5
+        </span>
         <div id='image-link-container'>
 
         </div>
       </div>
+
 
     </div>
     <div class ='right-sidebar'>
@@ -54,21 +59,40 @@
         </ul>
       </div>
       <div class='recipe-container'>
-      <h3>Recipes</h3>
+      <h3>Try these out!</h3>
+
         <div class='recipe-list'>
+          <div class='recipe' class='glow'>
+            <div class='recipe-left-column'><div id='line'></div></div>
+            <div class='recipe-right-column'>forward 10</div>
+          </div>
+
+          <div class ='recipe'>
+            <div class='recipe-full-width'>Type <span class ='console-font'>reset</span> and press <span class="go-button-mini">GO!</span>. Now try <span class ='console-font'>backward 10</span>. What happens now?</div>
+          </div>
+
 
           <div class='recipe'>
-            <div class='recipe-left-column'><div id='circle'></div></div>
+            <div class='recipe-left-column'><div id="rectangle"></div></div>
             <div class='recipe-right-column'>
-              (forward 2, rotate 10) repeat 36
+                linewidth 50, forward 5
             </div>
           </div>
 
+
           <div class='recipe'>
-            <div class='recipe-left-column'><div id='square'></div></div>
+            <div class='recipe-left-column'><img src="images/colorblock.png"></div>
             <div class='recipe-right-column'>
-              (forward 5, rotate 90) repeat 4
+                green, forward 5, jump 5
             </div>
+          </div>
+
+          <div class ='recipe'>
+            <div class='recipe-full-width'>Type <span class ='console-font'>undo</span> to undo your last command.</div>
+          </div>
+
+          <div class ='recipe'>
+            <div class='recipe-full-width'>Type <span class ='console-font'>rotate 90</span>. What happens?</div>
           </div>
 
           <div class='recipe'>
@@ -77,16 +101,43 @@
               (forward 10, rotate 240) repeat 3
             </div>
           </div>
+          <div class='recipe'>
+            <div class='recipe-left-column'><div id='square'></div></div>
+            <div class='recipe-right-column'>
+              green, (forward 5, rotate 90) repeat 4
+            </div>
+          </div>
 
+
+          <div class='recipe'>
+            <div class='recipe-left-column'><img src="images/starburst.png"></div>
+            <div class='recipe-right-column'>
+              orange, linewidth 200 <span class="go-button-mini">GO!</span>
+              <div class='line-seperator'></div>
+              (forward 1, rotate 10) repeat 36
+            </div>
+          </div>
+
+
+          <div class='recipe'>
+            <div class='recipe-left-column'><img src="images/colorstrips.png"></div>
+            <div class='recipe-right-column'>
+              linewidth 2000 <span class="go-button-mini">GO!</span>
+              <div class='line-seperator'></div>
+              (spin, randomcolor, forward 10) repeat 10
+            </div>
+          </div>
+
+
+        </div>
           <div id='dashboard'>
             <h4> DashBoard </h4>
             <h6 id='current-color'> Current Color: Blue </h6>
             <h6 id='line-width'> Current Line Width: 5 </h6>
           </div>
-
         </div>
       </div>
-      <img class='sprite-img' src="images/nyancat.png">
+      <img class='sprite-img' src="images/nyancat2.png">
     </div>
   </div>
 </body>
