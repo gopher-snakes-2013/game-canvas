@@ -3,7 +3,7 @@ var Parser = function (){
 }
 
 Parser.prototype.parseGivenCode = function(userCommand) {
-  if (this.checkIfLoopCommandExists(userCommand) === true){
+  if (this.checkIfLoopCommandExists(userCommand)){
     intermediaryData = userCommand.split(' repeat ')
     var userCommandChain = intermediaryData[0].slice(1,-1)
     var loopMultiplier = Number(intermediaryData[1])
